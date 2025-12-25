@@ -1,0 +1,9 @@
+@box from (0.2,0,0) to (0.8,0.2,1) texture "blocks:bus_t_4_bit" {
+  @part tags (south, north) texture "blocks:bus_4_bit"
+  @part tags (east, west) texture "blocks:bus_4_bit_side"
+  @part tags (bottom) texture "blocks:bus_x_4_bit"
+}
+@box from (0.8,0,0.2) to (1.0,0.2,0.8) texture "blocks:bus_v_4_bit" {
+  @part tags  (east, west)  texture "blocks:bus_4_bit"
+  @part tags (south, north) texture "blocks:bus_4_bit_side"
+}

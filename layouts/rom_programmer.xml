@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container id="main_container" position-func="gui.get_viewport()[1]/2-240,gui.get_viewport()[2]/2-250" size="480,500" color="#252525FF">
+    <panel id="header_panel" pos="0,0" size="480,50" color="#2A2A2AFF" padding="10, 0, 10,0">
+        <label id="header_label" pos="20,13" size="440,30" color="#FFFFFF" gravity="center-left">ROM Programmer</label>
+    </panel>
+    
+    <!-- ROM ID -->
+    <panel id="rom_id_panel" pos="20,40" size="440,30" orientation="horizontal" interval="10" color="#252525FF">
+        <label pos="10,5" size="50,25" color="#E0E0E0">ROM ID:</label>
+        <label id="rom_id_label" pos="10,30" size="420,25" color="#FFFFFF" gravity="center-left" text="rom_0_0_0" />
+    </panel>
+    
+    <!-- HEX Editor -->
+    <panel id="hex_panel" pos="20,120" size="440,470" color="#2A2A2AFF" padding="10,10,10,10">
+        <label pos="0,0" size="420,20" color="#E0E0E0">HEX Data:</label>
+        
+        <!-- Заголовок колонок -->
+        <panel id="hex_header" pos="35,25" size="360,20" padding="50, 0, 0 ,0" orientation="horizontal" interval="2" color="0">
+            <!-- Генерится в Lua -->
+        </panel>
+        
+        <!-- Строки HEX данных -->
+        <panel id="hex_rows" pos="0,50" size="420,400" color="0" scrollable="true">
+            <!-- Генерится в Lua -->
+        </panel>
+    </panel>
+    
+    <!-- Кнопки управления -->
+    <panel id="control_buttons_panel" pos="20,420" size="440,60" orientation="horizontal" interval="10" color="#252525FF">
+        <button id="write_button" size="100,40" color="#2D7A2DFF" hover-color="#3A9A3AFF" pressed-color="#1F5A1FFF" onclick="on_write_button_click()" text-align="center">Записать</button>
+        <button id="read_button" size="100,40" color="#2D5A7AFF" hover-color="#3A7A9AFF" pressed-color="#1F3A5AFF" onclick="on_read_button_click()" text-align="center">Прочитать</button>
+        <button id="clear_button" size="100,40" color="#7A2D2DFF" hover-color="#9A3A3AFF" pressed-color="#5A1F1FFF" onclick="on_clear_button_click()" text-align="center">Clear</button>
+        <button id="close_button" size="100,40" color="#5A5A5AFF" hover-color="#7A7A7AFF" pressed-color="#3A3A3AFF" onclick="close_gui()" text-align="center">Close</button>
+    </panel>
+</container>

@@ -1,0 +1,2 @@
+@box from (0.2,0,0) to (0.8,0.2,0.2) texture "blocks:wire_red_off"
+@box from (0.2,0,0.2) to (1,0.2,0.8) texture "blocks:wire_red_off"

@@ -1,0 +1,10 @@
+{
+  "id": "advanced_logic_2",
+  "title": "Advanced Logic Gates 2",
+  "version": "1.0.0",
+  "creator": "Dagger",
+  "description": "Advanced logic. Дополнение для Wire Mod, добавляющее продвинутые логические устройства",
+  "dependencies": [
+    "wire_mod_2"
+  ]
+}

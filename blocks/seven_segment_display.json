@@ -1,0 +1,17 @@
+{
+    "texture": "seven_segment_display",
+    "model": "aabb",
+    "hitbox": [
+      0,
+      0,
+      0,
+      3,
+      1,
+      1
+    ],
+    "size": [3, 1, 1],
+    "light-passing": false,
+    "rotation": "pane",
+    "script-name": "seven_segment_display"
+}
+

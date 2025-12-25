@@ -1,0 +1,13 @@
+{
+  "texture": "bus_8bit",
+  "model": "custom",
+  "model-name": "bus_8bit",
+  "light-passing": true,
+  "rotation": "pane",
+  "script-name": "bus_8_bit",
+  "sky-light-passing": true,
+  "hitbox": [0.2, 0, 0, 0.6, 0.2, 1],
+  "tags": ["advanced_logic_2:bus", "advanced_logic_2:bus_8bit"],
+  "picking-item": "advanced_logic_2:bus_8_bit.item"
+}
+

@@ -1,0 +1,28 @@
+{
+  "entities": [],
+  "items": [
+    "bus_16_bit.item",
+    "bus_8_bit.item",
+    "bus_orange_4.item"
+  ],
+  "blocks": [
+    "bus_16_bit",
+    "bus_8_bit",
+    "bus_bit_reader_4bit",
+    "bus_bit_writer_4bit",
+    "bus_driver_4bit",
+    "bus_extractor_4bit",
+    "clock_generator",
+    "bus_orange_4",
+    "bus_orange_c_4",
+    "bus_orange_c_u_4",
+    "bus_orange_c_v_4",
+    "bus_orange_h_4",
+    "bus_orange_t_4",
+    "bus_orange_t_u_4",
+    "bus_orange_t_v_4",
+    "bus_orange_v_4",
+    "bus_orange_x_4",
+    "bus_orange_x_v_4"
+  ]
+}

@@ -1,0 +1,11 @@
+# Data Buses Tags
+
+# Все шины (buses) - битность определяется через variant (0=4bit, 1=8bit, 2=16bit)
+"advanced_logic_2:bus" = [
+    "advanced_logic_2:bus",
+]
+
+"advanced_logic_2:bus_4bit" = [
+    "advanced_logic_2:bus",
+]
+
