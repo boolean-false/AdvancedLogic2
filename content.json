@@ -1,10 +1,4 @@
 {
-  "entities": [],
-  "items": [
-    "bus_16_bit.item",
-    "bus_8_bit.item",
-    "bus_orange_4.item"
-  ],
   "blocks": [
     "bus_16_bit",
     "bus_8_bit",
@@ -23,6 +17,13 @@
     "bus_orange_t_v_4",
     "bus_orange_v_4",
     "bus_orange_x_4",
-    "bus_orange_x_v_4"
-  ]
+    "bus_orange_x_v_4",
+    "seven_segment_display"
+  ],
+  "items": [
+    "bus_16_bit.item",
+    "bus_8_bit.item",
+    "bus_orange_4.item"
+  ],
+  "entities": []
 }

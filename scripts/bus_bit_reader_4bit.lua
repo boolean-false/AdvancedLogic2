@@ -55,22 +55,28 @@ function on_interact(x, y, z, playerid)
 end
 
 logic_viewer.set_view(device_id, function(x, y, z)
-    local block_id = block.get(x, y, z)
-    if block_id == 0 then
-        return nil
-    end
-    
+    if block.get(x, y, z) == 0 then return nil end
+
     local selected_bit = block.get_field(x, y, z, "selected_bit") or 0
     local bus_width = 4
 
+    -- Visualize which bit is selected (MSB → LSB, left to right)
+    local bit_vis = ""
+    for i = bus_width - 1, 0, -1 do
+        if i == selected_bit then
+            bit_vis = bit_vis .. logic_viewer.color('^', '#FFFF00')
+        else
+            bit_vis = bit_vis .. logic_viewer.color('.', '#888888')
+        end
+    end
+
+    -- inputs = nil  → auto-fill from device_system (shows actual bus value)
+    -- outputs = nil → auto-fill from device_system (shows bit output)
     return {
         display_name = "Читатель бита шины",
-        inputs = {
-        },
-        outputs = {
-        },
         settings = {
-            {name = "Выбранный бит", value = selected_bit .. " / " .. (bus_width - 1)},
+            {name = "Бит",     value = tostring(selected_bit) .. ' / ' .. tostring(bus_width - 1)},
+            {name = "Позиция", value = bit_vis},
         }
     }
 end)

@@ -99,34 +99,41 @@ end
 
 -- Кастомный view для logic_viewer
 logic_viewer.set_view(device_id, function(x, y, z)
-    -- Проверка существования блока
-    local block_id = block.get(x, y, z)
-    if block_id == 0 then
-        return nil
+    if block.get(x, y, z) == 0 then return nil end
+
+    local pulse_time     = block.get_field(x, y, z, "pulse_time")   or DEFAULT_PULSE_TIME
+    local delay_time     = block.get_field(x, y, z, "delay_time")   or DEFAULT_DELAY_TIME
+    local next_toggle    = block.get_field(x, y, z, "next_toggle")  or 0
+    local current_output = block.get_field(x, y, z, "output")       or 0
+
+    local time_until = 0
+    local success, uptime = pcall(time.uptime)
+    if success and uptime and next_toggle > 0 then
+        time_until = math.max(0, next_toggle - uptime)
     end
-    
-    local pulse_time = block.get_field(x, y, z, "pulse_time") or DEFAULT_PULSE_TIME
-    local delay_time = block.get_field(x, y, z, "delay_time") or DEFAULT_DELAY_TIME
-    local next_toggle = block.get_field(x, y, z, "next_toggle") or 0
-    local current_output = block.get_field(x, y, z, "output") or 0
-    
-    local time_until_toggle = 0
-    if next_toggle > 0 and time and time.uptime then
-        local success, uptime = pcall(time.uptime)
-        if success and uptime then
-            time_until_toggle = math.max(0, next_toggle - uptime)
-        end
-    end
-    
+
+    -- Period bar: |####....| proportional to time_until vs current period
+    local current_period = (current_output == 1) and delay_time or pulse_time
+    local bar_len = 10
+    local filled = current_period > 0 and math.floor((time_until / current_period) * bar_len + 0.5) or 0
+    filled = math.max(0, math.min(bar_len, filled))
+    local bar = logic_viewer.color('|', '#555555')
+               .. logic_viewer.color(string.rep('#', filled),          '#00FF88')
+               .. logic_viewer.color(string.rep('.', bar_len - filled), '#333333')
+               .. logic_viewer.color('|', '#555555')
+
+    -- outputs = nil → auto-fill from device_system
     return {
         display_name = "Clock Generator",
-        outputs = {
-            {name = "OUTPUT", value = current_output, bits = 1}
-        },
+        type = "source",
         settings = {
-            {name = "Pulse Time", value = string.format("%.2f", pulse_time) .. "s"},
-            {name = "Delay Time", value = string.format("%.2f", delay_time) .. "s"},
-            {name = "Time Until Toggle", value = string.format("%.2f", time_until_toggle) .. "s"}
+            {name = "Состояние",   value = current_output == 1 and "ON" or "OFF",
+             color = current_output == 1 and "#00FF88" or "#555555"},
+            {name = "<spacer>"},
+            {name = "Pulse",       value = string.format("%.2f", pulse_time)  .. "s"},
+            {name = "Delay",       value = string.format("%.2f", delay_time)  .. "s"},
+            {name = "До смены",    value = string.format("%.2f", time_until)  .. "s"},
+            {name = "Прогресс",    value = bar},
         }
     }
 end)
