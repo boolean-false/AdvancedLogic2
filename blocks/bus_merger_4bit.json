@@ -1,0 +1,20 @@
+{
+  "texture-faces": [
+    "base_side_1",
+    "base_side_1",
+    "base_side_1",
+    "bus_4_bit",
+    "base_side_1",
+    "base_side_1"
+  ],
+  "model": "aabb",
+  "hitbox": [0, 0, 0, 1, 0.2, 1],
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "pane",
+  "selectable": true,
+  "fields": {
+    "bits": {"type": "int8"}
+  },
+  "script-name": "bus_merger_4bit"
+}

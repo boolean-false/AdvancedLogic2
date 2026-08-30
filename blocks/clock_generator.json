@@ -13,7 +13,6 @@
   "sky-light-passing": true,
   "rotation": "pane",
   "selectable": true,
-  "tick-interval": 2,
   "fields": {
     "output": {"type": "int8"},
     "next_toggle": {"type": "float32"},

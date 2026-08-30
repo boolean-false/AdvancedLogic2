@@ -1,6 +1,6 @@
 {
   "texture": "bus_bit_writer_4bit",
-  "model": "aabb",
+  "model": "block",
   "hitbox": [
     0,
     0,
@@ -14,7 +14,8 @@
   "script-name": "bus_bit_writer_4bit",
   "sky-light-passing": false,
   "fields": {
-    "selected_bit": {"type": "int8"}
+    "selected_bit": {
+      "type": "int8"
+    }
   }
 }
-

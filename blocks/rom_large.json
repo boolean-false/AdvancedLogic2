@@ -1,0 +1,21 @@
+{
+  "texture-faces": [
+    "base_side_1",
+    "base_side_1",
+    "base_side_1",
+    "ram",
+    "base_side_1",
+    "base_side_1"
+  ],
+  "model": "aabb",
+  "hitbox": [0, 0, 0, 3, 0.2, 1],
+  "size": [3, 1, 1],
+  "rotation": "pane",
+  "selectable": true,
+  "fields": {
+    "mem":       {"type": "int32", "length": 64},
+    "addr_bits": {"type": "int32"},
+    "data_bits": {"type": "int32"}
+  },
+  "script-name": "rom_large"
+}

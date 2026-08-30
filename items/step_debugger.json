@@ -1,0 +1,6 @@
+{
+    "icon-type": "sprite",
+    "icon": "items:logic_configurator",
+    "caption": "Step Debugger",
+    "stack-size": 1
+}

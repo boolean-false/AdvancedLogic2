@@ -1,0 +1,17 @@
+{
+  "texture-faces": [
+    "base_side_1",
+    "base_side_1",
+    "base_side_1",
+    "gate_or3",
+    "base_side_1",
+    "base_side_1"
+  ],
+  "model": "aabb",
+  "hitbox": [0, 0, 0, 1, 0.2, 1],
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "pane",
+  "selectable": true,
+  "script-name": "encoder_4to2"
+}

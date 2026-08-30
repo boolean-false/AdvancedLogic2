@@ -69,11 +69,11 @@ function apply_settings()
     if success and uptime then
         local current_output = block.get_field(block_x, block_y, block_z, "output") or 0
         if current_output == 1 then
-            -- Currently on, next toggle after delay_time
-            block.set_field(block_x, block_y, block_z, "next_toggle", uptime + delay_time)
-        else
-            -- Currently off, next toggle after pulse_time
+            -- HIGH длится pulse_time.
             block.set_field(block_x, block_y, block_z, "next_toggle", uptime + pulse_time)
+        else
+            -- LOW длится delay_time.
+            block.set_field(block_x, block_y, block_z, "next_toggle", uptime + delay_time)
         end
     end
     
@@ -83,4 +83,3 @@ end
 function close_gui()
     hud.close("advanced_logic_2:clock_generator")
 end
-

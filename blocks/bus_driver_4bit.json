@@ -1,14 +1,17 @@
 {
-  "texture": "bus_driver_4bit",
+  "texture-faces": [
+    "base_side_1",
+    "base_side_1",
+    "base_side_1",
+    "bus_4_bit",
+    "base_side_1",
+    "base_side_1"
+  ],
   "model": "aabb",
-  "hitbox": [0, 0, 0, 4, 0.2, 1],
-  "size": [4, 1, 1],
-  "light-passing": false,
+  "hitbox": [0, 0, 0, 1, 0.2, 1],
+  "light-passing": true,
+  "sky-light-passing": true,
   "rotation": "pane",
-  "script-name": "bus_driver_4bit",
-  "sky-light-passing": false,
-  "fields": {
-    "output_value": {"type": "int16"}
-  }
+  "selectable": true,
+  "script-name": "bus_driver_4bit"
 }
-

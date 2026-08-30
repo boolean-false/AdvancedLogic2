@@ -1,0 +1,21 @@
+{
+  "texture-faces": [
+    "base_side_1",
+    "base_side_1",
+    "base_side_1",
+    "gate_t_trigger",
+    "base_side_1",
+    "base_side_1"
+  ],
+  "model": "aabb",
+  "hitbox": [0, 0, 0, 1, 0.2, 1],
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "pane",
+  "selectable": true,
+  "fields": {
+    "q":        {"type": "int8"},
+    "prev_clk": {"type": "int8"}
+  },
+  "script-name": "d_flip_flop"
+}

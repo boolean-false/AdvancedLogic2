@@ -1,0 +1,104 @@
+{
+  "texture": "indicator_4bit",
+  "model": "custom",
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "pane",
+  "script-name": "indicator_4bit",
+  "model-name": "indicator_4bit/0",
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    2,
+    1
+  ],
+  "state-based": {
+    "offset": 0,
+    "bits": 4,
+    "variants": [
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/1",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/2",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/3",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/4",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/5",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/6",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/7",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/8",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/9",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/A",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/B",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/C",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/D",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/E",
+        "texture": "indicator_4bit"
+      },
+      {
+        "model": "custom",
+        "model-name": "indicator_4bit/F",
+        "texture": "indicator_4bit"
+      }
+    ]
+  },
+  "fields": {
+    "chain_id": {
+      "type": "int8"
+    }
+  },
+  "obstacle": true
+}

@@ -1,0 +1,22 @@
+{
+  "texture-faces": [
+    "base_side_1",
+    "base_side_1",
+    "base_side_1",
+    "gate_mux_32_1",
+    "base_side_1",
+    "base_side_1"
+  ],
+  "model": "aabb",
+  "hitbox": [0, 0, 0, 1, 0.3, 1],
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "pane",
+  "selectable": true,
+  "fields": {
+    "value":         {"type": "int8"},
+    "strobe_until":  {"type": "float64"}
+  },
+  "tick-interval": 1,
+  "script-name": "keypad_4bit"
+}

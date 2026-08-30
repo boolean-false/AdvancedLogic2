@@ -1,0 +1,19 @@
+{
+  "texture-faces": [
+    "base_side_1",
+    "base_side_1",
+    "base_side_1",
+    "base_side_1",
+    "base_side_1",
+    "base_side_1"
+  ],
+  "model": "block",
+  "rotation": "pane",
+  "selectable": true,
+  "fields": {
+    "mem":       {"type": "int32", "length": 16},
+    "addr_bits": {"type": "int32", "length": 1},
+    "data_bits": {"type": "int32", "length": 1}
+  },
+  "script-name": "rom"
+}

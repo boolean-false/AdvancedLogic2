@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container position-func="gui.get_viewport()[1]/2-130,gui.get_viewport()[2]/2-160" size="260,310" color="#252525FF">
+
+    <panel pos="0,0" size="260,32" color="#2A2A2AFF" padding="12,8,12,8">
+        <label size="236,16" color="#FFFFFF" font-size="13" gravity="center-left">4-bit Keypad</label>
+    </panel>
+
+    <panel pos="10,42" size="240,16" color="#1E1E1EFF" padding="0,0,0,0">
+        <label id="last_pressed" size="240,16" color="#FFFF88" font-size="11" gravity="center-center">—</label>
+    </panel>
+
+    <!-- 4×4 grid -->
+    <panel pos="10,68" size="240,200" orientation="vertical" interval="6" color="0">
+        <panel size="240,44" orientation="horizontal" interval="6" color="0">
+            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(13)" text-align="center" font-size="16">D</button>
+            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(14)" text-align="center" font-size="16">E</button>
+            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(15)" text-align="center" font-size="16">F</button>
+            <button size="55,44" color="#5A3A3AFF" hover-color="#7A5A5AFF" pressed-color="#3A1A1AFF" onclick="press_key(12)" text-align="center" font-size="16">C</button>
+        </panel>
+        <panel size="240,44" orientation="horizontal" interval="6" color="0">
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(7)" text-align="center" font-size="16">7</button>
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(8)" text-align="center" font-size="16">8</button>
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(9)" text-align="center" font-size="16">9</button>
+            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(11)" text-align="center" font-size="16">B</button>
+        </panel>
+        <panel size="240,44" orientation="horizontal" interval="6" color="0">
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(4)" text-align="center" font-size="16">4</button>
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(5)" text-align="center" font-size="16">5</button>
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(6)" text-align="center" font-size="16">6</button>
+            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(10)" text-align="center" font-size="16">A</button>
+        </panel>
+        <panel size="240,44" orientation="horizontal" interval="6" color="0">
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(1)" text-align="center" font-size="16">1</button>
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(2)" text-align="center" font-size="16">2</button>
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(3)" text-align="center" font-size="16">3</button>
+            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(0)" text-align="center" font-size="16">0</button>
+        </panel>
+    </panel>
+
+    <panel pos="10,278" size="240,26" orientation="horizontal" interval="6" color="0">
+        <button size="240,24" color="#5A5A5AFF" hover-color="#7A7A7AFF" pressed-color="#3A3A3AFF" onclick="close_keypad()" text-align="center" font-size="11">Закрыть</button>
+    </panel>
+
+</container>
