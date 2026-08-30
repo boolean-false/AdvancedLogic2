@@ -14,7 +14,8 @@
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "cout": {"type": "int8"}
+    "cout": {"type": "int8"},
+    "data_bits": {"type": "int8"}
   },
   "script-name": "adder_4bit"
 }

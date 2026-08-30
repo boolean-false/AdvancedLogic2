@@ -11,9 +11,9 @@
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "mem":       {"type": "int32", "length": 16},
-    "addr_bits": {"type": "int32", "length": 1},
-    "data_bits": {"type": "int32", "length": 1}
+    "mem":       {"type": "int16", "length": 16},
+    "addr_bits": {"type": "int8"},
+    "data_bits": {"type": "int8"}
   },
   "script-name": "rom"
 }

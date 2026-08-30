@@ -14,7 +14,7 @@
   "script-name": "bus_bit_reader_4bit",
   "sky-light-passing": false,
   "fields": {
-    "selected_bit": {"type": "int8"}
+    "selected_bit": {"type": "int8"},
+    "data_bits": {"type": "int8"}
   }
 }
-

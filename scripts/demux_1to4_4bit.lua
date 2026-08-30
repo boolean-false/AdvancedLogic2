@@ -1,4 +1,4 @@
--- 4-битный DEMUX 1:4. Sel 2-bit выбирает один из 4 выходов; остальные = 0.
+-- Настраиваемый DEMUX 1:4 для шин 4/8/16 бит.
 --
 -- Порты:
 --   BACK  (0, bits=4): x     — вход
@@ -10,22 +10,24 @@
 
 local api = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
+local bus = require('advanced_logic_2:bus_common')
 
 local device_id = api.register({"advanced_logic_2:demux_1to4_4bit"}, {
     inputs = {
-        x   = {dir = 0, offset = 0, bits = 4},
+        x   = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
         sel = {dir = 5, offset = 0, bits = 2},
     },
     outputs = {
-        a = {dir = 2, offset = 0, bits = 4},
-        b = {dir = 3, offset = 0, bits = 4},
-        c = {dir = 1, offset = 0, bits = 4},
-        d = {dir = 4, offset = 0, bits = 4},
+        a = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
+        b = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits"},
+        c = {dir = 1, offset = 0, bits = 4, bits_field = "data_bits"},
+        d = {dir = 4, offset = 0, bits = 4, bits_field = "data_bits"},
     }
 })
 
-api.register_signal_handler(device_id, function(read, write)
-    local v   = (read("x")   or 0) % 16
+api.register_signal_handler(device_id, function(read, write, _, _, origin)
+    local width = bus.get_width(origin[1], origin[2], origin[3])
+    local v   = bus.clamp(read("x"), width)
     local sel = (read("sel") or 0) % 4
 
     write("a", sel == 0 and v or 0)
@@ -35,7 +37,12 @@ api.register_signal_handler(device_id, function(read, write)
 end)
 
 function on_placed(x, y, z, _)
+    bus.init_width(x, y, z)
     api.on_placed(x, y, z, device_id)
+end
+
+function on_interact(x, y, z, playerid)
+    return bus.try_cycle_width(x, y, z, playerid)
 end
 
 function on_broken(x, y, z, _)
@@ -44,8 +51,10 @@ end
 
 logic_viewer.set_view(device_id, function(x, y, z)
     if block.get(x, y, z) == 0 then return nil end
+    local width = bus.get_width(x, y, z)
     return {
-        display_name = "4-bit DEMUX 1:4",
+        display_name = string.format("DEMUX 1:4 (%d-bit)", width),
         type = "gate",
+        settings = {bus.viewer_width(width)},
     }
 end)

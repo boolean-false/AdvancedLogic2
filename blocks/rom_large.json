@@ -13,9 +13,9 @@
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "mem":       {"type": "int32", "length": 64},
-    "addr_bits": {"type": "int32"},
-    "data_bits": {"type": "int32"}
+    "mem":       {"type": "int16", "length": 64},
+    "addr_bits": {"type": "int8"},
+    "data_bits": {"type": "int8"}
   },
   "script-name": "rom_large"
 }

@@ -16,7 +16,8 @@
   "fields": {
     "count":    {"type": "int32"},
     "carry":    {"type": "int8"},
-    "prev_clk": {"type": "int8"}
+    "prev_clk": {"type": "int8"},
+    "data_bits": {"type": "int8"}
   },
   "script-name": "counter"
 }

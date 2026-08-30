@@ -1,10 +1,11 @@
 local api = require('wire_mod_2:api')
 local bit = require('wire_mod_2:bit')
 local logic_viewer = require('wire_mod_2:logic_viewer')
+local bus = require('advanced_logic_2:bus_common')
 
 local device_id = api.register({"advanced_logic_2:bus_bit_reader_4bit"}, {
     inputs = {
-        input = {dir = 2, offset = 0, bits = 4},  -- 4-битная шина на входе
+        input = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
     },
     outputs = {
         output = { dir = 0, offset = 0, bits = 1}  -- 1-битный выход
@@ -16,11 +17,8 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
     
     -- Получаем выбранный бит из поля блока
     local x, y, z = origin[1], origin[2], origin[3]
-    local selected_bit = block.get_field(x, y, z, "selected_bit") or 0
-    
-    -- Ограничиваем selected_bit диапазоном 0-3 для 4-битной шины
-    if selected_bit < 0 then selected_bit = 0 end
-    if selected_bit > 3 then selected_bit = 3 end
+    local width = bus.get_width(x, y, z)
+    local selected_bit = math.floor(block.get_field(x, y, z, "selected_bit") or 0) % width
     
     -- Извлекаем выбранный бит из шины
     -- Используем bit.band для получения нужного бита
@@ -30,11 +28,12 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, playerid)
-    api.on_placed(x, y, z, device_id)
+    bus.init_width(x, y, z)
     -- Инициализируем selected_bit если его нет
     if block.get_field(x, y, z, "selected_bit") == nil then
         block.set_field(x, y, z, "selected_bit", 0)
     end
+    api.on_placed(x, y, z, device_id)
 end
 
 function on_broken(x, y, z, playerid)
@@ -42,9 +41,11 @@ function on_broken(x, y, z, playerid)
 end
 
 function on_interact(x, y, z, playerid)
+    if bus.try_cycle_width(x, y, z, playerid) then return true end
+    local width = bus.get_width(x, y, z)
     local selected_bit = block.get_field(x, y, z, "selected_bit") or 0
     selected_bit = selected_bit + 1
-    if selected_bit > 3 then
+    if selected_bit >= width then
         selected_bit = 0
     end
     block.set_field(x, y, z, "selected_bit", selected_bit)
@@ -52,13 +53,15 @@ function on_interact(x, y, z, playerid)
     -- КРИТИЧНО: Помечаем устройство для пересчета после изменения selected_bit
     -- Это необходимо, чтобы устройство пересчитало выход на основе нового selected_bit
     api.mark_device_for_update(x, y, z)
+    return true
 end
 
 logic_viewer.set_view(device_id, function(x, y, z)
     if block.get(x, y, z) == 0 then return nil end
 
     local selected_bit = block.get_field(x, y, z, "selected_bit") or 0
-    local bus_width = 4
+    local bus_width = bus.get_width(x, y, z)
+    selected_bit = math.floor(selected_bit) % bus_width
 
     -- Visualize which bit is selected (MSB → LSB, left to right)
     local bit_vis = ""
@@ -75,9 +78,9 @@ logic_viewer.set_view(device_id, function(x, y, z)
     return {
         display_name = "Читатель бита шины",
         settings = {
+            bus.viewer_width(bus_width),
             {name = "Бит",     value = tostring(selected_bit) .. ' / ' .. tostring(bus_width - 1)},
             {name = "Позиция", value = bit_vis},
         }
     }
 end)
-

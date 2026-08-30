@@ -13,5 +13,8 @@
   "sky-light-passing": true,
   "rotation": "pane",
   "selectable": true,
+  "fields": {
+    "data_bits": {"type": "int8"}
+  },
   "script-name": "demux_1to4_4bit"
 }

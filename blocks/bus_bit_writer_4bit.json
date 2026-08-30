@@ -16,6 +16,7 @@
   "fields": {
     "selected_bit": {
       "type": "int8"
-    }
+    },
+    "data_bits": {"type": "int8"}
   }
 }

@@ -14,7 +14,8 @@
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "bout": {"type": "int8"}
+    "bout": {"type": "int8"},
+    "data_bits": {"type": "int8"}
   },
   "script-name": "subtractor_4bit"
 }

@@ -11,6 +11,9 @@ M.DEFAULT_PHYS_CELLS = 16
 --- Допустимые битности данных (cycle через UI).
 M.BIT_CYCLE = {4, 8, 16}
 
+local INT16_MODULUS = 65536
+local INT16_SIGN_BIT = 32768
+
 ---Безопасное получение битности (если field не задан или 0 — возвращает 4 как дефолт).
 ---@param v number|nil
 ---@return integer
@@ -59,6 +62,34 @@ function M.clamp_value(value, bits)
     return math.floor(value or 0) % (mask + 1)
 end
 
+---Читает int16-поле памяти как беззнаковое значение 0..65535.
+---@param x integer
+---@param y integer
+---@param z integer
+---@param index integer
+---@return integer
+function M.read_cell(x, y, z, index)
+    local value = block.get_field(x, y, z, "mem", index) or 0
+    if value < 0 then
+        return value + INT16_MODULUS
+    end
+    return value
+end
+
+---Записывает беззнаковое 16-битное значение в знаковое int16-поле.
+---@param x integer
+---@param y integer
+---@param z integer
+---@param value number
+---@param index integer
+function M.write_cell(x, y, z, value, index)
+    value = math.floor(value or 0) % INT16_MODULUS
+    if value >= INT16_SIGN_BIT then
+        value = value - INT16_MODULUS
+    end
+    block.set_field(x, y, z, "mem", value, index)
+end
+
 ---При смене data_bits применить новую mask ко всем сохранённым ячейкам.
 ---@param x integer
 ---@param y integer
@@ -69,9 +100,9 @@ function M.normalize_cells_for_bits(x, y, z, new_bits, phys_cells)
     phys_cells = phys_cells or M.DEFAULT_PHYS_CELLS
     local mask = M.value_mask(new_bits)
     for i = 0, phys_cells - 1 do
-        local v = block.get_field(x, y, z, "mem", i) or 0
+        local v = M.read_cell(x, y, z, i)
         if v > mask then
-            block.set_field(x, y, z, "mem", math.floor(v) % (mask + 1), i)
+            M.write_cell(x, y, z, math.floor(v) % (mask + 1), i)
         end
     end
 end
@@ -98,7 +129,7 @@ function M.build_memory_dump(x, y, z, data_bits, phys_cells)
         for col = 0, cols - 1 do
             local idx = row * cols + col
             if idx < phys_cells then
-                local val = block.get_field(x, y, z, "mem", idx) or 0
+                local val = M.read_cell(x, y, z, idx)
                 line = line .. string.format(fmt, val)
             end
         end
@@ -129,7 +160,7 @@ function M.init_fields(x, y, z, phys_cells)
     end
     for i = 0, phys_cells - 1 do
         if block.get_field(x, y, z, "mem", i) == nil then
-            block.set_field(x, y, z, "mem", 0, i)
+            M.write_cell(x, y, z, 0, i)
         end
     end
 end

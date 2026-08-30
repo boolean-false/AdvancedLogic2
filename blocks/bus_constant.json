@@ -3,7 +3,7 @@
     "base_side_1",
     "base_side_1",
     "base_side_1",
-    "t_trigger",
+    "indicator_4bit",
     "base_side_1",
     "base_side_1"
   ],
@@ -14,8 +14,8 @@
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "q":        {"type": "int8"},
-    "prev_clk": {"type": "int8"}
+    "value": {"type": "int32"},
+    "data_bits": {"type": "int8"}
   },
-  "script-name": "t_flip_flop"
+  "script-name": "bus_constant"
 }

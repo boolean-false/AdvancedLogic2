@@ -90,7 +90,7 @@ local function build_grid()
 
     -- Заполняем значения через .text — это разовое присвоение, не supplier.
     for i = 0, phys_cells - 1 do
-        local val  = block.get_field(bx, by, bz, "mem", i) or 0
+        local val  = mem.read_cell(bx, by, bz, i)
         local cell = document["cell_" .. i]
         if cell then cell.text = tostring(val) end
         update_labels(i, val)
@@ -123,7 +123,7 @@ function on_mem_apply()
         if cell then
             local val = clamp_val(cell.text)
             cell.text = tostring(val)
-            block.set_field(bx, by, bz, "mem", val, i)
+            mem.write_cell(bx, by, bz, val, i)
             update_labels(i, val)
         end
     end
@@ -137,7 +137,7 @@ end
 function on_mem_clear()
     if not is_rom then return end
     for i = 0, phys_cells - 1 do
-        block.set_field(bx, by, bz, "mem", 0, i)
+        mem.write_cell(bx, by, bz, 0, i)
         local cell = document["cell_" .. i]
         if cell then cell.text = "0" end
         update_labels(i, 0)
@@ -175,7 +175,7 @@ end
 
 function refresh_all()
     for i = 0, phys_cells - 1 do
-        local val  = block.get_field(bx, by, bz, "mem", i) or 0
+        local val  = mem.read_cell(bx, by, bz, i)
         local cell = document["cell_" .. i]
         if cell then cell.text = tostring(val) end
         update_labels(i, val)

@@ -42,10 +42,10 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 
     if (clk_rising and we == 1) or (we_rising and clk == 1) then
         local data_in = mem.clamp_value(read("data_in") or 0, data_bits)
-        block.set_field(x, y, z, "mem", data_in, addr)
+        mem.write_cell(x, y, z, data_in, addr)
     end
 
-    local value = mem.clamp_value(block.get_field(x, y, z, "mem", addr) or 0, data_bits)
+    local value = mem.clamp_value(mem.read_cell(x, y, z, addr), data_bits)
     write("data_out", value)
 end)
 

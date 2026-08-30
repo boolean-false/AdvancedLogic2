@@ -1,36 +1,44 @@
--- 4-bit bus merger: собирает 4 однобитных провода в 4-битную шину.
---
--- Порты:
---   BACK  (dir=0, bits=1): bit0    — младший бит (LSB)
---   LEFT  (dir=3, bits=1): bit1
---   RIGHT (dir=1, bits=1): bit2
---   UP    (dir=4, bits=1): bit3    — старший бит
---   FRONT (dir=2, bits=4): bus     — выходная шина
+-- Универсальный merger: отдельные однобитные линии -> шина 4/8/16 бит.
+-- ID сохранён для совместимости со старыми мирами.
 
-local api = require('wire_mod_2:api')
-local bit = require('wire_mod_2:bit')
-local logic_viewer = require('wire_mod_2:logic_viewer')
+local api          = require("wire_mod_2:api")
+local bit          = require("wire_mod_2:bit")
+local logic_viewer = require("wire_mod_2:logic_viewer")
+local bus          = require("advanced_logic_2:bus_common")
+
+local function make_inputs()
+    local inputs = {}
+    for index = 0, 15 do
+        inputs["bit" .. index] = {
+            dir = 0,
+            offset = index % 4,
+            offset_y = math.floor(index / 4),
+            bits = 1,
+        }
+    end
+    return inputs
+end
 
 local device_id = api.register({"advanced_logic_2:bus_merger_4bit"}, {
-    inputs = {
-        bit0 = {dir = 0, offset = 0, bits = 1},
-        bit1 = {dir = 3, offset = 0, bits = 1},
-        bit2 = {dir = 1, offset = 0, bits = 1},
-        bit3 = {dir = 4, offset = 0, bits = 1},
+    inputs = make_inputs(),
+    outputs = {
+        bus = {dir = 2, offset = 0, offset_y = 0, bits = 4, bits_field = "data_bits"},
     },
-    outputs = { bus = {dir = 2, offset = 0, bits = 4} }
 })
 
-api.register_signal_handler(device_id, function(read, write)
-    local b0 = (read("bit0") or 0) ~= 0 and 1 or 0
-    local b1 = (read("bit1") or 0) ~= 0 and 1 or 0
-    local b2 = (read("bit2") or 0) ~= 0 and 1 or 0
-    local b3 = (read("bit3") or 0) ~= 0 and 1 or 0
-    local v = bit.bor(b0, bit.bor(bit.lshift(b1, 1), bit.bor(bit.lshift(b2, 2), bit.lshift(b3, 3))))
-    write("bus", v)
+api.register_signal_handler(device_id, function(read, write, _, _, origin)
+    local width = bus.get_width(origin[1], origin[2], origin[3])
+    local value = 0
+    for index = 0, width - 1 do
+        if (read("bit" .. index) or 0) ~= 0 then
+            value = bit.bor(value, bit.lshift(1, index))
+        end
+    end
+    write("bus", bus.clamp(value, width))
 end)
 
 function on_placed(x, y, z, _)
+    bus.init_width(x, y, z)
     api.on_placed(x, y, z, device_id)
 end
 
@@ -38,10 +46,19 @@ function on_broken(x, y, z, _)
     api.on_broken(x, y, z, device_id)
 end
 
+function on_interact(x, y, z, playerid)
+    return bus.try_cycle_width(x, y, z, playerid)
+end
+
 logic_viewer.set_view(device_id, function(x, y, z)
     if block.get(x, y, z) == 0 then return nil end
+    local width = bus.get_width(x, y, z)
     return {
-        display_name = "Bus Merger (4-bit)",
+        display_name = string.format("Bus Merger (%d-bit)", width),
         type = "gate",
+        settings = {
+            bus.viewer_width(width),
+            {name = string.format("Используются bit0..bit%d", width - 1)},
+        },
     }
 end)

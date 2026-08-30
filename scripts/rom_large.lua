@@ -18,7 +18,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
     local x, y, z = origin[1], origin[2], origin[3]
     local data_bits = mem.get_data_bits(x, y, z)
     local addr  = math.floor(read("addr") or 0) % PHYS_CELLS
-    local value = mem.clamp_value(block.get_field(x, y, z, "mem", addr) or 0, data_bits)
+    local value = mem.clamp_value(mem.read_cell(x, y, z, addr), data_bits)
     write("data", value)
 end)
 

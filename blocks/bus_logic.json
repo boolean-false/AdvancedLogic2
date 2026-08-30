@@ -3,7 +3,7 @@
     "base_side_1",
     "base_side_1",
     "base_side_1",
-    "t_trigger",
+    "gate_and3",
     "base_side_1",
     "base_side_1"
   ],
@@ -14,8 +14,8 @@
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "q":        {"type": "int8"},
-    "prev_clk": {"type": "int8"}
+    "operation": {"type": "int8"},
+    "data_bits": {"type": "int8"}
   },
-  "script-name": "jk_flip_flop"
+  "script-name": "bus_logic"
 }
