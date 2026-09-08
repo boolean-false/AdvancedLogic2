@@ -7,7 +7,11 @@ local function ensure_bus(color, bits)
     api.register_wire_variants("advanced_logic_2", {
         wire_type = "bus",
         color = color,
-        bits = bits
+        bits = bits,
+        crossing = {
+            lower_model='al2_crossing/ribbon/lower',upper_model='al2_crossing/ribbon/upper',
+            top='blocks:al2_ribbon_'..bits..'_5',side='blocks:al2_ribbon_'..bits..'_side'
+        }
     })
 end
 

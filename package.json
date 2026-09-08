@@ -1,10 +1,11 @@
 {
   "id": "advanced_logic_2",
-  "title": "Advanced Logic Gates 2",
-  "version": "1.0.0",
+  "title": "AdvancedLogic2",
+  "version": "2.0.0",
   "creator": "Dagger",
-  "description": "Advanced logic. Дополнение для Wire Mod, добавляющее продвинутые логические устройства",
+  "description": "Расширение WireMod2: шины 4/8/16 бит, арифметика, маршрутизация данных, регистры, счётчики и память. Редактор HEX/DEC с обменом данными и универсальный индикатор сигналов.",
   "dependencies": [
     "wire_mod_2"
-  ]
+  ],
+  "license": "MIT"
 }
