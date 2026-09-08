@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container position-func="math.max(8,(gui.get_viewport()[1]-480)/2),math.max(8,(gui.get_viewport()[2]-490)/2)" size="480,490" color="#1B2027FC">
+<container pos="0,0" size="4,66" color="#8AC6D3FF" interactive="false"/>
+<label pos="20,12" size="440,28" color="#E8E6DFFF" id="ui_title">Настройки компонента</label><label pos="20,42" size="440,20" color="#ADB5C1FF">Выбор применяется сразу / текущий вариант выделен</label>
+<panel id="options" pos="20,82" size="440,334" scrollable="true" max-length="334" orientation="vertical" interval="8" color="0"/><label pos="20,422" size="440,22" color="#8AC6D3FF" id="feedback"></label><button pos="320,448" size="140,34" color="#345763FF" hover-color="#465365FF" text-align="center" onclick="close()">Готово</button>
+</container>

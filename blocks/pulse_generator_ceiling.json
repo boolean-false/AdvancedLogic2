@@ -29,6 +29,9 @@
     },
     "pulse_until": {
       "type": "float64"
+    },
+    "pulse_duration": {
+      "type": "float64"
     }
   },
   "tick-interval": 1,

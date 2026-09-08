@@ -1,62 +1,17 @@
--- Универсальный splitter: шина 4/8/16 бит -> отдельные однобитные линии.
--- ID сохранён для совместимости со старыми мирами.
-
-local api          = require("wire_mod_2:api")
-local bit          = require("wire_mod_2:bit")
-local logic_viewer = require("wire_mod_2:logic_viewer")
-local bus          = require("advanced_logic_2:bus_common")
-
-local function make_outputs()
-    local outputs = {}
-    for index = 0, 15 do
-        outputs["bit" .. index] = {
-            dir = 2,
-            offset = index % 4,
-            offset_y = math.floor(index / 4),
-            bits = 1,
-        }
-    end
-    return outputs
-end
-
-local device_id = api.register({"advanced_logic_2:bus_splitter_4bit"}, {
-    inputs = {
-        bus = {dir = 0, offset = 0, offset_y = 0, bits = 4, bits_field = "data_bits"},
-    },
-    outputs = make_outputs(),
-})
-
-api.register_signal_handler(device_id, function(read, write, _, _, origin)
-    local width = bus.get_width(origin[1], origin[2], origin[3])
-    local value = bus.clamp(read("bus"), width)
-    for index = 0, 15 do
-        local output = index < width and bit.band(bit.rshift(value, index), 1) or 0
-        write("bit" .. index, output)
-    end
+local api=require('wire_mod_2:api')
+local viewer=require('wire_mod_2:logic_viewer')
+local device_id=api.register({'advanced_logic_2:bus_splitter_4bit'},{inputs={bus={dir=0,offset=0,accept_bits={1,4,8,16}}},outputs={bit0={dir=2,offset=0,bits=1},bit1={dir=2,offset=1,bits=1},bit2={dir=1,offset=0,bits=1},bit3={dir=3,offset=0,bits=1}}})
+api.register_signal_handler(device_id,function(read,write,_,_,origin)
+    local group=math.floor(block.get_field(origin[1],origin[2],origin[3],'group') or 0)%4
+    local value=math.floor((read('bus') or 0)/2^(group*4))%16
+    for i=0,3 do write('bit'..i,math.floor(value/2^i)%2) end
 end)
-
-function on_placed(x, y, z, _)
-    bus.init_width(x, y, z)
-    api.on_placed(x, y, z, device_id)
+function on_placed(x, y, z, playerid)
+    require('wire_mod_2:gate_mounts').prepare(x,y,z,playerid)
+    api.on_placed(x,y,z,device_id)
 end
-
-function on_broken(x, y, z, _)
-    api.on_broken(x, y, z, device_id)
-end
-
-function on_interact(x, y, z, playerid)
-    return bus.try_cycle_width(x, y, z, playerid)
-end
-
-logic_viewer.set_view(device_id, function(x, y, z)
-    if block.get(x, y, z) == 0 then return nil end
-    local width = bus.get_width(x, y, z)
-    return {
-        display_name = string.format("Bus Splitter (%d-bit)", width),
-        type = "gate",
-        settings = {
-            bus.viewer_width(width),
-            {name = string.format("Активны bit0..bit%d", width - 1)},
-        },
-    }
+function on_broken(x,y,z) api.on_broken(x,y,z,device_id) end
+function on_interact(x,y,z,playerid) return require('advanced_logic_2:component_settings').open(x,y,z,playerid,'group') end
+viewer.set_view(device_id,function(x,y,z)
+ return {display_name='Отвод 4 бит',settings={{name='Диапазон',value=string.format('%d..%d',4*(block.get_field(x,y,z,'group') or 0),4*(block.get_field(x,y,z,'group') or 0)+3)}}}
 end)

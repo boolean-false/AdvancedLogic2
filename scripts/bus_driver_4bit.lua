@@ -1,13 +1,13 @@
 -- Настраиваемый 4/8/16-bit tri-state bus driver.
 --
 -- Порты:
---   BACK  (dir=0, bits=4): data    — входные данные
---   LEFT  (dir=3, bits=1): oe      — Output Enable
---   FRONT (dir=2, bits=4): out     — выход
+--   BACK  (dir=0, bits=4): data    - входные данные
+--   LEFT  (dir=3, bits=1): oe      - Output Enable
+--   FRONT (dir=2, bits=4): out     - выход
 --
--- При oe=0 НЕ пишем в выход → simulation очистит драйв (high-Z).
+-- При oe=0 НЕ пишем в выход -> simulation очистит драйв (high-Z).
 -- При oe=1 пишем data на выход. Это позволяет нескольким bus_driver'ам разделять
--- одну цепь — активен только тот, у кого oe=1 (классический tri-state bus).
+-- одну цепь - активен только тот, у кого oe=1 (классический tri-state bus).
 
 local api = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
@@ -24,7 +24,7 @@ local device_id = api.register({"advanced_logic_2:bus_driver_4bit"}, {
 api.register_signal_handler(device_id, function(read, write, _, _, origin)
     local oe = read("oe") or 0
     if oe == 0 then
-        -- НЕ пишем — simulation снимет драйв с порта (high-Z)
+        -- НЕ пишем - simulation снимет драйв с порта (high-Z)
         return
     end
     local data = read("data") or 0
@@ -53,8 +53,8 @@ logic_viewer.set_view(device_id, function(x, y, z)
         type = "gate",
         settings = {
             bus.viewer_width(width),
-            {name = "OE=1 → данные на выход"},
-            {name = "OE=0 → высокоомный (Z)", color = "#888888"},
+            {name = "OE=1 -> данные на выход"},
+            {name = "OE=0 -> высокоомный (Z)", color = "#888888"},
         }
     }
 end)

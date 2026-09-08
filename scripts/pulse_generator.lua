@@ -1,15 +1,18 @@
--- Pulse Generator: на фронте входа (0→1) выдаёт фиксированный импульс на выход.
--- Длительность импульса PULSE_DURATION секунд.
+-- Pulse Generator: на фронте входа (0->1) выдаёт фиксированный импульс на выход.
+-- Длительность настраивается; новый фронт продлевает импульс.
 --
 -- Порты:
---   BACK  (dir=0, bits=1): in    — триггер
---   FRONT (dir=2, bits=1): out   — импульс
+--   BACK  (dir=0, bits=1): in    - триггер
+--   FRONT (dir=2, bits=1): out   - импульс
 
 local api = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
 local timer_registry = require('wire_mod_2:timer_registry')
 
-local PULSE_DURATION = 0.1  -- секунды
+local function duration(x,y,z)
+    local value=block.get_field(x,y,z,'pulse_duration') or 0
+    return value>0 and value or 0.1
+end
 local process_timer
 
 local device_id = api.register({"advanced_logic_2:pulse_generator"}, {
@@ -34,10 +37,10 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 
     block.set_field(x, y, z, "prev_in", input_v)
 
-    -- Rising edge → старт импульса
+    -- Rising edge -> старт импульса
     if input_v == 1 and prev == 0 then
         active = true
-        until_t = now + PULSE_DURATION
+        until_t = now + duration(x,y,z)
         block.set_field(x, y, z, "pulse_active", 1)
         block.set_field(x, y, z, "pulse_until",  until_t)
         write("out", 1)
@@ -98,9 +101,13 @@ logic_viewer.set_view(device_id, function(x, y, z)
         display_name = "Pulse Generator",
         type = "gate",
         settings = {
-            {name = "Длит. импульса", value = string.format("%.2fs", PULSE_DURATION)},
+            {name = "Длит. импульса", value = string.format("%.2fs", duration(x,y,z))},
             {name = "Состояние", value = active and "PULSING" or "idle",
              color = active and "#00FF88" or "#888888"},
         }
     }
 end)
+
+function on_interact(x,y,z,playerid)
+    return require('advanced_logic_2:component_settings').open(x,y,z,playerid)
+end

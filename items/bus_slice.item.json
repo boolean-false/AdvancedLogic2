@@ -1,0 +1,5 @@
+{
+  "icon-type": "sprite",
+  "icon": "items:al2_bus_slice",
+  "placing-block": "advanced_logic_2:bus_slice_mounted"
+}

@@ -1,10 +1,10 @@
 -- Настраиваемый мультиплексор 2:1 для шин 4/8/16 бит.
 --
 -- Порты:
---   A   (BACK,  dir=0, bits=4) — вход A (выбирается при SEL=0)
---   B   (RIGHT, dir=1, bits=4) — вход B (выбирается при SEL=1)
---   SEL (LEFT,  dir=3, bits=1) — выбор
---   Y   (FRONT, dir=2, bits=4) — выход
+--   A   (BACK,  dir=0, bits=4) - вход A (выбирается при SEL=0)
+--   B   (RIGHT, dir=1, bits=4) - вход B (выбирается при SEL=1)
+--   SEL (LEFT,  dir=3, bits=1) - выбор
+--   Y   (FRONT, dir=2, bits=4) - выход
 --
 -- Поведение: Y = SEL ? B : A
 

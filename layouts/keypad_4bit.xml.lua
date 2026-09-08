@@ -1,4 +1,4 @@
---- Keypad UI: 4×4 hex кнопок. На клик — пишет value+strobe в block fields,
+--- Keypad UI: 4x4 hex кнопок. На клик - пишет value+strobe в block fields,
 --- mark_device_for_update тычет симуляцию.
 
 local api          = require("wire_mod_2:api")
@@ -26,21 +26,22 @@ function on_open(...)
         hud.close(LAYOUT_ID)
         return
     end
+    document.last_pressed.text=string.format("Выход: %d / 0x%X",block.get_field(bx,by,bz,"value") or 0,block.get_field(bx,by,bz,"value") or 0)
 end
 
 function on_close(invid)
 end
 
 function press_key(value)
-    if not bx then return end
+    if not require('wire_mod_2:ui').valid(bx,by,bz,'advanced_logic_2:keypad_4bit') then close_keypad();return end
     block.set_field(bx, by, bz, "value",        value % 16)
     block.set_field(bx, by, bz, "strobe_until", uptime_safe() + STROBE_DURATION)
 
     -- Обновляем индикатор последней нажатой
     local lbl = document["last_pressed"]
-    if lbl then lbl.text = string.format("Last: 0x%X (%d)", value % 16, value % 16) end
+    if lbl then lbl.text = string.format("Выход: 0x%X / %d", value % 16, value % 16) end
 
-    -- Триггерим evaluate → выходы обновятся
+    -- Триггерим evaluate -> выходы обновятся
     simulation.mark_device_for_update(bx, by, bz)
 end
 

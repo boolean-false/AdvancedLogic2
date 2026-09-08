@@ -1,5 +1,5 @@
 --- Clock Engine: обработка одного clock_generator блока.
---- Раньше жило в scripts/clock_generator.lua:on_block_tick — теперь вызывается
+--- Раньше жило в scripts/clock_generator.lua:on_block_tick - теперь вызывается
 --- глобально из world.lua через clock_registry.
 
 local api = require('wire_mod_2:api')

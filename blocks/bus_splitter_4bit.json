@@ -4,21 +4,16 @@
     "al2_gate_side",
     "al2_gate_side",
     "al2_bus_splitter_4bit",
-    "al2_bus_splitter_4bit_front",
-    "al2_bus_splitter_4bit_back"
+    "al2_gate_side",
+    "al2_gate_side"
   ],
   "model": "aabb",
   "hitbox": [
     0,
     0,
     0,
-    4,
-    4,
-    1
-  ],
-  "size": [
-    4,
-    4,
+    2,
+    0.2,
     1
   ],
   "light-passing": true,
@@ -26,9 +21,14 @@
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "data_bits": {
+    "group": {
       "type": "int8"
     }
   },
-  "script-name": "bus_splitter_4bit"
+  "script-name": "bus_splitter_4bit",
+  "size": [
+    2,
+    1,
+    1
+  ]
 }

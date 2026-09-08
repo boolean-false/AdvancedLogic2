@@ -3,7 +3,7 @@
     "al2_gate_side",
     "al2_gate_side",
     "al2_gate_side",
-    "al2_bus_logic",
+    "al2_bus_logic_mode_0",
     "al2_gate_side",
     "al2_gate_side"
   ],
@@ -28,5 +28,41 @@
       "type": "int8"
     }
   },
-  "script-name": "bus_logic"
+  "script-name": "bus_logic",
+  "state-based": {
+    "offset": 0,
+    "bits": 2,
+    "variants": [
+      {
+        "texture-faces": [
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_bus_logic_mode_1",
+          "al2_gate_side",
+          "al2_gate_side"
+        ]
+      },
+      {
+        "texture-faces": [
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_bus_logic_mode_2",
+          "al2_gate_side",
+          "al2_gate_side"
+        ]
+      },
+      {
+        "texture-faces": [
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_bus_logic_mode_3",
+          "al2_gate_side",
+          "al2_gate_side"
+        ]
+      }
+    ]
+  }
 }

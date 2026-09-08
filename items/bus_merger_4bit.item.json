@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
   "icon": "items:al2_bus_merger_4bit",
-  "placing-block": "advanced_logic_2:bus_merger_4bit"
+  "placing-block": "advanced_logic_2:bus_merger_4bit_mounted"
 }

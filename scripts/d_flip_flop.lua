@@ -1,10 +1,10 @@
 -- D Flip-Flop (положительный фронт CLK)
 --
 -- Порты:
---   D   (RIGHT, dir=1) — вход данных
---   CLK (LEFT,  dir=3) — тактовый сигнал
---   RST (BACK,  dir=0) — асинхронный сброс (active high)
---   Q   (FRONT, dir=2) — выход
+--   D   (RIGHT, dir=1) - вход данных
+--   CLK (LEFT,  dir=3) - тактовый сигнал
+--   RST (BACK,  dir=0) - асинхронный сброс (active high)
+--   Q   (FRONT, dir=2) - выход
 
 local api          = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')

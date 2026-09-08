@@ -12,7 +12,7 @@
     0,
     0,
     0,
-    1,
+    2,
     0.2,
     1
   ],
@@ -20,5 +20,10 @@
   "sky-light-passing": true,
   "rotation": "pane",
   "selectable": true,
-  "script-name": "decoder_2to4"
+  "script-name": "decoder_2to4",
+  "size": [
+    2,
+    1,
+    1
+  ]
 }

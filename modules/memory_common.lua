@@ -1,6 +1,5 @@
 --- Общая логика для блоков памяти (RAM/ROM).
---- Все функции принимают phys_cells явно — это позволяет иметь блоки разного размера
---- (ram=16 ячеек, ram_large=64 ячеек, и т.д.) без дублирования логики.
+--- Хранят 64 слова; активная ёмкость 16 или 64 выбирается отдельно.
 
 ---@class ALMemoryCommon
 local M = {}
@@ -14,7 +13,7 @@ M.BIT_CYCLE = {4, 8, 16}
 local INT16_MODULUS = 65536
 local INT16_SIGN_BIT = 32768
 
----Безопасное получение битности (если field не задан или 0 — возвращает 4 как дефолт).
+---Безопасное получение битности (если field не задан или 0 - возвращает 4 как дефолт).
 ---@param v number|nil
 ---@return integer
 function M.safe_bits(v)
@@ -30,6 +29,15 @@ function M.get_addr_bits(x, y, z)
     return M.safe_bits(block.get_field(x, y, z, "addr_bits", 0))
 end
 
+-- Capacity changes hide cells instead of destroying their contents.
+function M.get_cells(x,y,z)
+    return M.get_addr_bits(x,y,z)==6 and 64 or 16
+end
+function M.set_cells(x,y,z,cells)
+    assert(cells==16 or cells==64,'capacity must be 16 or 64')
+    block.set_field(x,y,z,'addr_bits',cells==64 and 6 or 4)
+end
+
 ---@param x integer
 ---@param y integer
 ---@param z integer
@@ -38,7 +46,7 @@ function M.get_data_bits(x, y, z)
     return M.safe_bits(block.get_field(x, y, z, "data_bits", 0))
 end
 
----Следующая битность в цикле {4, 8, 16}. После 16 → 4.
+---Следующая битность в цикле {4, 8, 16}. После 16 -> 4.
 ---@param cur integer
 ---@return integer
 function M.next_in_cycle(cur)

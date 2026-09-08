@@ -1,14 +1,3 @@
--- Настраиваемый сумматор 4/8/16 бит с переносом.
---
--- Порты:
---   A    (BACK,  dir=0, bits=4) — первый операнд
---   B    (LEFT,  dir=3, bits=4) — второй операнд
---   CIN  (RIGHT, dir=1, bits=1) — входной перенос (carry in)
---   SUM  (FRONT, dir=2, bits=4) — сумма (4 бита, биты 3:0)
---
---   COUT (DOWN, dir=5, bits=1) — выходной перенос
--- Для вычитания: B = NOT(B) + 1 (дополнение до двух).
-
 local api          = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
 local bus          = require('advanced_logic_2:bus_common')
@@ -16,12 +5,12 @@ local bus          = require('advanced_logic_2:bus_common')
 local device_id = api.register({"advanced_logic_2:adder_4bit"}, {
     inputs = {
         a   = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
-        b   = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits"},
+        b   = {dir = 0, offset = 1, bits = 4, bits_field = "data_bits"},
         cin = {dir = 1, offset = 0, bits = 1},
     },
     outputs = {
         sum  = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
-        cout = {dir = 5, offset = 0, bits = 1},
+        cout = {dir = 2, offset = 1, bits = 1},
     }
 })
 

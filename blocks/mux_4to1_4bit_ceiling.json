@@ -12,7 +12,7 @@
     0,
     0,
     0,
-    1,
+    2,
     0.2,
     1
   ],
@@ -26,6 +26,11 @@
     }
   },
   "script-name": "mux_4to1_4bit",
+  "size": [
+    2,
+    1,
+    1
+  ],
   "hidden": true,
   "picking-item": "advanced_logic_2:mux_4to1_4bit.item"
 }

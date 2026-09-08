@@ -12,7 +12,7 @@
     0,
     0,
     0,
-    1,
+    2,
     0.2,
     1
   ],
@@ -25,5 +25,10 @@
       "type": "int8"
     }
   },
-  "script-name": "mux_4to1_4bit"
+  "script-name": "mux_4to1_4bit",
+  "size": [
+    2,
+    1,
+    1
+  ]
 }

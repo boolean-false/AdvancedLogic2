@@ -1,8 +1,8 @@
--- 4-bit Keypad: UI 4×4 кнопок с hex-значениями (0-F).
+-- 4-bit Keypad: UI 4x4 кнопок с hex-значениями (0-F).
 -- При нажатии в UI:
---   - value (FRONT, 4-bit) ← код клавиши
---   - strobe (RIGHT, 1-bit) ← 1 в течение STROBE_DURATION секунд
--- ПКМ+конфигуратор → открыть UI.
+--   - value (FRONT, 4-bit) <- код клавиши
+--   - strobe (RIGHT, 1-bit) <- 1 в течение STROBE_DURATION секунд
+-- ПКМ+конфигуратор -> открыть UI.
 
 local api          = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
@@ -58,7 +58,7 @@ function on_block_present(x, y, z)
 end
 
 function on_interact(x, y, z, playerid)
-    if not cfg_check.can_open_ui(playerid) then return false end
+    if cfg_check.has_configurator(playerid) and not cfg_check.can_open_ui(playerid) then return false end
     if hud.is_open(LAYOUT_ID) then return true end
 
     if not session.entries then session.entries = {} end

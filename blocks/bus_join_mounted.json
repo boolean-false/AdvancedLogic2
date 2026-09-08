@@ -3,7 +3,7 @@
     "al2_gate_side",
     "al2_gate_side",
     "al2_gate_side",
-    "al2_rom_large",
+    "al2_bus_join",
     "al2_gate_side",
     "al2_gate_side"
   ],
@@ -12,30 +12,23 @@
     0,
     0,
     0,
-    3,
+    1,
     0.2,
     1
   ],
-  "size": [
-    3,
-    1,
-    1
-  ],
-  "rotation": "stairs",
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "pipe",
   "selectable": true,
   "fields": {
-    "mem": {
-      "type": "int16",
-      "length": 64
-    },
-    "addr_bits": {
+    "part_bits": {
       "type": "int8"
     },
     "data_bits": {
       "type": "int8"
     }
   },
-  "script-name": "rom_large",
+  "script-name": "bus_join",
   "hidden": true,
-  "picking-item": "advanced_logic_2:rom_large.item"
+  "picking-item": "advanced_logic_2:bus_join.item"
 }

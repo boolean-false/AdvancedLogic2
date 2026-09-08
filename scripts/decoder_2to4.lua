@@ -1,22 +1,13 @@
--- 2-to-4 Decoder (one-hot). Активен только один выход — соответствующий sel.
---
--- Порты:
---   BACK  (0, bits=2): sel
---   FRONT (2, bits=1): out0   (sel=00)
---   LEFT  (3, bits=1): out1   (sel=01)
---   RIGHT (1, bits=1): out2   (sel=10)
---   UP    (4, bits=1): out3   (sel=11)
-
 local api = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
 
 local device_id = api.register({"advanced_logic_2:decoder_2to4"}, {
-    inputs  = { sel = {dir = 0, offset = 0, bits = 2, flexible = true} },
+    inputs  = { sel = {dir = 0, offset = 0, accept_bits = {1,4,8,16}} },
     outputs = {
         out0 = {dir = 2, offset = 0, bits = 1},
         out1 = {dir = 3, offset = 0, bits = 1},
         out2 = {dir = 1, offset = 0, bits = 1},
-        out3 = {dir = 4, offset = 0, bits = 1},
+        out3 = {dir = 2, offset = 1, bits = 1},
     }
 })
 

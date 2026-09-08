@@ -20,7 +20,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
     -- Получаем выбранный бит из поля блока
     local x, y, z = origin[1], origin[2], origin[3]
     local width = bus.get_width(x, y, z)
-    local selected_bit = math.floor(block.get_field(x, y, z, "selected_bit") or 0) % width
+    local selected_bit = math.floor(block.get_field(x, y, z, "selected_bit") or 0) % 16
     
     -- Нормализуем input_bit_value (0 или 1)
     local bit_to_write = (input_bit_value ~= 0) and 1 or 0
@@ -52,19 +52,7 @@ function on_broken(x, y, z, playerid)
 end
 
 function on_interact(x, y, z, playerid)
-    if bus.try_cycle_width(x, y, z, playerid) then return true end
-    local width = bus.get_width(x, y, z)
-    local selected_bit = block.get_field(x, y, z, "selected_bit") or 0
-    selected_bit = selected_bit + 1
-    if selected_bit >= width then
-        selected_bit = 0
-    end
-    block.set_field(x, y, z, "selected_bit", selected_bit)
-    
-    -- КРИТИЧНО: Помечаем устройство для пересчета после изменения selected_bit
-    -- Это необходимо, чтобы устройство пересчитало выход на основе нового selected_bit
-    api.mark_device_for_update(x, y, z)
-    return true
+    return require('advanced_logic_2:component_settings').open(x,y,z,playerid)
 end
 
 logic_viewer.set_view(device_id, function(x, y, z)
@@ -72,9 +60,9 @@ logic_viewer.set_view(device_id, function(x, y, z)
 
     local selected_bit = block.get_field(x, y, z, "selected_bit") or 0
     local bus_width = bus.get_width(x, y, z)
-    selected_bit = math.floor(selected_bit) % bus_width
+    selected_bit = math.floor(selected_bit) % 16
 
-    -- Visualize which bit will be written (MSB → LSB, left to right)
+    -- Visualize which bit will be written (MSB -> LSB, left to right)
     local bit_vis = ""
     for i = bus_width - 1, 0, -1 do
         if i == selected_bit then
@@ -84,14 +72,14 @@ logic_viewer.set_view(device_id, function(x, y, z)
         end
     end
 
-    -- inputs = nil  → auto-fill (shows input_bit and input_bus values)
-    -- outputs = nil → auto-fill (shows output bus value)
+    -- inputs = nil  -> auto-fill (shows input_bit and input_bus values)
+    -- outputs = nil -> auto-fill (shows output bus value)
     return {
         display_name = "Записыватель бита шины",
         settings = {
             bus.viewer_width(bus_width),
             {name = "Бит",     value = tostring(selected_bit) .. ' / ' .. tostring(bus_width - 1)},
-            {name = "Позиция", value = bit_vis},
+            {name = "Позиция", value = selected_bit>=bus_width and 'Вне ширины: данные проходят без изменения' or bit_vis},
         }
     }
 end)

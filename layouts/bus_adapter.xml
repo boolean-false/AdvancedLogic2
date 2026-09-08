@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<container position-func="gui.get_viewport()[1]/2-220,gui.get_viewport()[2]/2-145" size="440,290" color="#22262CFF">
-    <label pos="20,15" size="400,30">Адаптер разрядности</label>
-    <label id="current" pos="20,55" size="400,25">Ширина выхода: 4 бит</label>
-    <label pos="20,90" size="400,25">Выберите ширину выхода:</label>
-    <button pos="20,125" size="90,35" onclick="choose(1)">1 бит</button>
-    <button pos="123,125" size="90,35" onclick="choose(4)">4 бита</button>
-    <button pos="226,125" size="90,35" onclick="choose(8)">8 бит</button>
-    <button pos="329,125" size="90,35" onclick="choose(16)">16 бит</button>
-    <label pos="20,178" size="400,25">Сужение: младшие биты. Расширение: нулями.</label>
-    <label pos="20,205" size="400,25">Выход 1 бит — младший бит, не проверка на ноль.</label>
-    <button pos="150,242" size="140,32" onclick="close()">Закрыть</button>
+<container position-func="math.max(8,(gui.get_viewport()[1]-480)/2),math.max(8,(gui.get_viewport()[2]-282)/2)" size="480,282" color="#1B2027FC">
+<container pos="0,0" size="4,66" color="#8AC6D3FF" interactive="false"/>
+<label pos="20,12" size="440,28" color="#E8E6DFFF" id="ui_title">Адаптер разрядности</label><label pos="20,42" size="440,20" color="#ADB5C1FF">Выбор применяется сразу</label>
+<label pos="20,82" size="440,24" color="#8AC6D3FF" id="current">Ширина выхода</label><button pos="20,122" size="104,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="choose(1)" id="width_1">1 бит</button><button pos="132,122" size="104,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="choose(4)" id="width_4">4 бит</button><button pos="244,122" size="104,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="choose(8)" id="width_8">8 бит</button><button pos="356,122" size="104,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="choose(16)" id="width_16">16 бит</button><label pos="20,170" size="440,24" color="#ADB5C1FF">Сужение: младшие биты. Расширение: нулями.</label><label pos="20,196" size="440,24" color="#ADB5C1FF">1 бит - бит 0, а не проверка числа на ноль.</label><button pos="320,236" size="140,34" color="#345763FF" hover-color="#465365FF" text-align="center" onclick="close()">Готово</button>
 </container>

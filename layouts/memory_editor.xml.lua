@@ -1,218 +1,144 @@
--- Редактор/просмотрщик памяти ROM/RAM
--- addr_bits определяется физическим объёмом блока (16→4, 64→6).
--- data_bits: ширина данных (4/8/16). Влияет на диапазон значений.
-
-local api        = require("wire_mod_2:api")
-local mem        = require("advanced_logic_2:memory_common")
-
-local LAYOUT_ID  = "advanced_logic_2:memory_editor"
-local bx, by, bz
-local is_rom
-local mem_type    -- "ROM" / "RAM"
-local addr_bits   -- 4 / 8 / 16
-local data_bits   -- 4 / 8 / 16
-local phys_cells  -- 16 / 64 / ... зависит от типа блока
-
--- ========================
--- Утилиты
--- ========================
-
-local function safe_bits(v)
-    return mem.safe_bits(v)
+local ui=require('wire_mod_2:ui')
+local mem=require('advanced_logic_2:memory_common')
+local transfer=require('advanced_logic_2:memory_transfer')
+local api=require('wire_mod_2:api')
+local LAYOUT_ID='advanced_logic_2:memory_editor'
+local bx,by,bz,is_rom,bits,cells,radix
+local clear_until,reload_until=0,0
+local clear_range
+local function feedback(text)document.feedback.text=text end
+local function valid()
+ if not ui.valid(bx,by,bz,is_rom and 'advanced_logic_2:rom' or 'advanced_logic_2:ram') then
+  hud.close(LAYOUT_ID);return false
+ end
+ return true
 end
-
-local function next_in_cycle(cur)
-    return mem.next_in_cycle(cur)
+local function headers()
+ document.mem_title.text=string.format('%s / %d слов / %d бит / адреса HEX',is_rom and 'ROM' or 'RAM',cells,bits)
+ document.btn_addr.value=tostring(cells);document.btn_data.value=tostring(bits)
+ document.radix.value=tostring(radix)
 end
-
-local function get_max()   return 2 ^ data_bits - 1 end
-
-local function to_bin(val)
-    val = math.floor(val or 0)
-    if data_bits > 8 then return "--------" end
-    local s = ""
-    for i = data_bits - 1, 0, -1 do
-        s = s .. (math.floor(val / (2 ^ i)) % 2)
-        if i == 4 and data_bits == 8 then s = s .. "_" end
-    end
-    return s
+local function range()
+ local parsed,err=transfer.parse(document.range_start.text,8,16,1)
+ local first=parsed and parsed[1]
+ if not first or first>=cells then feedback('Начало (HEX): '..(err or string.format('допустимо 00..%02X',cells-1)));return end
+ local count,err=ui.number(document.range_count.text,1,cells-first,true)
+ if not count then feedback('Длина: '..err);return end
+ return first,count
 end
-
-local function hex_fmt(val)
-    if data_bits <= 4  then return string.format("0x%X",   val) end
-    if data_bits <= 8  then return string.format("0x%02X", val) end
-    return string.format("0x%04X", val)
+function select_row(first)
+ document.range_start.text=string.format('0x%02X',first)
+ document.range_count.text=tostring(math.min(8,cells-first))
+ feedback(string.format('Диапазон %02X..%02X',first,math.min(first+7,cells-1)))
 end
-
-local function clamp_val(text)
-    local n = math.floor(tonumber(text) or 0)
-    local mx = get_max()
-    if n < 0  then return 0  end
-    if n > mx then return mx end
-    return n
+local function read_draft()
+ local values={}
+ for i=0,cells-1 do
+  local parsed,err=transfer.parse(document['cell_'..i].text,bits,radix,1)
+  if not parsed then feedback(string.format('Адрес %02X: %s',i,err));return end
+  values[i+1]=parsed[1]
+ end
+ return values
 end
-
--- ========================
--- Обновление лейблов (бинарник + хекс, не трогает textbox)
--- ========================
-
-local function update_labels(addr, val)
-    local bin = document["bin_" .. addr]
-    local hex = document["hex_" .. addr]
-    if bin then bin.text = to_bin(val)  end
-    if hex then hex.text = hex_fmt(val) end
+local function build(values)
+ local grid=document.mem_grid;grid:clear()
+ for first=0,cells-1,8 do
+  local row='<panel size="712,28" orientation="horizontal" interval="4" color="0">'
+  row=row..'<button size="64,28" onclick="select_row('..first..')">'..string.format('%02X',first)..'</button>'
+  for i=first,math.min(first+7,cells-1) do
+   row=row..string.format('<textbox id="cell_%d" size="76,28" editable="%s" color="#12171DFF" text-color="#E8E6DFFF"/>',i,is_rom and 'true' or 'false')
+  end
+  grid:add(row..'</panel>')
+ end
+ for i=0,cells-1 do
+  local value=values and values[i+1] or mem.clamp_value(mem.read_cell(bx,by,bz,i),bits)
+  document['cell_'..i].text=transfer.format(value,bits,radix)
+ end
 end
-
--- ========================
--- Построение сетки
--- ========================
-
-local function build_grid()
-    local grid = document["mem_grid"]
-    grid:clear()
-    local editable = is_rom and "true" or "false"
-
-    -- Сначала создаём структуру БЕЗ атрибута text= на textbox.
-    -- text="..." в динамическом XML работает как supplier (каждый кадр),
-    -- что сбрасывает введённые пользователем значения.
-    for i = 0, phys_cells - 1 do
-        grid:add(string.format(
-            '<panel size="268,22" orientation="horizontal" interval="3" color="#00000000">'
-            .. '<label size="36,20" color="#5588FF" font-size="10">0x%02X</label>'
-            .. '<textbox id="cell_%d" size="54,20" editable="%s"'
-            .. ' font-size="10" text-color="#FFFFFF" color="#1A1A1AFF"/>'
-            .. '<label id="bin_%d" size="96,20" color="#505060" font-size="9"></label>'
-            .. '<label id="hex_%d" size="42,20" color="#44DDAA" font-size="10"></label>'
-            .. '</panel>',
-            i, i, editable, i, i
-        ))
-    end
-
-    -- Заполняем значения через .text — это разовое присвоение, не supplier.
-    for i = 0, phys_cells - 1 do
-        local val  = mem.read_cell(bx, by, bz, i)
-        local cell = document["cell_" .. i]
-        if cell then cell.text = tostring(val) end
-        update_labels(i, val)
-    end
-end
-
--- ========================
--- Обновление заголовка и кнопок режима
--- ========================
-
-local function refresh_header()
-    document["mem_title"].text = string.format(
-        "%s  addr:%db  data:%db",
-        mem_type, addr_bits, data_bits
-    )
-    local ba = document["btn_addr"]
-    local bd = document["btn_data"]
-    if ba then ba.text = string.format("Addr: %db", addr_bits) end
-    if bd then bd.text = string.format("Data: %db", data_bits) end
-end
-
--- ========================
--- Кнопки
--- ========================
-
 function on_mem_apply()
-    if not is_rom then return end
-    for i = 0, phys_cells - 1 do
-        local cell = document["cell_" .. i]
-        if cell then
-            local val = clamp_val(cell.text)
-            cell.text = tostring(val)
-            mem.write_cell(bx, by, bz, val, i)
-            update_labels(i, val)
-        end
-    end
-    api.mark_device_for_update(bx, by, bz)
+ if not valid() then return false end
+ if not is_rom then return true end
+ local values=read_draft();if not values then return false end
+ for i=0,cells-1 do
+  if values[i+1]~=mem.clamp_value(mem.read_cell(bx,by,bz,i),bits) then
+   mem.write_cell(bx,by,bz,values[i+1],i)
+  end
+ end
+ api.mark_device_for_update(bx,by,bz);feedback('Записано в ROM');return true
 end
-
-function on_mem_close()
-    hud.close(LAYOUT_ID)
+function export_range()
+ if not valid() then return end
+ local first,count=range();if not first then return end
+ local selected={}
+ for i=first,first+count-1 do
+  local values,err=transfer.parse(document['cell_'..i].text,bits,radix,1)
+  if not values then feedback(string.format('Адрес %02X: %s',i,err));return end
+  selected[#selected+1]=values[1]
+ end
+ document.exchange.text=transfer.export(selected,bits,radix)
+ document.exchange.focused=true
+ feedback('В поле обмена: Ctrl+A, Ctrl+C для копирования')
 end
-
+function import_range()
+ if not is_rom or not valid() then return end
+ local first,count=range();if not first then return end
+ local values,err=transfer.parse(document.exchange.text,bits,radix,count)
+ if not values then feedback(err);return false end
+ for i,value in ipairs(values) do document['cell_'..(first+i-1)].text=transfer.format(value,bits,radix) end
+ feedback(string.format('Вставлено %d слов с адреса %02X. Нажмите "Записать".',#values,first))
+ return true
+end
 function on_mem_clear()
-    if not is_rom then return end
-    for i = 0, phys_cells - 1 do
-        mem.write_cell(bx, by, bz, 0, i)
-        local cell = document["cell_" .. i]
-        if cell then cell.text = "0" end
-        update_labels(i, 0)
-    end
-    api.mark_device_for_update(bx, by, bz)
+ if not is_rom or not valid() then return end
+ local first,count=range();if not first then return end
+ local signature=first..':'..count
+ if clear_until==0 or time.uptime()>clear_until or clear_range~=signature then
+  clear_range=signature;clear_until=time.uptime()+4;feedback('Повторите очистку за 4 с. Изменяется только черновик диапазона.');return
+ end
+ clear_until=0
+ for i=first,first+count-1 do document['cell_'..i].text=transfer.format(0,bits,radix) end
+ feedback('Диапазон обнулен в черновике. Нажмите "Записать".')
 end
-
--- ========================
--- Адресная ширина фиксирована физическим объёмом памяти.
--- ========================
-
-function on_addr_cycle()
-    refresh_header()
-end
-
--- ========================
--- Цикл data_bits
--- ========================
-
-function on_data_cycle()
-    data_bits = next_in_cycle(data_bits)
-    block.set_field(bx, by, bz, "data_bits", data_bits, 0)
-    -- Применяем новую mask ко всем ячейкам (P2.13).
-    mem.normalize_cells_for_bits(bx, by, bz, data_bits, phys_cells)
-    refresh_header()
-    build_grid()
-    -- Битность является частью конфигурации порта: нужно пересобрать связи,
-    -- а не только пересчитать значение устройства.
-    api.refresh_device(bx, by, bz)
-end
-
--- ========================
--- Авто-обновление ОЗУ
--- ========================
-
 function refresh_all()
-    for i = 0, phys_cells - 1 do
-        local val  = mem.read_cell(bx, by, bz, i)
-        local cell = document["cell_" .. i]
-        if cell then cell.text = tostring(val) end
-        update_labels(i, val)
-    end
+ if not valid() then return end
+ -- Explicit reload discards the ROM draft only after a second click.
+ if is_rom then
+  local values=read_draft();local dirty=not values
+  if values then for i=0,cells-1 do if values[i+1]~=mem.clamp_value(mem.read_cell(bx,by,bz,i),bits) then dirty=true end end end
+  if dirty and (reload_until==0 or time.uptime()>reload_until) then
+   reload_until=time.uptime()+4;feedback('Есть правки. Повторите "Перечитать" за 4 с, чтобы отменить их.');return
+  end
+ end
+ clear_until=0;reload_until=0;build();feedback('Перечитано из памяти')
 end
-
--- ========================
--- События layout
--- ========================
-
-function on_open(...)
-    local args = {...}
-
-    if session.entries and session.entries["mem_editor_pos"] then
-        local pos = session.entries["mem_editor_pos"]
-        bx, by, bz = pos[1], pos[2], pos[3]
-    elseif args and #args >= 3 then
-        bx, by, bz = args[1], args[2], args[3]
-    else
-        hud.close(LAYOUT_ID)
-        return
-    end
-
-    is_rom     = (session.entries and session.entries["mem_editor_is_rom"]) or false
-    mem_type   = (session.entries and session.entries["mem_editor_type"]) or (is_rom and "ROM" or "RAM")
-    addr_bits  = safe_bits(session.entries and session.entries["mem_editor_addr_bits"])
-    data_bits  = safe_bits(session.entries and session.entries["mem_editor_data_bits"])
-    phys_cells = (session.entries and session.entries["mem_editor_phys_cells"]) or 16
-    if phys_cells == 0 then phys_cells = 16 end
-
-    refresh_header()
-
-    document["mem_apply"].visible = is_rom
-    document["mem_clear"].visible = is_rom
-
-    build_grid()
+function set_radix(value)
+ local n=tonumber(value);if (n~=10 and n~=16) or n==radix then return end
+ local values=read_draft();if not values then headers();return end
+ radix=n;headers();build(values);document.exchange.text=''
+ feedback('Изменен только формат отображения')
 end
-
-function on_close(invid)
+function set_capacity(value)
+ local n=tonumber(value);if (n~=16 and n~=64) or n==cells then return end
+ if not valid() or not on_mem_apply() then headers();return end
+ mem.set_cells(bx,by,bz,n);cells=n;headers();build()
+ document.range_start.text='0x00';document.range_count.text=tostring(cells)
+ api.refresh_device(bx,by,bz)
+end
+function set_data_width(value)
+ local n=tonumber(value);if (n~=4 and n~=8 and n~=16) or n==bits then return end
+ if not valid() or not on_mem_apply() then headers();return end
+ bits=n;block.set_field(bx,by,bz,'data_bits',bits);headers();build();api.refresh_device(bx,by,bz)
+end
+function on_mem_close()hud.close(LAYOUT_ID)end
+function on_open()
+ local entries=session.entries or {};local pos=entries.mem_editor_pos
+ if not pos then on_mem_close();return end
+ bx,by,bz=pos[1],pos[2],pos[3];is_rom=entries.mem_editor_is_rom or false
+ if not valid() then return end
+ cells=mem.get_cells(bx,by,bz);bits=mem.get_data_bits(bx,by,bz);radix=16;clear_until=0;reload_until=0
+ headers();build()
+ document.range_start.text='0x00';document.range_count.text=tostring(cells)
+ document.exchange.text=''
+ document.mem_apply.enabled=is_rom;document.mem_clear.enabled=is_rom;document.import_btn.enabled=is_rom
+ feedback(is_rom and 'HEX: одно поле = одно слово. Правки записываются кнопкой "Записать".' or 'RAM: снимок для чтения и копирования. Запись выполняет схема.')
 end

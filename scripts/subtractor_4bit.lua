@@ -1,14 +1,3 @@
--- Настраиваемый вычитатель 4/8/16 бит с заёмом.
---
--- Порты:
---   a    (BACK,  dir=0, bits=4) — уменьшаемое
---   b    (LEFT,  dir=3, bits=4) — вычитаемое
---   bin  (RIGHT, dir=1, bits=1) — входной заём (borrow in)
---   diff (FRONT, dir=2, bits=4) — разность (4 бита)
---
---   bout (DOWN, dir=5, bits=1) — выходной заём
--- Алгоритм: diff = a - b - bin. Если результат < 0: diff += 16, bout = 1.
-
 local api          = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
 local bus          = require('advanced_logic_2:bus_common')
@@ -16,12 +5,12 @@ local bus          = require('advanced_logic_2:bus_common')
 local device_id = api.register({"advanced_logic_2:subtractor_4bit"}, {
     inputs = {
         a   = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
-        b   = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits"},
+        b   = {dir = 0, offset = 1, bits = 4, bits_field = "data_bits"},
         bin = {dir = 1, offset = 0, bits = 1},
     },
     outputs = {
         diff = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
-        bout = {dir = 5, offset = 0, bits = 1},
+        bout = {dir = 2, offset = 1, bits = 1},
     }
 })
 

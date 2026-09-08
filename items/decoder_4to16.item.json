@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
   "icon": "items:al2_decoder_4to16",
-  "placing-block": "advanced_logic_2:decoder_4to16"
+  "placing-block": "advanced_logic_2:decoder_4to16_mounted"
 }

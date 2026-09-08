@@ -7,13 +7,13 @@
     "al2_gate_side",
     "al2_gate_side"
   ],
-  "model": "block",
+  "model": "aabb",
   "rotation": "pane",
   "selectable": true,
   "fields": {
     "mem": {
       "type": "int16",
-      "length": 16
+      "length": 64
     },
     "addr_bits": {
       "type": "int8"
@@ -22,5 +22,18 @@
       "type": "int8"
     }
   },
-  "script-name": "rom"
+  "script-name": "rom",
+  "size": [
+    1,
+    1,
+    1
+  ],
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    1
+  ]
 }

@@ -1,3 +1,4 @@
+local ui=require('wire_mod_2:ui')
 local clocks = require('advanced_logic_2:clock_registry')
 
 local block_x, block_y, block_z = 0, 0, 0
@@ -24,7 +25,7 @@ end
 function cycle_clock()
     if not valid_target() then return end
     if not clocks.request_cycle(block_x,block_y,block_z) then
-        gui.alert('Включите паузу и дождитесь завершения предыдущего такта.')
+        document.feedback.text='Сначала пауза; дождитесь завершения такта.'
     end
     refresh_status()
 end
@@ -52,6 +53,7 @@ function on_open(...)
     end
     
     if not valid_target() then return end
+    document.feedback.text=''
     refresh_status()
     -- Load current settings from block
     local pulse_time = block.get_field(block_x, block_y, block_z, "pulse_time")
@@ -77,16 +79,16 @@ function apply_settings()
     local pulse_text = document.pulse_time.text
     local delay_text = document.delay_time.text
     
-    local pulse_time = tonumber(pulse_text)
-    local delay_time = tonumber(delay_text)
+    local pulse_time = tonumber((pulse_text:gsub(',','.')))
+    local delay_time = tonumber((delay_text:gsub(',','.')))
     
-    if not pulse_time or pulse_time < 0.01 or pulse_time > 60 then
-        gui.alert("Pulse time must be between 0.01 and 60 seconds")
+    if not pulse_time or pulse_time~=pulse_time or pulse_time < 0.01 or pulse_time > 60 then
+        document.feedback.text='Высокий уровень: от 0.01 до 60 секунд'
         return
     end
     
-    if not delay_time or delay_time < 0.01 or delay_time > 60 then
-        gui.alert("Delay time must be between 0.01 and 60 seconds")
+    if not delay_time or delay_time~=delay_time or delay_time < 0.01 or delay_time > 60 then
+        document.feedback.text='Низкий уровень: от 0.01 до 60 секунд'
         return
     end
     
@@ -107,7 +109,13 @@ function apply_settings()
         end
     end
     
-    close_gui()
+    document.feedback.text=string.format('Применено / %.2f Гц',1/(pulse_time+delay_time))
+end
+
+function preset(hz)
+    document.pulse_time.text=tostring(0.5/hz)
+    document.delay_time.text=tostring(0.5/hz)
+    document.feedback.text='Пресет выбран. Нажмите [Применить интервалы].'
 end
 
 function close_gui()

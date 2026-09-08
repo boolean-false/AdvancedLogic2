@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<container position-func="gui.get_viewport()[1]/2-145,gui.get_viewport()[2]/2-255" size="290,510" color="#252525FF">
-
-    <!-- Заголовок -->
-    <panel pos="0,0" size="290,32" color="#2A2A2AFF" padding="12,8,12,8">
-        <label id="mem_title" size="266,16" color="#FFFFFF" font-size="13" gravity="center-left">ROM / RAM</label>
-    </panel>
-
-    <!-- Конфигурация -->
-    <panel pos="0,32" size="290,26" color="#1E1E1EFF" padding="6,3,6,3" orientation="horizontal" interval="8">
-        <label id="btn_addr" size="127,20" color="#2A3A2AFF" gravity="center" font-size="10">Addr: 4b (fixed)</label>
-        <button id="btn_data" size="127,20" color="#2A3A4AFF" hover-color="#3A4A6AFF" pressed-color="#1A2A3AFF" onclick="on_data_cycle()" text-align="center" font-size="10">Data: 4b</button>
-    </panel>
-
-    <!-- Колонка контента -->
-    <panel pos="10,62" size="270,16" color="#1E1E1EFF" orientation="horizontal" interval="3">
-        <label size="36,14" color="#888888" font-size="9">ADDR</label>
-        <label size="54,14" color="#888888" font-size="9">DEC</label>
-        <label size="96,14" color="#888888" font-size="9">BINARY</label>
-        <label size="42,14" color="#888888" font-size="9">HEX</label>
-    </panel>
-
-    <!-- Скролл -->
-    <panel id="mem_grid" pos="10,81" size="270,366" scrollable="true" max-length="366" orientation="vertical" interval="2" color="0"/>
-
-    <!-- Сепаратор -->
-    <panel pos="10,451" size="270,1" color="#444444FF"/>
-
-    <!-- Нижние кнопки -->
-    <panel pos="10,456" size="270,40" orientation="horizontal" interval="6" color="#252525FF">
-        <button id="mem_apply" size="83,36" color="#2D7A2DFF" hover-color="#3A9A3AFF" pressed-color="#1F5A1FFF" onclick="on_mem_apply()" text-align="center">Применить</button>
-        <button id="mem_clear" size="83,36" color="#7A2D2DFF" hover-color="#9A3A3AFF" pressed-color="#5A1F1FFF" onclick="on_mem_clear()" text-align="center">Сбросить</button>
-        <button size="83,36" color="#5A5A5AFF" hover-color="#7A7A7AFF" pressed-color="#3A3A3AFF" onclick="on_mem_close()" text-align="center">Закрыть</button>
-    </panel>
-
+<container position-func="math.max(8,(gui.get_viewport()[1]-760)/2),math.max(8,(gui.get_viewport()[2]-600)/2)" size="760,600" color="#1B2027FC">
+<container pos="0,0" size="4,66" color="#8AC6D3FF" interactive="false"/>
+<label pos="20,12" size="720,28" color="#E8E6DFFF" id="ui_title">Редактор памяти</label><label pos="20,42" size="720,20" color="#ADB5C1FF">8 слов в строке. HEX / DEC. ROM: запись; RAM: чтение и копирование.</label>
+<label pos="20,74" size="370,24" color="#8AC6D3FF" id="mem_title"></label><select id="btn_addr" pos="396,72" size="106,30" width="106" selected="16" onselect="set_capacity"><option value="16">16 слов</option><option value="64">64 слова</option></select><select id="btn_data" pos="510,72" size="106,30" width="106" selected="4" onselect="set_data_width"><option value="4">4 бита</option><option value="8">8 бит</option><option value="16">16 бит</option></select><select id="radix" pos="624,72" size="112,30" width="112" selected="16" onselect="set_radix"><option value="16">HEX</option><option value="10">DEC</option></select><label pos="20,112" size="64,24" color="#E8E6DFFF">Начало</label><textbox id="range_start" pos="88,108" size="92,34" editable="true" color="#12171DFF" text-color="#E8E6DFFF"/><label pos="196,112" size="48,24" color="#E8E6DFFF">Слов</label><textbox id="range_count" pos="248,108" size="64,34" editable="true" color="#12171DFF" text-color="#E8E6DFFF"/><button pos="332,108" size="190,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="export_range()">В поле обмена</button><button pos="536,108" size="200,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="import_range()" id="import_btn">Из поля в сетку</button><label pos="20,152" size="64,24" color="#E8E6DFFF">АДРЕС</label><label pos="88,152" size="76,24" color="#E8E6DFFF">00</label><label pos="168,152" size="76,24" color="#E8E6DFFF">01</label><label pos="248,152" size="76,24" color="#E8E6DFFF">02</label><label pos="328,152" size="76,24" color="#E8E6DFFF">03</label><label pos="408,152" size="76,24" color="#E8E6DFFF">04</label><label pos="488,152" size="76,24" color="#E8E6DFFF">05</label><label pos="568,152" size="76,24" color="#E8E6DFFF">06</label><label pos="648,152" size="76,24" color="#E8E6DFFF">07</label><panel id="mem_grid" pos="20,178" size="720,254" min-length="254" max-length="254" scrollable="true" orientation="vertical" interval="3" color="0"/><label pos="20,438" size="720,24" color="#E8E6DFFF">Поле обмена: Ctrl+A / Ctrl+C / Ctrl+V. Слова разделяются пробелом.</label><textbox id="exchange" pos="20,466" size="720,44" multiline="true" editable="true" color="#12171DFF" text-color="#E8E6DFFF"/><label pos="20,516" size="720,28" color="#8AC6D3FF" id="feedback"></label><button pos="20,552" size="172,34" color="#345763FF" hover-color="#465365FF" text-align="center" onclick="on_mem_apply()" id="mem_apply">Записать</button><button pos="204,552" size="172,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="on_mem_clear()" id="mem_clear">Очистить диапазон</button><button pos="388,552" size="172,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="refresh_all()">Перечитать</button><button pos="572,552" size="168,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="on_mem_close()">Закрыть</button>
 </container>

@@ -1,0 +1,29 @@
+{
+  "texture-faces": [
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_decoder_4to16",
+    "al2_gate_side",
+    "al2_gate_side"
+  ],
+  "model": "aabb",
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    1
+  ],
+  "size": [
+    1,
+    1,
+    1
+  ],
+  "rotation": "stairs",
+  "selectable": true,
+  "script-name": "decoder_4to16",
+  "hidden": true,
+  "picking-item": "advanced_logic_2:decoder_4to16.item"
+}

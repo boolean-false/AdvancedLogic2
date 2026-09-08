@@ -3,7 +3,7 @@
     "al2_gate_side",
     "al2_gate_side",
     "al2_gate_side",
-    "al2_ram_large",
+    "al2_bus_slice",
     "al2_gate_side",
     "al2_gate_side"
   ],
@@ -12,36 +12,23 @@
     0,
     0,
     0,
-    3,
+    1,
     0.2,
     1
   ],
-  "size": [
-    3,
-    1,
-    1
-  ],
+  "light-passing": true,
+  "sky-light-passing": true,
   "rotation": "stairs",
   "selectable": true,
   "fields": {
-    "mem": {
-      "type": "int16",
-      "length": 64
-    },
-    "addr_bits": {
+    "part_bits": {
       "type": "int8"
     },
     "data_bits": {
       "type": "int8"
-    },
-    "prev_clk": {
-      "type": "int8"
-    },
-    "prev_we": {
-      "type": "int8"
     }
   },
-  "script-name": "ram_large",
+  "script-name": "bus_slice",
   "hidden": true,
-  "picking-item": "advanced_logic_2:ram_large.item"
+  "picking-item": "advanced_logic_2:bus_slice.item"
 }

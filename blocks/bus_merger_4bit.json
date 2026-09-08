@@ -4,31 +4,27 @@
     "al2_gate_side",
     "al2_gate_side",
     "al2_bus_merger_4bit",
-    "al2_bus_merger_4bit_front",
-    "al2_bus_merger_4bit_back"
+    "al2_gate_side",
+    "al2_gate_side"
   ],
   "model": "aabb",
   "hitbox": [
     0,
     0,
     0,
-    4,
-    4,
-    1
-  ],
-  "size": [
-    4,
-    4,
+    2,
+    0.2,
     1
   ],
   "light-passing": true,
   "sky-light-passing": true,
   "rotation": "pane",
   "selectable": true,
-  "fields": {
-    "data_bits": {
-      "type": "int8"
-    }
-  },
-  "script-name": "bus_merger_4bit"
+  "fields": {},
+  "script-name": "bus_merger_4bit",
+  "size": [
+    2,
+    1,
+    1
+  ]
 }

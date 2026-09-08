@@ -1,12 +1,3 @@
--- Настраиваемый Comparator. Сравнивает A и B как 4/8/16-битные числа.
---
--- Порты:
---   BACK  (dir=0, bits=4): a
---   LEFT  (dir=3, bits=4): b
---   FRONT (dir=2, bits=1): eq    — A == B
---   RIGHT (dir=1, bits=1): gt    — A >  B
---   UP    (dir=4, bits=1): lt    — A <  B
-
 local api = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
 local bus = require('advanced_logic_2:bus_common')
@@ -14,12 +5,12 @@ local bus = require('advanced_logic_2:bus_common')
 local device_id = api.register({"advanced_logic_2:comparator_4bit"}, {
     inputs = {
         a = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
-        b = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits"},
+        b = {dir = 0, offset = 1, bits = 4, bits_field = "data_bits"},
     },
     outputs = {
         eq = {dir = 2, offset = 0, bits = 1},
         gt = {dir = 1, offset = 0, bits = 1},
-        lt = {dir = 4, offset = 0, bits = 1},
+        lt = {dir = 2, offset = 1, bits = 1},
     }
 })
 

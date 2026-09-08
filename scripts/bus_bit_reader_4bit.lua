@@ -5,7 +5,7 @@ local bus = require('advanced_logic_2:bus_common')
 
 local device_id = api.register({"advanced_logic_2:bus_bit_reader_4bit"}, {
     inputs = {
-        input = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
+        input = {dir = 2, offset = 0, accept_bits = {1,4,8,16}},
     },
     outputs = {
         output = { dir = 0, offset = 0, bits = 1}  -- 1-битный выход
@@ -17,8 +17,8 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
     
     -- Получаем выбранный бит из поля блока
     local x, y, z = origin[1], origin[2], origin[3]
-    local width = bus.get_width(x, y, z)
-    local selected_bit = math.floor(block.get_field(x, y, z, "selected_bit") or 0) % width
+    local width = api.get_port_state('input',x,y,z).bits or 16
+    local selected_bit = math.floor(block.get_field(x, y, z, "selected_bit") or 0) % 16
     
     -- Извлекаем выбранный бит из шины
     -- Используем bit.band для получения нужного бита
@@ -42,29 +42,17 @@ function on_broken(x, y, z, playerid)
 end
 
 function on_interact(x, y, z, playerid)
-    if bus.try_cycle_width(x, y, z, playerid) then return true end
-    local width = bus.get_width(x, y, z)
-    local selected_bit = block.get_field(x, y, z, "selected_bit") or 0
-    selected_bit = selected_bit + 1
-    if selected_bit >= width then
-        selected_bit = 0
-    end
-    block.set_field(x, y, z, "selected_bit", selected_bit)
-    
-    -- КРИТИЧНО: Помечаем устройство для пересчета после изменения selected_bit
-    -- Это необходимо, чтобы устройство пересчитало выход на основе нового selected_bit
-    api.mark_device_for_update(x, y, z)
-    return true
+    return require('advanced_logic_2:component_settings').open(x,y,z,playerid)
 end
 
 logic_viewer.set_view(device_id, function(x, y, z)
     if block.get(x, y, z) == 0 then return nil end
 
     local selected_bit = block.get_field(x, y, z, "selected_bit") or 0
-    local bus_width = bus.get_width(x, y, z)
-    selected_bit = math.floor(selected_bit) % bus_width
+    local bus_width = api.get_port_state('input',x,y,z).bits or 16
+    selected_bit = math.floor(selected_bit) % 16
 
-    -- Visualize which bit is selected (MSB → LSB, left to right)
+    -- Visualize which bit is selected (MSB -> LSB, left to right)
     local bit_vis = ""
     for i = bus_width - 1, 0, -1 do
         if i == selected_bit then
@@ -74,8 +62,8 @@ logic_viewer.set_view(device_id, function(x, y, z)
         end
     end
 
-    -- inputs = nil  → auto-fill from device_system (shows actual bus value)
-    -- outputs = nil → auto-fill from device_system (shows bit output)
+    -- inputs = nil  -> auto-fill from device_system (shows actual bus value)
+    -- outputs = nil -> auto-fill from device_system (shows bit output)
     return {
         display_name = "Читатель бита шины",
         settings = {

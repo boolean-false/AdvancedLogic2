@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<container position-func="gui.get_viewport()[1]/2-130,gui.get_viewport()[2]/2-160" size="260,310" color="#252525FF">
-
-    <panel pos="0,0" size="260,32" color="#2A2A2AFF" padding="12,8,12,8">
-        <label size="236,16" color="#FFFFFF" font-size="13" gravity="center-left">4-bit Keypad</label>
-    </panel>
-
-    <panel pos="10,42" size="240,16" color="#1E1E1EFF" padding="0,0,0,0">
-        <label id="last_pressed" size="240,16" color="#FFFF88" font-size="11" gravity="center-center">—</label>
-    </panel>
-
-    <!-- 4×4 grid -->
-    <panel pos="10,68" size="240,200" orientation="vertical" interval="6" color="0">
-        <panel size="240,44" orientation="horizontal" interval="6" color="0">
-            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(13)" text-align="center" font-size="16">D</button>
-            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(14)" text-align="center" font-size="16">E</button>
-            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(15)" text-align="center" font-size="16">F</button>
-            <button size="55,44" color="#5A3A3AFF" hover-color="#7A5A5AFF" pressed-color="#3A1A1AFF" onclick="press_key(12)" text-align="center" font-size="16">C</button>
-        </panel>
-        <panel size="240,44" orientation="horizontal" interval="6" color="0">
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(7)" text-align="center" font-size="16">7</button>
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(8)" text-align="center" font-size="16">8</button>
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(9)" text-align="center" font-size="16">9</button>
-            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(11)" text-align="center" font-size="16">B</button>
-        </panel>
-        <panel size="240,44" orientation="horizontal" interval="6" color="0">
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(4)" text-align="center" font-size="16">4</button>
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(5)" text-align="center" font-size="16">5</button>
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(6)" text-align="center" font-size="16">6</button>
-            <button size="55,44" color="#3A3A3AFF" hover-color="#5A5A5AFF" pressed-color="#1A1A1AFF" onclick="press_key(10)" text-align="center" font-size="16">A</button>
-        </panel>
-        <panel size="240,44" orientation="horizontal" interval="6" color="0">
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(1)" text-align="center" font-size="16">1</button>
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(2)" text-align="center" font-size="16">2</button>
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(3)" text-align="center" font-size="16">3</button>
-            <button size="55,44" color="#3A4A6AFF" hover-color="#5A6A8AFF" pressed-color="#1A2A4AFF" onclick="press_key(0)" text-align="center" font-size="16">0</button>
-        </panel>
-    </panel>
-
-    <panel pos="10,278" size="240,26" orientation="horizontal" interval="6" color="0">
-        <button size="240,24" color="#5A5A5AFF" hover-color="#7A7A7AFF" pressed-color="#3A3A3AFF" onclick="close_keypad()" text-align="center" font-size="11">Закрыть</button>
-    </panel>
-
+<container position-func="math.max(8,(gui.get_viewport()[1]-348)/2),math.max(8,(gui.get_viewport()[2]-370)/2)" size="348,370" color="#1B2027FC">
+<container pos="0,0" size="4,66" color="#8AC6D3FF" interactive="false"/>
+<label pos="20,12" size="308,28" color="#E8E6DFFF" id="ui_title">Клавиатура HEX</label><label pos="20,42" size="308,20" color="#ADB5C1FF">Клик отправляет цифру и импульс STROBE</label>
+<label pos="20,78" size="308,28" color="#8AC6D3FF" id="last_pressed"></label><button pos="20,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(0)" id="digit_0">0</button><button pos="98,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(1)" id="digit_1">1</button><button pos="176,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(2)" id="digit_2">2</button><button pos="254,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(3)" id="digit_3">3</button><button pos="20,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(4)" id="digit_4">4</button><button pos="98,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(5)" id="digit_5">5</button><button pos="176,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(6)" id="digit_6">6</button><button pos="254,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(7)" id="digit_7">7</button><button pos="20,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(8)" id="digit_8">8</button><button pos="98,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(9)" id="digit_9">9</button><button pos="176,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(10)" id="digit_10">A</button><button pos="254,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(11)" id="digit_11">B</button><button pos="20,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(12)" id="digit_12">C</button><button pos="98,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(13)" id="digit_13">D</button><button pos="176,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(14)" id="digit_14">E</button><button pos="254,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(15)" id="digit_15">F</button><button pos="188,320" size="140,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="close_keypad()">Закрыть</button>
 </container>

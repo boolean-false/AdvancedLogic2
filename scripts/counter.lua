@@ -93,7 +93,7 @@ logic_viewer.set_view(device_id, function(x, y, z)
             {name = "Q",     value = logic_viewer.format_bits(count, width)},
             {name = "DEC",   value = tostring(count)},
             {name = "CARRY", value = tostring(carry)},
-            {name = "CLK ↑", value = "LOAD > EN; DIR: 0 +1, 1 -1"},
+            {name = "CLK ^", value = "LOAD > EN; DIR: 0 +1, 1 -1"},
             {name = "CLR", value = "Асинхронный сброс"},
         }
     }

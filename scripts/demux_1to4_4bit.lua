@@ -1,13 +1,3 @@
--- Настраиваемый DEMUX 1:4 для шин 4/8/16 бит.
---
--- Порты:
---   BACK  (0, bits=4): x     — вход
---   DOWN  (5, bits=2): sel   (00=a, 01=b, 10=c, 11=d)
---   FRONT (2, bits=4): a
---   LEFT  (3, bits=4): b
---   RIGHT (1, bits=4): c
---   UP    (4, bits=4): d
-
 local api = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
 local bus = require('advanced_logic_2:bus_common')
@@ -16,13 +6,13 @@ local device_id = api.register({"advanced_logic_2:demux_1to4_4bit"}, {
     inputs = {
         x   = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
         -- Выбор использует младшие 2 бита любой многобитной шины.
-        sel = {dir = 5, offset = 0, bits = 2, flexible = true},
+        sel = {dir = 0, offset = 1, accept_bits = {1,4,8,16}},
     },
     outputs = {
         a = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
         b = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits"},
         c = {dir = 1, offset = 0, bits = 4, bits_field = "data_bits"},
-        d = {dir = 4, offset = 0, bits = 4, bits_field = "data_bits"},
+        d = {dir = 2, offset = 1, bits = 4, bits_field = "data_bits"},
     }
 })
 

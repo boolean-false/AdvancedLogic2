@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<container position-func="gui.get_viewport()[1]/2-220,gui.get_viewport()[2]/2-180" size="440,485" color="#252525FF">
-    <panel pos="0,0" size="440,50" color="#2A2A2AFF" padding="15,10,15,10">
-        <label pos="0,0" size="410,30" color="#FFFFFF" font-size="20" gravity="center-left">Настройки тактового генератора</label>
-    </panel>
-    
-    <panel pos="20,50" size="400,110" color="#252525FF" padding="15,15,15,15">
-        <label pos="0,0" size="370,25" color="#E0E0E0" font-size="14">Время импульса (секунды):</label>
-        <textbox id="pulse_time" pos="0,30" size="370,40" text="0.50" editable="true" font-size="16" text-color="#FFFFFF" color="#1A1A1AFF" padding="10,8,10,8" />
-        <label pos="0,75" size="370,20" color="#888888" font-size="11">Время, в течение которого выход включен</label>
-    </panel>
-    
-    <panel pos="20,180" size="400,110" color="#252525FF" padding="15,15,15,15">
-        <label pos="0,0" size="370,25" color="#E0E0E0" font-size="14">Время задержки (секунды):</label>
-        <textbox id="delay_time" pos="0,30" size="370,40" text="0.50" editable="true" font-size="16" text-color="#FFFFFF" color="#1A1A1AFF" padding="10,8,10,8" />
-        <label pos="0,75" size="370,20" color="#888888" font-size="11">Время, в течение которого выход выключен</label>
-    </panel>
-    
-    <label id="run_status" pos="20,300" size="400,24">Генератор работает</label>
-    <button pos="20,330" size="125,32" onclick="start_clock()">Пуск</button>
-    <button pos="157,330" size="125,32" onclick="pause_clock()">Пауза</button>
-    <button pos="294,330" size="125,32" onclick="cycle_clock()">Один такт</button>
-    <label pos="20,373" size="400,24">Такт на паузе: 0 → 1 → 0. Только этот генератор.</label>
-    <panel pos="20,420" size="400,50" orientation="horizontal" interval="15" padding="0,10,0,0"  color="#252525FF">
-        <button id="apply_btn" pos="0,0" size="192,40" color="#2D7A2DFF" hover-color="#3A9A3AFF" pressed-color="#1F5A1FFF" onclick="apply_settings()" text-align="center">Применить</button>
-        <button id="cancel_btn" pos="207,0" size="193,40" color="#5A2A2AFF" hover-color="#7A3A3AFF" pressed-color="#3A1A1AFF" onclick="close_gui()" text-align="center">Отмена</button>
-    </panel>
+<container position-func="math.max(8,(gui.get_viewport()[1]-480)/2),math.max(8,(gui.get_viewport()[2]-466)/2)" size="480,466" color="#1B2027FC">
+<container pos="0,0" size="4,66" color="#8AC6D3FF" interactive="false"/>
+<label pos="20,12" size="440,28" color="#E8E6DFFF" id="ui_title">Тактовый генератор</label><label pos="20,42" size="440,20" color="#ADB5C1FF">Пауза и ручной такт относятся только к этому генератору</label>
+<label pos="20,82" size="210,24" color="#E8E6DFFF">Высокий уровень, с</label><label pos="250,82" size="210,24" color="#E8E6DFFF">Низкий уровень, с</label><textbox id="pulse_time" pos="20,112" size="210,34" editable="true" color="#12171DFF" text-color="#E8E6DFFF"/><textbox id="delay_time" pos="250,112" size="210,34" editable="true" color="#12171DFF" text-color="#E8E6DFFF"/><button pos="20,160" size="140,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="preset(1)">1 Гц</button><button pos="170,160" size="140,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="preset(2)">2 Гц</button><button pos="320,160" size="140,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="preset(10)">10 Гц</button><label pos="20,208" size="440,24" color="#8AC6D3FF" id="run_status"></label><button pos="20,242" size="140,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="start_clock()">Пуск</button><button pos="170,242" size="140,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="pause_clock()">Пауза</button><button pos="320,242" size="140,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="cycle_clock()">Один такт</button><label pos="20,288" size="440,24" color="#ADB5C1FF">На паузе один такт: 0 -&gt; 1 -&gt; 0.</label><label pos="20,320" size="440,24" color="#ADB5C1FF">Каждый интервал: от 0.01 до 60 секунд.</label><label pos="20,354" size="440,42" color="#8AC6D3FF" id="feedback"></label><button pos="20,412" size="270,34" color="#345763FF" hover-color="#465365FF" text-align="center" onclick="apply_settings()">Применить интервалы</button><button pos="308,412" size="152,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="close_gui()">Закрыть</button>
 </container>
-

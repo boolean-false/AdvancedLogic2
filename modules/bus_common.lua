@@ -6,7 +6,7 @@ local cfg_check = require("advanced_logic_2:configurator_check")
 ---@class ALBusCommon
 local M = {}
 
-M.WIDTHS = {4, 8, 16}
+M.WIDTHS = {1, 4, 8, 16}
 M.DEFAULT_WIDTH = 4
 
 ---@param value number|nil
@@ -66,11 +66,7 @@ end
 ---Переключает ширину только конфигуратором в Viewer-режиме.
 ---@return boolean handled
 function M.try_cycle_width(x, y, z, playerid)
-    if not cfg_check.can_open_ui(playerid) then return false end
-    local width = M.next_width(M.get_width(x, y, z))
-    block.set_field(x, y, z, "data_bits", width, 0)
-    api.refresh_device(x, y, z)
-    return true
+    return require('advanced_logic_2:component_settings').open(x,y,z,playerid)
 end
 
 ---@param width integer

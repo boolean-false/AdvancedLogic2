@@ -1,3 +1,4 @@
+local ui=require('wire_mod_2:ui')
 local api = require("wire_mod_2:api")
 local bus = require("advanced_logic_2:bus_common")
 
@@ -6,6 +7,7 @@ local bx, by, bz
 local selected_width = bus.DEFAULT_WIDTH
 
 local function update_width_labels()
+    for _,n in ipairs({1,4,8,16}) do document['width_'..n].text=(n==selected_width and '[x] ' or '')..n..' бит' end
     local width_label = document["width_label"]
     local range_label = document["range_label"]
     if width_label then width_label.text = tostring(selected_width) .. " бит" end
@@ -17,18 +19,20 @@ end
 function set_width(width)
     selected_width = bus.safe_width(width)
     local input = document["value_input"]
-    if input then input.text = tostring(bus.clamp(tonumber(input.text) or 0, selected_width)) end
+    document.feedback.text='Выбрана ширина. Нажмите [Применить].'
     update_width_labels()
 end
 
 function apply_constant()
-    if not bx then return end
+    if not ui.valid(bx,by,bz,'advanced_logic_2:bus_constant') then close_constant();return end
     local input = document["value_input"]
-    local value = bus.clamp(input and tonumber(input.text) or 0, selected_width)
+    local value,err=ui.number(input and input.text,0,bus.mask(selected_width),true)
+    if not value then document.feedback.text=err;return end
     block.set_field(bx, by, bz, "value", value)
     block.set_field(bx, by, bz, "data_bits", selected_width, 0)
     if input then input.text = tostring(value) end
     api.refresh_device(bx, by, bz)
+    document.feedback.text=string.format("Сохранено: %d / 0x%X",value,value)
 end
 
 function close_constant()
@@ -47,6 +51,7 @@ function on_open(...)
         return
     end
 
+    document.feedback.text=''
     selected_width = bus.get_width(bx, by, bz)
     local input = document["value_input"]
     if input then input.text = tostring(bus.clamp(block.get_field(bx, by, bz, "value") or 0, selected_width)) end
