@@ -1,0 +1,39 @@
+{
+  "texture": "bus_4_bit",
+  "model": "custom",
+  "model-name": "generated_wires/bus_orange_4/61",
+  "light-passing": true,
+  "rotation": "pane",
+  "script-name": "bus_base",
+  "sky-light-passing": true,
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+  ],
+  "fields": {
+    "chain_id": {
+      "type": "int32"
+    }
+  },
+  "tags": [
+    "wire_mod_2:wire"
+  ],
+  "picking-item": "advanced_logic_2:bus_orange_4.item",
+  "obstacle": false,
+  "state-based": {
+    "offset": 0,
+    "bits": 1,
+    "variants": [
+      {
+        "model": "custom",
+        "model-name": "generated_wires/bus_orange_4/61",
+        "texture": "bus_4_bit"
+      }
+    ]
+  },
+  "hidden": true
+}

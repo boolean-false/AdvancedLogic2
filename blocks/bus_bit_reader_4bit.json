@@ -1,5 +1,4 @@
 {
-  "texture": "bus_bit_reader_4bit",
   "model": "aabb",
   "hitbox": [
     0,
@@ -14,7 +13,19 @@
   "script-name": "bus_bit_reader_4bit",
   "sky-light-passing": false,
   "fields": {
-    "selected_bit": {"type": "int8"},
-    "data_bits": {"type": "int8"}
-  }
+    "selected_bit": {
+      "type": "int8"
+    },
+    "data_bits": {
+      "type": "int8"
+    }
+  },
+  "texture-faces": [
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_bus_bit_reader_4bit",
+    "al2_gate_side",
+    "al2_gate_side"
+  ]
 }

@@ -1,23 +1,45 @@
 {
   "texture-faces": [
-    "base_side_1",
-    "base_side_1",
-    "base_side_1",
-    "ram",
-    "base_side_1",
-    "base_side_1"
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_ram_large",
+    "al2_gate_side",
+    "al2_gate_side"
   ],
   "model": "aabb",
-  "hitbox": [0, 0, 0, 3, 0.2, 1],
-  "size": [3, 1, 1],
+  "hitbox": [
+    0,
+    0,
+    0,
+    3,
+    0.2,
+    1
+  ],
+  "size": [
+    3,
+    1,
+    1
+  ],
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "mem":       {"type": "int16", "length": 64},
-    "addr_bits": {"type": "int8"},
-    "data_bits": {"type": "int8"},
-    "prev_clk":  {"type": "int8"},
-    "prev_we":   {"type": "int8"}
+    "mem": {
+      "type": "int16",
+      "length": 64
+    },
+    "addr_bits": {
+      "type": "int8"
+    },
+    "data_bits": {
+      "type": "int8"
+    },
+    "prev_clk": {
+      "type": "int8"
+    },
+    "prev_we": {
+      "type": "int8"
+    }
   },
   "script-name": "ram_large"
 }

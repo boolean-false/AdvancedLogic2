@@ -1,19 +1,26 @@
 {
   "texture-faces": [
-    "base_side_1",
-    "base_side_1",
-    "base_side_1",
-    "base_side_1",
-    "base_side_1",
-    "base_side_1"
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_rom",
+    "al2_gate_side",
+    "al2_gate_side"
   ],
   "model": "block",
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "mem":       {"type": "int16", "length": 16},
-    "addr_bits": {"type": "int8"},
-    "data_bits": {"type": "int8"}
+    "mem": {
+      "type": "int16",
+      "length": 16
+    },
+    "addr_bits": {
+      "type": "int8"
+    },
+    "data_bits": {
+      "type": "int8"
+    }
   },
   "script-name": "rom"
 }

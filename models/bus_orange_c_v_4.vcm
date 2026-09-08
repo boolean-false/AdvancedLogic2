@@ -1,4 +1,0 @@
-@box from (0.2,0,0) to (0.8,0.2,0.2) texture "blocks:bus_4_bit" {
-  @part tags (west, east) texture "blocks:bus_4_bit_side"
-}
-@box from (0.2,0,0.2) to (0.8,1,0.8) texture "blocks:bus_4_bit"

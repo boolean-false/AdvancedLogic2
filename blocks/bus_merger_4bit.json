@@ -1,21 +1,34 @@
 {
   "texture-faces": [
-    "base_side_1",
-    "base_side_1",
-    "base_side_1",
-    "bus_4_bit",
-    "base_side_1",
-    "base_side_1"
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_bus_merger_4bit",
+    "al2_bus_merger_4bit_front",
+    "al2_bus_merger_4bit_back"
   ],
   "model": "aabb",
-  "hitbox": [0, 0, 0, 4, 4, 1],
-  "size": [4, 4, 1],
+  "hitbox": [
+    0,
+    0,
+    0,
+    4,
+    4,
+    1
+  ],
+  "size": [
+    4,
+    4,
+    1
+  ],
   "light-passing": true,
   "sky-light-passing": true,
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "data_bits": {"type": "int8"}
+    "data_bits": {
+      "type": "int8"
+    }
   },
   "script-name": "bus_merger_4bit"
 }

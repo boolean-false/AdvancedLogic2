@@ -1,5 +1,4 @@
 {
-  "texture": "bus_bit_writer_4bit",
   "model": "block",
   "hitbox": [
     0,
@@ -17,6 +16,16 @@
     "selected_bit": {
       "type": "int8"
     },
-    "data_bits": {"type": "int8"}
-  }
+    "data_bits": {
+      "type": "int8"
+    }
+  },
+  "texture-faces": [
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_bus_bit_writer_4bit",
+    "al2_gate_side",
+    "al2_gate_side"
+  ]
 }

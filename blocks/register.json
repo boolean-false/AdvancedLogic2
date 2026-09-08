@@ -1,22 +1,35 @@
 {
   "texture-faces": [
-    "base_side_1",
-    "base_side_1",
-    "base_side_1",
-    "counter_4bit",
-    "base_side_1",
-    "base_side_1"
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_register",
+    "al2_gate_side",
+    "al2_gate_side"
   ],
   "model": "aabb",
-  "hitbox": [0, 0, 0, 1, 0.2, 1],
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    1
+  ],
   "light-passing": true,
   "sky-light-passing": true,
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "q":        {"type": "int32"},
-    "prev_clk": {"type": "int8"},
-    "data_bits": {"type": "int8"}
+    "q": {
+      "type": "int32"
+    },
+    "prev_clk": {
+      "type": "int8"
+    },
+    "data_bits": {
+      "type": "int8"
+    }
   },
   "script-name": "register"
 }

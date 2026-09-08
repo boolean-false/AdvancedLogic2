@@ -1,0 +1,5 @@
+{
+  "icon-type": "sprite",
+  "icon": "items:al2_mux_4to1_4bit",
+  "placing-block": "advanced_logic_2:mux_4to1_4bit"
+}

@@ -1,15 +1,26 @@
 {
   "texture-faces": [
-    "base_side_1",
-    "base_side_1",
-    "base_side_1",
-    "gate_or3",
-    "base_side_1",
-    "base_side_1"
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_decoder_4to16",
+    "al2_decoder_4to16_front",
+    "al2_decoder_4to16_back"
   ],
   "model": "aabb",
-  "hitbox": [0, 0, 0, 4, 4, 1],
-  "size": [4, 4, 1],
+  "hitbox": [
+    0,
+    0,
+    0,
+    4,
+    4,
+    1
+  ],
+  "size": [
+    4,
+    4,
+    1
+  ],
   "rotation": "pane",
   "selectable": true,
   "script-name": "decoder_4to16"

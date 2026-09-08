@@ -1,10 +1,8 @@
-@box from (0,0,0) to (1,0.2,1) texture "blocks:indicator" shading off {
-    @part tags (north) region (0.00023,0.889599,0.055244,0.998336)
-    @part tags (top,bottom) region (0.000121,0.003483,0.055466,0.498706)
-    @part tags (east,west,south) region (0.000014,0.782767,0.055252,0.887378)
+@box from (0,0,0) to (1,0.2,1) texture "$0" shading off {
+    @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
+    @part tags (top) texture "$3"
 }
-@box from (0,0.2,0.4) to (1,2,0.6) texture "blocks:indicator" shading off {
-    @part tags (north,south) region (0.555556,0.109375,0.611111,1)
-    @part tags (top,bottom) region (0.055218,0,0.110765,0.106488)
-    @part tags (east,west) region (0.058288,0.269136,0.067203,1.001526)
+@box from (0,0.2,0.4) to (1,2,0.6) texture "$0" shading off {
+    @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
+    @part tags (north,south) texture "$4"
 }

@@ -1,0 +1,39 @@
+{
+  "texture": "al2_bus_16",
+  "model": "custom",
+  "model-name": "generated_wires/bus_cyan_16/30",
+  "light-passing": true,
+  "rotation": "pane",
+  "script-name": "bus_base",
+  "sky-light-passing": true,
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+  ],
+  "fields": {
+    "chain_id": {
+      "type": "int32"
+    }
+  },
+  "tags": [
+    "wire_mod_2:wire"
+  ],
+  "picking-item": "advanced_logic_2:bus_cyan_16.item",
+  "obstacle": false,
+  "state-based": {
+    "offset": 0,
+    "bits": 1,
+    "variants": [
+      {
+        "model": "custom",
+        "model-name": "generated_wires/bus_cyan_16/30",
+        "texture": "al2_bus_16"
+      }
+    ]
+  },
+  "hidden": true
+}

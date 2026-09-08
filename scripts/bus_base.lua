@@ -1,3 +1,4 @@
+local lifecycle = require('wire_mod_2:conductor_lifecycle')
 local api = require('wire_mod_2:api')
 
 local function ensure_bus(color, bits)
@@ -17,12 +18,16 @@ ensure_bus("purple", 8)
 ensure_bus("cyan", 16)
 
 function on_placed(x, y, z, playerid)
-    api.on_wire_placed(x, y, z)
+    lifecycle.present(x, y, z)
 end
 
 function on_broken(x, y, z, playerid)
-    api.on_wire_broken(x, y, z)
+    lifecycle.broken(x, y, z)
 end
 
 function on_interact(x, y, z, playerid)
+end
+
+function on_block_present(x, y, z)
+    lifecycle.present(x, y, z)
 end

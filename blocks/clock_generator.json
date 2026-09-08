@@ -1,23 +1,38 @@
 {
   "texture-faces": [
-    "base_side_1",
-    "base_side_1",
-    "base_side_1",
-    "gate_pulse_generator",
-    "base_side_1",
-    "base_side_1"
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_clock_generator",
+    "al2_gate_side",
+    "al2_gate_side"
   ],
   "model": "aabb",
-  "hitbox": [0, 0, 0, 1, 0.2, 1],
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    1
+  ],
   "light-passing": true,
   "sky-light-passing": true,
   "rotation": "pane",
   "selectable": true,
   "fields": {
-    "output": {"type": "int8"},
-    "next_toggle": {"type": "float32"},
-    "pulse_time": {"type": "float32"},
-    "delay_time": {"type": "float32"}
+    "output": {
+      "type": "int8"
+    },
+    "next_toggle": {
+      "type": "float32"
+    },
+    "pulse_time": {
+      "type": "float32"
+    },
+    "delay_time": {
+      "type": "float32"
+    }
   },
   "state-based": {
     "offset": 0,
@@ -25,36 +40,35 @@
     "variants": [
       {
         "texture-faces": [
-          "base_side_1",
-          "base_side_1",
-          "base_side_1",
-          "gate_pulse_generator",
-          "base_side_1",
-          "base_side_1"
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_clock_generator",
+          "al2_gate_side",
+          "al2_gate_side"
         ]
       },
       {
         "texture-faces": [
-          "base_side_1",
-          "base_side_1",
-          "base_side_1",
-          "gate_pulse_generator",
-          "base_side_1",
-          "base_side_1"
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_clock_generator",
+          "al2_gate_side",
+          "al2_gate_side"
         ]
       },
       {
         "texture-faces": [
-          "base_side_1",
-          "base_side_1",
-          "base_side_1",
-          "gate_pulse_generator",
-          "base_side_1",
-          "base_side_1"
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_clock_generator",
+          "al2_gate_side",
+          "al2_gate_side"
         ]
       }
     ]
   },
   "script-name": "clock_generator"
 }
-
