@@ -1,0 +1,29 @@
+{
+  "texture-faces": [
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_bus_adapter",
+    "al2_gate_side",
+    "al2_gate_side"
+  ],
+  "model": "aabb",
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    1
+  ],
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "pane",
+  "selectable": true,
+  "fields": {
+    "data_bits": {
+      "type": "int8"
+    }
+  },
+  "script-name": "bus_adapter"
+}

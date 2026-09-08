@@ -12,9 +12,9 @@
     0,
     0,
     0,
-    1,
+    2,
     0.2,
-    1
+    2
   ],
   "light-passing": true,
   "sky-light-passing": true,
@@ -34,5 +34,10 @@
       "type": "int8"
     }
   },
-  "script-name": "counter"
+  "script-name": "counter",
+  "size": [
+    2,
+    1,
+    2
+  ]
 }

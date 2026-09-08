@@ -1,0 +1,89 @@
+{
+  "texture": "al2_ribbon_8_side",
+  "model": "custom",
+  "model-name": "surface_buses/8/240",
+  "light-passing": true,
+  "rotation": "stairs",
+  "script-name": "bus_base",
+  "sky-light-passing": true,
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+  ],
+  "fields": {
+    "chain_id": {
+      "type": "int32"
+    }
+  },
+  "tags": [
+    "wire_mod_2:wire"
+  ],
+  "picking-item": "advanced_logic_2:bus_purple_8.item",
+  "obstacle": false,
+  "state-based": {
+    "offset": 0,
+    "bits": 4,
+    "variants": [
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/240",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/241",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/241",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/242",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/242",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/243",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/243",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/244",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/244",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/245",
+        "texture": "al2_ribbon_8_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/8/245",
+        "texture": "al2_ribbon_8_side"
+      }
+    ]
+  },
+  "hidden": true
+}

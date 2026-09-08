@@ -1,5 +1,5 @@
 {
-  "model": "block",
+  "model": "aabb",
   "hitbox": [
     0,
     0,
@@ -8,10 +8,10 @@
     0.2,
     1
   ],
-  "light-passing": false,
+  "light-passing": true,
   "rotation": "pane",
   "script-name": "bus_bit_writer_4bit",
-  "sky-light-passing": false,
+  "sky-light-passing": true,
   "fields": {
     "selected_bit": {
       "type": "int8"

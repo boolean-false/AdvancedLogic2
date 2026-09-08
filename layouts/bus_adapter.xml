@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container position-func="gui.get_viewport()[1]/2-220,gui.get_viewport()[2]/2-145" size="440,290" color="#22262CFF">
+    <label pos="20,15" size="400,30">Адаптер разрядности</label>
+    <label id="current" pos="20,55" size="400,25">Ширина выхода: 4 бит</label>
+    <label pos="20,90" size="400,25">Выберите ширину выхода:</label>
+    <button pos="20,125" size="90,35" onclick="choose(1)">1 бит</button>
+    <button pos="123,125" size="90,35" onclick="choose(4)">4 бита</button>
+    <button pos="226,125" size="90,35" onclick="choose(8)">8 бит</button>
+    <button pos="329,125" size="90,35" onclick="choose(16)">16 бит</button>
+    <label pos="20,178" size="400,25">Сужение: младшие биты. Расширение: нулями.</label>
+    <label pos="20,205" size="400,25">Выход 1 бит — младший бит, не проверка на ноль.</label>
+    <button pos="150,242" size="140,32" onclick="close()">Закрыть</button>
+</container>

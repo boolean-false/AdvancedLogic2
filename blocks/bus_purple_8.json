@@ -1,9 +1,9 @@
 {
-  "texture": "al2_bus_8",
+  "texture": "al2_ribbon_8_side",
   "model": "custom",
-  "model-name": "generated_wires/bus_purple_8/0",
+  "model-name": "surface_buses/8/58",
   "light-passing": true,
-  "rotation": "pane",
+  "rotation": "stairs",
   "script-name": "bus_base",
   "sky-light-passing": true,
   "hitbox": [
@@ -30,8 +30,8 @@
     "variants": [
       {
         "model": "custom",
-        "model-name": "generated_wires/bus_purple_8/0",
-        "texture": "al2_bus_8"
+        "model-name": "surface_buses/8/58",
+        "texture": "al2_ribbon_8_side"
       }
     ]
   }

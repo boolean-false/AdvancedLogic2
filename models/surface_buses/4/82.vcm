@@ -1,0 +1,6 @@
+@box from (0.04,0.04,0.2) to (0.2,0.2,0.8) texture "blocks:al2_ribbon_4_side" {
+ @part tags (top) texture "blocks:al2_ribbon_4_0" region (0.2,0.2,0.8,0.8)
+ @part tags (bottom) texture "blocks:al2_ribbon_4_0" region (0.2,0.8,0.8,0.2)
+ @part tags (west) texture "blocks:al2_ribbon_4_0" region (0.2,0.8,0.8,0.2)
+ @part tags (east) texture "blocks:al2_ribbon_4_0" region (0.8,0.8,0.2,0.2)
+}

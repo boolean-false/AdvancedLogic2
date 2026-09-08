@@ -1,13 +1,6 @@
--- Universal Counter с явной шириной 4/8/16 бит.
---
--- Порты:
---   data  (BACK,  dir=0, flexible): значение для load
---   clk   (LEFT,  dir=3, bits=1)
---   en    (RIGHT, dir=1, bits=1):   счёт (en=1+load=1 → декремент, en=1+load=0 → инкремент)
---   load  (UP,    dir=4, bits=1)
---   clr   (DOWN,  dir=5, bits=1):   async clear
---   q     (FRONT, dir=2, flexible)
---   carry (FRONT offset=1, dir=2, bits=1)
+-- Counter 2x2: all eight contacts lie on the panel perimeter.
+-- CLR is asynchronous. Rising CLK: LOAD > EN; DIR=0 up, DIR=1 down.
+-- CARRY reports wraparound until the next rising edge or clear.
 
 local api          = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
@@ -18,9 +11,10 @@ local device_id = api.register({"advanced_logic_2:counter"}, {
     inputs = {
         clk  = {dir = 3, offset = 0, bits = 1},
         en   = {dir = 1, offset = 0, bits = 1},
+        dir  = {dir = 1, offset = 1, bits = 1},
         data = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
-        load = {dir = 4, offset = 0, bits = 1},
-        clr  = {dir = 5, offset = 0, bits = 1},
+        load = {dir = 0, offset = 1, bits = 1},
+        clr  = {dir = 3, offset = 1, bits = 1},
     },
     outputs = {
         q     = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
@@ -37,6 +31,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
     local clr  = read("clr")  or 0
     local load = read("load") or 0
     local en   = read("en")   or 0
+    local down = (read("dir") or 0) ~= 0
     local data = (read("data") or 0) % modulus
 
     local count = (block.get_field(x, y, z, "count") or 0) % modulus
@@ -48,16 +43,16 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
         edge.update(x, y, z, clk, "prev_clk")
     elseif edge.rising(x, y, z, clk, "prev_clk") then
         carry = 0
-        if en ~= 0 and load ~= 0 then
-            -- декремент
-            if count == 0 then count = modulus - 1; carry = 1
-            else count = count - 1 end
-        elseif en ~= 0 then
-            -- инкремент
-            if count == modulus - 1 then count = 0; carry = 1
-            else count = count + 1 end
-        elseif load ~= 0 then
+        if load ~= 0 then
             count = data
+        elseif en ~= 0 then
+            if down then
+                if count == 0 then count = modulus - 1; carry = 1
+                else count = count - 1 end
+            else
+                if count == modulus - 1 then count = 0; carry = 1
+                else count = count + 1 end
+            end
         end
     end
 
@@ -98,6 +93,8 @@ logic_viewer.set_view(device_id, function(x, y, z)
             {name = "Q",     value = logic_viewer.format_bits(count, width)},
             {name = "DEC",   value = tostring(count)},
             {name = "CARRY", value = tostring(carry)},
+            {name = "CLK ↑", value = "LOAD > EN; DIR: 0 +1, 1 -1"},
+            {name = "CLR", value = "Асинхронный сброс"},
         }
     }
 end)

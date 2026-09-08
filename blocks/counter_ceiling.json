@@ -12,9 +12,9 @@
     0,
     0,
     0,
-    1,
+    2,
     0.2,
-    1
+    2
   ],
   "light-passing": true,
   "sky-light-passing": true,
@@ -35,6 +35,11 @@
     }
   },
   "script-name": "counter",
+  "size": [
+    2,
+    1,
+    2
+  ],
   "hidden": true,
   "picking-item": "advanced_logic_2:counter.item"
 }
