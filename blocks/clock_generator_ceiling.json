@@ -32,6 +32,9 @@
     },
     "delay_time": {
       "type": "float32"
+    },
+    "paused": {
+      "type": "int8"
     }
   },
   "state-based": {

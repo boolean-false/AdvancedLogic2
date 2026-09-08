@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
-  "icon": "items:al2_indicator_4bit",
+  "icon": "items:al2_indicator",
   "placing-block": "advanced_logic_2:indicator_4bit"
 }

@@ -1,0 +1,2 @@
+@rect from (0.43,-0.745,0.172) right (-0.86,0,0) up (0,1.49,0) texture "$screen" region (0,0,1,1) shading off
+@rect from (-0.43,-0.745,-0.172) right (0.86,0,0) up (0,1.49,0) texture "$screen" region (0,0,1,1) shading off

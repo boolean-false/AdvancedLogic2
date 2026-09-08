@@ -23,6 +23,7 @@ function on_placed(x, y, z, playerid)
     local ok, uptime = pcall(time.uptime)
     block.set_field(x, y, z, "next_toggle", (ok and uptime or 0) + DEFAULT_DELAY_TIME)
     block.set_field(x, y, z, "output", 0)
+    block.set_field(x, y, z, "paused", 0)
 
     api.on_placed(x, y, z, device_id)
     clock_registry.register(x, y, z, device_id)
@@ -89,7 +90,7 @@ logic_viewer.set_view(device_id, function(x, y, z)
                .. logic_viewer.color(string.rep('.', bar_len - filled), '#333333')
                .. logic_viewer.color('|', '#555555')
 
-    local paused_str = clock_registry.is_paused() and "ДА" or "нет"
+    local paused_str = clock_registry.is_paused(x,y,z) and "ДА" or "нет"
 
     return {
         display_name = "Clock Generator",
@@ -103,8 +104,8 @@ logic_viewer.set_view(device_id, function(x, y, z)
             {name = "До смены",    value = string.format("%.2f", time_until)  .. "s"},
             {name = "Прогресс",    value = bar},
             {name = "<spacer>"},
-            {name = "Глобальная пауза", value = paused_str,
-             color = clock_registry.is_paused() and "#FF8800" or "#888888"},
+            {name = "Пауза генератора", value = paused_str,
+             color = clock_registry.is_paused(x,y,z) and "#FF8800" or "#888888"},
         }
     }
 end)

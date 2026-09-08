@@ -1,8 +1,0 @@
-@box from (0,0,0) to (1,0.2,1) texture "$0" shading off {
-    @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
-    @part tags (top) texture "$3"
-}
-@box from (0,0.2,0.4) to (1,2,0.6) texture "$0" shading off {
-    @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
-    @part tags (north,south) texture "$4"
-}

@@ -4,7 +4,7 @@
   "sky-light-passing": true,
   "rotation": "pane",
   "script-name": "indicator_4bit",
-  "model-name": "indicator_4bit/0",
+  "model-name": "indicator",
   "hitbox": [
     0,
     0,
@@ -13,204 +13,18 @@
     2,
     1
   ],
-  "state-based": {
-    "offset": 0,
-    "bits": 4,
-    "variants": [
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/1",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_1",
-          "al2_indicator_4bit_display_1"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/2",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_2",
-          "al2_indicator_4bit_display_2"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/3",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_3",
-          "al2_indicator_4bit_display_3"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/4",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_4",
-          "al2_indicator_4bit_display_4"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/5",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_5",
-          "al2_indicator_4bit_display_5"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/6",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_6",
-          "al2_indicator_4bit_display_6"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/7",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_7",
-          "al2_indicator_4bit_display_7"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/8",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_8",
-          "al2_indicator_4bit_display_8"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/9",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_9",
-          "al2_indicator_4bit_display_9"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/A",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_A",
-          "al2_indicator_4bit_display_A"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/B",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_B",
-          "al2_indicator_4bit_display_B"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/C",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_C",
-          "al2_indicator_4bit_display_C"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/D",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_D",
-          "al2_indicator_4bit_display_D"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/E",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_E",
-          "al2_indicator_4bit_display_E"
-        ]
-      },
-      {
-        "model": "custom",
-        "model-name": "indicator_4bit/F",
-        "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_indicator_4bit",
-          "al2_indicator_4bit_display_F",
-          "al2_indicator_4bit_display_F"
-        ]
-      }
-    ]
-  },
   "fields": {
     "chain_id": {
+      "type": "int8"
+    },
+    "display_mode": {
       "type": "int8"
     }
   },
   "obstacle": true,
-  "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_indicator_4bit",
-    "al2_indicator_4bit_display_0",
-    "al2_indicator_4bit_display_0"
+  "size": [
+    1,
+    2,
+    1
   ]
 }

@@ -1,108 +1,55 @@
---- Clock Registry: централизованное управление clock_generator блоками.
---- Заменяет per-block on_block_tick на один глобальный tick (см. P2.10).
----
---- Преимущества:
----   1. Один callback вместо N (масштабируется до сотен clocks).
----   2. Глобальная пауза/step через step debugger.
----   3. Легче дебажить.
-
----@class ALClockRegistry
-local M = {}
-local device_system = require('wire_mod_2:device_system')
-
---- Зарегистрированные clocks.
---- key = "x:y:z", value = {x, y, z}
-local clocks = {}
-
---- Глобальная пауза. Когда true — clocks НЕ обрабатываются автоматически.
-local paused = false
-
---- Счётчик ручных шагов (для step debugger).
-local pending_steps = 0
-
-local function pos_key(x, y, z)
-    return x .. ":" .. y .. ":" .. z
+-- One scheduler, independent persistent pause state for each generator.
+local M={}
+local devices=require('wire_mod_2:device_system')
+local api=require('wire_mod_2:api')
+local clocks={}
+local function key(x,y,z)return x..':'..y..':'..z end
+function M.register(x,y,z,device_id)
+    local k=key(x,y,z)
+    if not clocks[k] then clocks[k]={x=x,y=y,z=z,device_id=device_id,pending=0} end
 end
-
----Регистрация clock_generator.
----@param x integer
----@param y integer
----@param z integer
-function M.register(x, y, z, device_id)
-    clocks[pos_key(x, y, z)] = {x = x, y = y, z = z, device_id = device_id}
+function M.unregister(x,y,z)clocks[key(x,y,z)]=nil end
+function M.is_paused(x,y,z)return (block.get_field(x,y,z,'paused') or 0)~=0 end
+function M.set_paused(x,y,z,paused)
+    local r=clocks[key(x,y,z)]
+    if not r then return false end
+    r.pending=0
+    block.set_field(x,y,z,'paused',paused and 1 or 0)
+    if not paused then
+        local period=(block.get_field(x,y,z,'output') or 0)==1 and 'pulse_time' or 'delay_time'
+        block.set_field(x,y,z,'next_toggle',time.uptime()+(block.get_field(x,y,z,period) or .5))
+    end
+    return true
 end
-
----@param x integer
----@param y integer
----@param z integer
-function M.unregister(x, y, z)
-    clocks[pos_key(x, y, z)] = nil
+-- A complete 0 -> 1 -> 0 pulse, across two world ticks. Keep this clock paused.
+function M.request_cycle(x,y,z)
+    local r=clocks[key(x,y,z)]
+    if not r or not M.is_paused(x,y,z) or r.pending>0 then return false end
+    if (block.get_field(x,y,z,'output') or 0)~=0 then
+        block.set_field(x,y,z,'output',0)
+        api.send_signal(x,y,z,0)
+    end
+    r.pending=2
+    return true
 end
-
----@return boolean
-function M.is_paused()
-    return paused
-end
-
----Установить состояние паузы.
----@param p boolean
-function M.set_paused(p)
-    paused = p == true
-end
-
----Тогглить паузу. Возвращает новое состояние.
----@return boolean
-function M.toggle_paused()
-    paused = not paused
-    return paused
-end
-
----Запросить ручной шаг. Следующий tick принудительно переключит каждый clock
----ровно один раз и снова оставит глобальную паузу включённой.
-function M.request_step()
-    pending_steps = pending_steps + 1
-end
-
----@return integer
 function M.clock_count()
-    local n = 0
-    for _ in pairs(clocks) do n = n + 1 end
-    return n
+    local n=0;for _ in pairs(clocks) do n=n+1 end;return n
 end
-
----Tick callback (вызывается из world.lua on_world_tick).
----Обрабатывает все зарегистрированные clocks.
----@param process_clock fun(x: integer, y: integer, z: integer, force_toggle: boolean)
 function M.tick(process_clock)
-    -- Если на паузе и нет pending steps — пропускаем.
-    if paused and pending_steps == 0 then
-        return
-    end
-
-    local force_toggle = pending_steps > 0
-    if force_toggle then
-        pending_steps = pending_steps - 1
-    end
-
-    -- Делаем копию ключей чтобы безопасно итерировать (clock мог удалиться).
-    local keys = {}
-    for k, _ in pairs(clocks) do table.insert(keys, k) end
-
-    for _, k in ipairs(keys) do
-        local pos = clocks[k]
-        if pos then
-            local config = device_system.get_device_config_by_position(pos.x, pos.y, pos.z)
-            if not config or (pos.device_id and config.device_id ~= pos.device_id) then
-                -- Блок удалён — снимаем регистрацию.
-                clocks[k] = nil
-            else
-                local ok, err = pcall(process_clock, pos.x, pos.y, pos.z, force_toggle)
-                if not ok then
-                    print("[clock_registry] tick error at " .. k .. ": " .. tostring(err))
-                end
+    local keys={};for k in pairs(clocks) do keys[#keys+1]=k end
+    table.sort(keys)
+    for _,k in ipairs(keys) do
+        local r=clocks[k]
+        if r and block.get(r.x,r.y,r.z)>=0 then
+            local config=devices.get_device_config_by_position(r.x,r.y,r.z)
+            if not config or (r.device_id and config.device_id~=r.device_id) then clocks[k]=nil
+            elseif r.pending>0 or not M.is_paused(r.x,r.y,r.z) then
+                local forced=r.pending>0
+                if forced then r.pending=r.pending-1 end
+                local ok,err=pcall(process_clock,r.x,r.y,r.z,forced)
+                if not ok then print('[clock_registry] '..k..': '..tostring(err)) end
             end
         end
     end
 end
-
 return M

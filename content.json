@@ -266,7 +266,6 @@
     "bus_cyan_16.item",
     "bus_orange_4.item",
     "bus_purple_8.item",
-    "step_debugger",
     "adder_4bit.item",
     "subtractor_4bit.item",
     "comparator_4bit.item",
@@ -294,5 +293,7 @@
     "rom.item",
     "rom_large.item"
   ],
-  "entities": []
+  "entities": [
+    "indicator_screen"
+  ]
 }
