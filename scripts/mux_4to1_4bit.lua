@@ -18,7 +18,8 @@ local device_id = api.register({"advanced_logic_2:mux_4to1_4bit"}, {
         b   = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits"},
         c   = {dir = 1, offset = 0, bits = 4, bits_field = "data_bits"},
         d   = {dir = 4, offset = 0, bits = 4, bits_field = "data_bits"},
-        sel = {dir = 5, offset = 0, bits = 2},
+        -- Выбор использует младшие 2 бита любой многобитной шины.
+        sel = {dir = 5, offset = 0, bits = 2, flexible = true},
     },
     outputs = { y = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"} }
 })

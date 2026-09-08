@@ -7,9 +7,11 @@
 local api          = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
 local cfg_check    = require('advanced_logic_2:configurator_check')
+local timer_registry = require('wire_mod_2:timer_registry')
 
 local LAYOUT_ID       = "advanced_logic_2:keypad_4bit"
 local STROBE_DURATION = 0.15  -- секунды
+local process_timer
 
 local device_id = api.register({"advanced_logic_2:keypad_4bit"}, {
     outputs = {
@@ -38,10 +40,20 @@ function on_placed(x, y, z, _)
     block.set_field(x, y, z, "value",        0)
     block.set_field(x, y, z, "strobe_until", 0)
     api.on_placed(x, y, z, device_id)
+    timer_registry.register(x, y, z, process_timer, device_id)
 end
 
 function on_broken(x, y, z, _)
+    timer_registry.unregister(x, y, z)
     api.on_broken(x, y, z, device_id)
+end
+
+function on_block_present(x, y, z)
+    -- Значение клавиши сохраняется, а короткий strobe после перезапуска гасится.
+    block.set_field(x, y, z, "strobe_until", 0)
+    api.on_placed(x, y, z, device_id)
+    api.mark_device_for_update(x, y, z)
+    timer_registry.register(x, y, z, process_timer, device_id)
 end
 
 function on_interact(x, y, z, playerid)
@@ -57,8 +69,8 @@ function on_interact(x, y, z, playerid)
     return true
 end
 
--- Tick для авто-сброса strobe (если evaluate не вызывается извне за время strobe).
-function on_block_tick(x, y, z, tps)
+-- Централизованная проверка для авто-сброса strobe.
+process_timer = function(x, y, z)
     local strobe_until = block.get_field(x, y, z, "strobe_until") or 0
     if strobe_until <= 0 then return end
     if uptime_safe() >= strobe_until then

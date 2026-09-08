@@ -6,7 +6,7 @@
 --   bin  (RIGHT, dir=1, bits=1) — входной заём (borrow in)
 --   diff (FRONT, dir=2, bits=4) — разность (4 бита)
 --
--- BOUT (выходной заём) отображается в Logic Viewer, но нет отдельного порта.
+--   bout (DOWN, dir=5, bits=1) — выходной заём
 -- Алгоритм: diff = a - b - bin. Если результат < 0: diff += 16, bout = 1.
 
 local api          = require('wire_mod_2:api')
@@ -20,7 +20,8 @@ local device_id = api.register({"advanced_logic_2:subtractor_4bit"}, {
         bin = {dir = 1, offset = 0, bits = 1},
     },
     outputs = {
-        diff = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"}
+        diff = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
+        bout = {dir = 5, offset = 0, bits = 1},
     }
 })
 
@@ -43,11 +44,16 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 
     block.set_field(x, y, z, "bout", bout)
     write("diff", result)
+    write("bout", bout)
 end)
 
 function on_placed(x, y, z, _)
     bus.init_width(x, y, z)
     block.set_field(x, y, z, "bout", 0)
+    api.on_placed(x, y, z, device_id)
+end
+
+function on_block_present(x, y, z)
     api.on_placed(x, y, z, device_id)
 end
 

@@ -19,7 +19,8 @@ local PHYS_CELLS = 64
 
 local device_id = api.register({"advanced_logic_2:ram_large"}, {
     inputs  = {
-        addr     = {dir = 0, bits = 6},
+        -- Адрес берётся из младших 6 бит шины 8/16 бит.
+        addr     = {dir = 0, bits = 6, flexible = true},
         we       = {dir = 1, bits = 1},
         data_in  = {dir = 0, offset = 2, bits = 4, bits_field = "data_bits"},
         clk      = {dir = 3, bits = 1},
@@ -35,9 +36,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
     local clk       = read("clk") or 0
 
     local clk_rising = edge.rising(x, y, z, clk, "prev_clk")
-    local we_rising  = edge.rising(x, y, z, we,  "prev_we")
-
-    if (clk_rising and we == 1) or (we_rising and clk == 1) then
+    if clk_rising and we ~= 0 then
         local data_in = mem.clamp_value(read("data_in") or 0, data_bits)
         mem.write_cell(x, y, z, data_in, addr)
     end
@@ -49,7 +48,6 @@ end)
 function on_placed(x, y, z, _)
     mem.init_fields(x, y, z, PHYS_CELLS)
     block.set_field(x, y, z, "prev_clk", 0, 0)
-    block.set_field(x, y, z, "prev_we",  0, 0)
     api.on_placed(x, y, z, device_id)
 end
 

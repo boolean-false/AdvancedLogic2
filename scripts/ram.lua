@@ -34,13 +34,9 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
     local we        = read("we")  or 0
     local clk       = read("clk") or 0
 
-    -- Запись срабатывает на фронте CLK при WE=1 ИЛИ на фронте WE при CLK=1
-    -- (защита от случая когда CLK и WE приходят в разных тиках симуляции).
-    -- Edge.rising обновляет prev-поле как побочный эффект — вызываем оба.
+    -- Синхронная запись: только положительный фронт CLK при активном WE.
     local clk_rising = edge.rising(x, y, z, clk, "prev_clk")
-    local we_rising  = edge.rising(x, y, z, we,  "prev_we")
-
-    if (clk_rising and we == 1) or (we_rising and clk == 1) then
+    if clk_rising and we ~= 0 then
         local data_in = mem.clamp_value(read("data_in") or 0, data_bits)
         mem.write_cell(x, y, z, data_in, addr)
     end
@@ -52,7 +48,6 @@ end)
 function on_placed(x, y, z, _)
     mem.init_fields(x, y, z, PHYS_CELLS)
     block.set_field(x, y, z, "prev_clk", 0, 0)
-    block.set_field(x, y, z, "prev_we",  0, 0)
     api.on_placed(x, y, z, device_id)
 end
 

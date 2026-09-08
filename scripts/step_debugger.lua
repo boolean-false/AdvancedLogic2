@@ -2,7 +2,7 @@
 ---
 --- Управление:
 ---   ПКМ в воздух / по блоку       — toggle глобальной паузы clocks
----   Shift+ПКМ                      — ручной шаг (один tick всех clocks)
+---   Shift+ПКМ                      — ручной шаг (один фронт всех clocks)
 ---                                    Работает только когда на паузе.
 
 local clock_registry = require('advanced_logic_2:clock_registry')
@@ -24,7 +24,7 @@ local function handle_action()
             return
         end
         clock_registry.request_step()
-        announce("Step: 1 tick")
+        announce("Step: один фронт")
         return
     end
 

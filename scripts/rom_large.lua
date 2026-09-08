@@ -10,7 +10,7 @@ local LAYOUT_ID  = "advanced_logic_2:memory_editor"
 local PHYS_CELLS = 64
 
 local device_id = api.register({"advanced_logic_2:rom_large"}, {
-    inputs  = { addr = {dir = 0, bits = 6} },
+    inputs  = { addr = {dir = 0, bits = 6, flexible = true} },
     outputs = { data = {dir = 2, bits = 4, bits_field = "data_bits"} }
 })
 

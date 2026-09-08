@@ -7,8 +7,10 @@
 
 local api = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
+local timer_registry = require('wire_mod_2:timer_registry')
 
 local PULSE_DURATION = 0.1  -- секунды
+local process_timer
 
 local device_id = api.register({"advanced_logic_2:pulse_generator"}, {
     inputs  = { ["in"] = {dir = 0, offset = 0, bits = 1} },
@@ -61,14 +63,25 @@ function on_placed(x, y, z, _)
     block.set_field(x, y, z, "pulse_active", 0)
     block.set_field(x, y, z, "pulse_until",  0)
     api.on_placed(x, y, z, device_id)
+    timer_registry.register(x, y, z, process_timer, device_id)
 end
 
 function on_broken(x, y, z, _)
+    timer_registry.unregister(x, y, z)
     api.on_broken(x, y, z, device_id)
 end
 
--- Tick для авто-сброса импульса (если evaluate не вызывается извне за время импульса).
-function on_block_tick(x, y, z, tps)
+function on_block_present(x, y, z)
+    -- Незавершённый короткий импульс безопасно завершается при загрузке мира.
+    block.set_field(x, y, z, "pulse_active", 0)
+    block.set_field(x, y, z, "pulse_until", 0)
+    api.on_placed(x, y, z, device_id)
+    api.mark_device_for_update(x, y, z)
+    timer_registry.register(x, y, z, process_timer, device_id)
+end
+
+-- Централизованная проверка для авто-сброса импульса.
+process_timer = function(x, y, z)
     local active = (block.get_field(x, y, z, "pulse_active") or 0) ~= 0
     if not active then return end
     local until_t = block.get_field(x, y, z, "pulse_until") or 0

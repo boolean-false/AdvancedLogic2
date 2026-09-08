@@ -6,7 +6,7 @@
 --   CIN  (RIGHT, dir=1, bits=1) — входной перенос (carry in)
 --   SUM  (FRONT, dir=2, bits=4) — сумма (4 бита, биты 3:0)
 --
--- COUT (бит 4 результата) отображается в Logic Viewer, но нет отдельного порта.
+--   COUT (DOWN, dir=5, bits=1) — выходной перенос
 -- Для вычитания: B = NOT(B) + 1 (дополнение до двух).
 
 local api          = require('wire_mod_2:api')
@@ -20,7 +20,8 @@ local device_id = api.register({"advanced_logic_2:adder_4bit"}, {
         cin = {dir = 1, offset = 0, bits = 1},
     },
     outputs = {
-        sum = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"}
+        sum  = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
+        cout = {dir = 5, offset = 0, bits = 1},
     }
 })
 
@@ -41,11 +42,16 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
     block.set_field(x, y, z, "cout", cout)
 
     write("sum", sum)
+    write("cout", cout)
 end)
 
 function on_placed(x, y, z, _)
     bus.init_width(x, y, z)
     block.set_field(x, y, z, "cout", 0)
+    api.on_placed(x, y, z, device_id)
+end
+
+function on_block_present(x, y, z)
     api.on_placed(x, y, z, device_id)
 end
 

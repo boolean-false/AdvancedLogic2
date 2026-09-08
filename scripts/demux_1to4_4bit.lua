@@ -15,7 +15,8 @@ local bus = require('advanced_logic_2:bus_common')
 local device_id = api.register({"advanced_logic_2:demux_1to4_4bit"}, {
     inputs = {
         x   = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
-        sel = {dir = 5, offset = 0, bits = 2},
+        -- Выбор использует младшие 2 бита любой многобитной шины.
+        sel = {dir = 5, offset = 0, bits = 2, flexible = true},
     },
     outputs = {
         a = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},

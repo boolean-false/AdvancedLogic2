@@ -8,6 +8,7 @@
 
 ---@class ALClockRegistry
 local M = {}
+local device_system = require('wire_mod_2:device_system')
 
 --- Зарегистрированные clocks.
 --- key = "x:y:z", value = {x, y, z}
@@ -27,8 +28,8 @@ end
 ---@param x integer
 ---@param y integer
 ---@param z integer
-function M.register(x, y, z)
-    clocks[pos_key(x, y, z)] = {x, y, z}
+function M.register(x, y, z, device_id)
+    clocks[pos_key(x, y, z)] = {x = x, y = y, z = z, device_id = device_id}
 end
 
 ---@param x integer
@@ -56,8 +57,8 @@ function M.toggle_paused()
     return paused
 end
 
----Запросить ручной шаг (для step debugger). Если на паузе — следующий tick
----обработает clocks один раз и снова замрёт.
+---Запросить ручной шаг. Следующий tick принудительно переключит каждый clock
+---ровно один раз и снова оставит глобальную паузу включённой.
 function M.request_step()
     pending_steps = pending_steps + 1
 end
@@ -71,14 +72,15 @@ end
 
 ---Tick callback (вызывается из world.lua on_world_tick).
 ---Обрабатывает все зарегистрированные clocks.
----@param process_clock fun(x: integer, y: integer, z: integer)
+---@param process_clock fun(x: integer, y: integer, z: integer, force_toggle: boolean)
 function M.tick(process_clock)
     -- Если на паузе и нет pending steps — пропускаем.
     if paused and pending_steps == 0 then
         return
     end
 
-    if pending_steps > 0 then
+    local force_toggle = pending_steps > 0
+    if force_toggle then
         pending_steps = pending_steps - 1
     end
 
@@ -89,12 +91,12 @@ function M.tick(process_clock)
     for _, k in ipairs(keys) do
         local pos = clocks[k]
         if pos then
-            local block_id = block.get(pos[1], pos[2], pos[3])
-            if block_id == 0 then
+            local config = device_system.get_device_config_by_position(pos.x, pos.y, pos.z)
+            if not config or (pos.device_id and config.device_id ~= pos.device_id) then
                 -- Блок удалён — снимаем регистрацию.
                 clocks[k] = nil
             else
-                local ok, err = pcall(process_clock, pos[1], pos[2], pos[3])
+                local ok, err = pcall(process_clock, pos.x, pos.y, pos.z, force_toggle)
                 if not ok then
                     print("[clock_registry] tick error at " .. k .. ": " .. tostring(err))
                 end

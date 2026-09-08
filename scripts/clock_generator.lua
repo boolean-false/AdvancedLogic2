@@ -24,7 +24,7 @@ function on_placed(x, y, z, playerid)
     block.set_field(x, y, z, "output", 0)
 
     api.on_placed(x, y, z, device_id)
-    clock_registry.register(x, y, z)
+    clock_registry.register(x, y, z, device_id)
 end
 
 function on_broken(x, y, z, playerId)
@@ -33,8 +33,17 @@ function on_broken(x, y, z, playerId)
 end
 
 function on_block_present(x, y, z)
-    -- При загрузке мира: возвращаем clock в registry.
-    clock_registry.register(x, y, z)
+    -- time.uptime начинается заново при запуске движка, поэтому абсолютный
+    -- дедлайн из сохранения заменяем новым периодом от текущего момента.
+    local ok, uptime = pcall(time.uptime)
+    local output = block.get_field(x, y, z, "output") or 0
+    local period = output ~= 0
+        and (block.get_field(x, y, z, "pulse_time") or DEFAULT_PULSE_TIME)
+        or (block.get_field(x, y, z, "delay_time") or DEFAULT_DELAY_TIME)
+    block.set_field(x, y, z, "next_toggle", (ok and uptime or 0) + period)
+    api.on_placed(x, y, z, device_id)
+    api.send_signal(x, y, z, output)
+    clock_registry.register(x, y, z, device_id)
 end
 
 function on_block_removed(x, y, z)
