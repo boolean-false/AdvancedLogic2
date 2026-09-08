@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
   "icon": "items:al2_keypad_4bit",
-  "placing-block": "advanced_logic_2:keypad_4bit"
+  "placing-block": "advanced_logic_2:keypad_4bit_mounted"
 }

@@ -59,6 +59,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, _)
+    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
     block.set_field(x, y, z, "prev_in",      0)
     block.set_field(x, y, z, "pulse_active", 0)
     block.set_field(x, y, z, "pulse_until",  0)

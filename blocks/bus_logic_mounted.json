@@ -1,0 +1,34 @@
+{
+  "texture-faces": [
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_bus_logic",
+    "al2_gate_side",
+    "al2_gate_side"
+  ],
+  "model": "aabb",
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    1
+  ],
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "pipe",
+  "selectable": true,
+  "fields": {
+    "operation": {
+      "type": "int8"
+    },
+    "data_bits": {
+      "type": "int8"
+    }
+  },
+  "script-name": "bus_logic",
+  "hidden": true,
+  "picking-item": "advanced_logic_2:bus_logic.item"
+}

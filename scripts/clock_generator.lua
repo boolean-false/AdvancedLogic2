@@ -17,6 +17,7 @@ local DEFAULT_PULSE_TIME = 0.5
 local DEFAULT_DELAY_TIME = 0.5
 
 function on_placed(x, y, z, playerid)
+    require('wire_mod_2:gate_mounts').prepare(x,y,z,playerid)
     block.set_field(x, y, z, "pulse_time", DEFAULT_PULSE_TIME)
     block.set_field(x, y, z, "delay_time", DEFAULT_DELAY_TIME)
     local ok, uptime = pcall(time.uptime)

@@ -28,6 +28,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, playerid)
+    require('wire_mod_2:gate_mounts').prepare(x,y,z,playerid)
     bus.init_width(x, y, z)
     -- Инициализируем selected_bit если его нет
     if block.get_field(x, y, z, "selected_bit") == nil then

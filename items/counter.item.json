@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
   "icon": "items:al2_counter",
-  "placing-block": "advanced_logic_2:counter"
+  "placing-block": "advanced_logic_2:counter_mounted"
 }

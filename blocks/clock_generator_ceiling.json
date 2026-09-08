@@ -1,0 +1,76 @@
+{
+  "texture-faces": [
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_clock_generator",
+    "al2_gate_side",
+    "al2_gate_side"
+  ],
+  "model": "aabb",
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    1
+  ],
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "stairs",
+  "selectable": true,
+  "fields": {
+    "output": {
+      "type": "int8"
+    },
+    "next_toggle": {
+      "type": "float32"
+    },
+    "pulse_time": {
+      "type": "float32"
+    },
+    "delay_time": {
+      "type": "float32"
+    }
+  },
+  "state-based": {
+    "offset": 0,
+    "bits": 2,
+    "variants": [
+      {
+        "texture-faces": [
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_clock_generator",
+          "al2_gate_side",
+          "al2_gate_side"
+        ]
+      },
+      {
+        "texture-faces": [
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_clock_generator",
+          "al2_gate_side",
+          "al2_gate_side"
+        ]
+      },
+      {
+        "texture-faces": [
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_gate_side",
+          "al2_clock_generator",
+          "al2_gate_side",
+          "al2_gate_side"
+        ]
+      }
+    ]
+  },
+  "script-name": "clock_generator",
+  "hidden": true,
+  "picking-item": "advanced_logic_2:clock_generator.item"
+}

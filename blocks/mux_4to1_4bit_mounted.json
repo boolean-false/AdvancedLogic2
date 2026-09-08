@@ -1,0 +1,31 @@
+{
+  "texture-faces": [
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_mux_4to1_4bit",
+    "al2_gate_side",
+    "al2_gate_side"
+  ],
+  "model": "aabb",
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    1
+  ],
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "pipe",
+  "selectable": true,
+  "fields": {
+    "data_bits": {
+      "type": "int8"
+    }
+  },
+  "script-name": "mux_4to1_4bit",
+  "hidden": true,
+  "picking-item": "advanced_logic_2:mux_4to1_4bit.item"
+}

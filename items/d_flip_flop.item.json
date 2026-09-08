@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
   "icon": "items:al2_d_flip_flop",
-  "placing-block": "advanced_logic_2:d_flip_flop"
+  "placing-block": "advanced_logic_2:d_flip_flop_mounted"
 }

@@ -32,6 +32,7 @@ api.register_signal_handler(device_id, function(read, write, _, _, origin)
 end)
 
 function on_placed(x, y, z, _)
+    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
     bus.init_width(x, y, z)
     api.on_placed(x, y, z, device_id)
 end

@@ -1,0 +1,26 @@
+{
+  "texture-faces": [
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_gate_side",
+    "al2_decoder_2to4",
+    "al2_gate_side",
+    "al2_gate_side"
+  ],
+  "model": "aabb",
+  "hitbox": [
+    0,
+    0,
+    0,
+    1,
+    0.2,
+    1
+  ],
+  "light-passing": true,
+  "sky-light-passing": true,
+  "rotation": "stairs",
+  "selectable": true,
+  "script-name": "decoder_2to4",
+  "hidden": true,
+  "picking-item": "advanced_logic_2:decoder_2to4.item"
+}

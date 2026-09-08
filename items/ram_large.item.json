@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
   "icon": "items:al2_ram_large",
-  "placing-block": "advanced_logic_2:ram_large"
+  "placing-block": "advanced_logic_2:ram_large_mounted"
 }

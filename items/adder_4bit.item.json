@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
   "icon": "items:al2_adder_4bit",
-  "placing-block": "advanced_logic_2:adder_4bit"
+  "placing-block": "advanced_logic_2:adder_4bit_mounted"
 }

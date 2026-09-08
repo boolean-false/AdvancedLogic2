@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
   "icon": "items:al2_pulse_generator",
-  "placing-block": "advanced_logic_2:pulse_generator"
+  "placing-block": "advanced_logic_2:pulse_generator_mounted"
 }

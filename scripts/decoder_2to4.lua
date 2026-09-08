@@ -29,6 +29,7 @@ api.register_signal_handler(device_id, function(read, write)
 end)
 
 function on_placed(x, y, z, _)
+    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
     api.on_placed(x, y, z, device_id)
 end
 
