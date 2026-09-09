@@ -82,6 +82,26 @@
         "model": "custom",
         "model-name": "surface_buses/16/245",
         "texture": "al2_ribbon_16_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/16/246",
+        "texture": "al2_ribbon_16_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/16/246",
+        "texture": "al2_ribbon_16_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/16/247",
+        "texture": "al2_ribbon_16_side"
+      },
+      {
+        "model": "custom",
+        "model-name": "surface_buses/16/247",
+        "texture": "al2_ribbon_16_side"
       }
     ]
   },

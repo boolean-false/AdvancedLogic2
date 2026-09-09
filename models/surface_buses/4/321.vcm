@@ -1,0 +1,28 @@
+@box from (0.2,0.04,0.2) to (0.8,0.2,0.8) texture "blocks:al2_ribbon_4_side" {
+ @part tags (top) texture "blocks:al2_ribbon_4_15" region (0.2,0.2,0.8,0.8)
+ @part tags (bottom) texture "blocks:al2_ribbon_4_15" region (0.2,0.8,0.8,0.2)
+}
+@box from (0.2,0.04,0.8) to (0.8,0.2,1) texture "blocks:al2_ribbon_4_side" {
+ @part tags (top) texture "blocks:al2_ribbon_4_15" region (0.2,0,0.8,0.2)
+ @part tags (bottom) texture "blocks:al2_ribbon_4_15" region (0.2,0.2,0.8,0)
+}
+@box from (0.8,0.04,0.2) to (1,0.2,0.8) texture "blocks:al2_ribbon_4_side" {
+ @part tags (top) texture "blocks:al2_ribbon_4_15" region (0.8,0.2,1,0.8)
+ @part tags (bottom) texture "blocks:al2_ribbon_4_15" region (0.8,0.8,1,0.2)
+}
+@box from (0,0.04,0.2) to (0.2,0.2,0.8) texture "blocks:al2_ribbon_4_side" {
+ @part tags (top) texture "blocks:al2_ribbon_4_15" region (0,0.2,0.2,0.8)
+ @part tags (bottom) texture "blocks:al2_ribbon_4_15" region (0,0.8,0.2,0.2)
+}
+@box from (0.04,0.04,0.2) to (0.2,0.2,0.8) texture "blocks:al2_ribbon_4_side" {
+ @part tags (top) texture "blocks:al2_ribbon_4_15" region (0.04,0.2,0.2,0.8)
+ @part tags (bottom) texture "blocks:al2_ribbon_4_15" region (0.04,0.8,0.2,0.2)
+}
+@box from (0.2,0.04,0.04) to (0.8,0.2,0.2) texture "blocks:al2_ribbon_4_side" {
+ @part tags (top) texture "blocks:al2_ribbon_4_15" region (0.2,0.8,0.8,0.96)
+ @part tags (bottom) texture "blocks:al2_ribbon_4_15" region (0.2,0.96,0.8,0.8)
+}
+@box from (0.04,0.04,0.04) to (0.2,0.2,0.2) texture "blocks:al2_ribbon_4_side" {
+}
+@box from (0.04,0,0.04) to (0.2,0.04,0.2) texture "blocks:al2_ribbon_4_side" {
+}
