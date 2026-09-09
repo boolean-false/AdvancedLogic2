@@ -13,5 +13,10 @@
     "name": "4-битный процессор",
     "category": "Advanced Logic / Вычисления",
     "path": "advanced_logic_2:schematics/advanced-accumulator-cpu.wms"
+  },
+  {
+    "name": "8-битная программируемая машина",
+    "category": "Advanced Logic / Вычисления",
+    "path": "advanced_logic_2:schematics/advanced-microcoded-machine.wms"
   }
 ]
