@@ -34,18 +34,19 @@ function on_broken(x, y, z, playerId)
     api.on_broken(x, y, z, device_id)
 end
 
+local function restore_clock(x,y,z)
+    local output=block.get_field(x,y,z,'output') or 0
+    local period=output~=0 and (block.get_field(x,y,z,'pulse_time') or DEFAULT_PULSE_TIME)
+        or (block.get_field(x,y,z,'delay_time') or DEFAULT_DELAY_TIME)
+    block.set_field(x,y,z,'next_toggle',time.uptime()+period)
+    clock_registry.register(x,y,z,device_id)
+end
+api.register_restore_handler(device_id,restore_clock)
+
 function on_block_present(x, y, z)
-    -- time.uptime начинается заново при запуске движка, поэтому абсолютный
-    -- дедлайн из сохранения заменяем новым периодом от текущего момента.
-    local ok, uptime = pcall(time.uptime)
-    local output = block.get_field(x, y, z, "output") or 0
-    local period = output ~= 0
-        and (block.get_field(x, y, z, "pulse_time") or DEFAULT_PULSE_TIME)
-        or (block.get_field(x, y, z, "delay_time") or DEFAULT_DELAY_TIME)
-    block.set_field(x, y, z, "next_toggle", (ok and uptime or 0) + period)
+    restore_clock(x,y,z)
     api.on_placed(x, y, z, device_id)
-    api.send_signal(x, y, z, output)
-    clock_registry.register(x, y, z, device_id)
+    api.send_signal(x, y, z, block.get_field(x,y,z,'output') or 0)
 end
 
 function on_block_removed(x, y, z)
