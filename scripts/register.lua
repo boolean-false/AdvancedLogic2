@@ -2,9 +2,9 @@
 --
 -- Порты:
 --   D    (RIGHT, dir=1, flexible): вход данных
---   CLK  (LEFT,  dir=3, bits=1):   тактовый сигнал
+--   CLK  (FRONT, dir=2, bits=1):   тактовый сигнал
 --   LOAD (BACK,  dir=0, bits=1):   разрешение записи
---   Q    (FRONT, dir=2, flexible): выход
+--   Q    (RIGHT, dir=3, flexible): выход
 
 local api          = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')
@@ -14,11 +14,11 @@ local bus          = require('advanced_logic_2:bus_common')
 local device_id = api.register({"advanced_logic_2:register"}, {
     inputs = {
         d    = {dir = 1, offset = 0, bits = 4, bits_field = "data_bits"},
-        clk  = {dir = 3, offset = 0, bits = 1},
+        clk  = {dir = 2, offset = 0, bits = 1},
         load = {dir = 0, offset = 0, bits = 1},
     },
     outputs = {
-        q = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"}
+        q = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits"}
     }
 })
 

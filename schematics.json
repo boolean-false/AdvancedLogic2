@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Счётчик и индикатор",
+    "category": "Advanced Logic / Автоматика",
+    "path": "advanced_logic_2:schematics/advanced-counter-display.wms"
+  },
+  {
+    "name": "Стенд RAM",
+    "category": "Advanced Logic / Память",
+    "path": "advanced_logic_2:schematics/advanced-ram-workbench.wms"
+  },
+  {
+    "name": "4-битный процессор",
+    "category": "Advanced Logic / Вычисления",
+    "path": "advanced_logic_2:schematics/advanced-accumulator-cpu.wms"
+  }
+]

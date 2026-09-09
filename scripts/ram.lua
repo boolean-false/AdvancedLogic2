@@ -17,6 +17,20 @@ local device_id = api.register({"advanced_logic_2:ram"}, {
     outputs = { data_out = {dir = 2, bits = 4, bits_field = "data_bits"} }
 })
 
+api.register_config_schema(device_id,{"addr_bits","data_bits"})
+api.register_schematic_codec(device_id,{
+    capture=function(x,y,z)
+        local cells={}
+        for i=0,PHYS_CELLS-1 do cells[i+1]=mem.read_cell(x,y,z,i) end
+        return {cells=cells}
+    end,
+    restore=function(x,y,z,data)
+        for i,value in ipairs(data.cells or {}) do
+            if i<=PHYS_CELLS then mem.write_cell(x,y,z,value,i-1) end
+        end
+    end
+})
+
 api.register_signal_handler(device_id, function(read, write, inputs, outputs, origin, block_id)
     local x, y, z = origin[1], origin[2], origin[3]
 

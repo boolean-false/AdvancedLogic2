@@ -5,7 +5,7 @@ local bus          = require('advanced_logic_2:bus_common')
 local device_id = api.register({"advanced_logic_2:adder_4bit"}, {
     inputs = {
         a   = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
-        b   = {dir = 0, offset = 1, bits = 4, bits_field = "data_bits"},
+        b   = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits"},
         cin = {dir = 1, offset = 0, bits = 1},
     },
     outputs = {
