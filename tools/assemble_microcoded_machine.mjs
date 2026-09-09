@@ -1,5 +1,3 @@
-// Плата спроектирована вручную: позиции компонентов и ломаные проводов заданы явно.
-// Поиск позиций и автоматическая трассировка не выполняются. Запуск возможен из любого каталога через Node.
 import fs from 'node:fs';
 import {encode} from '../../wire_mod2/tools/wms_codec.mjs';
 import path from 'node:path';
@@ -59,7 +57,6 @@ function wire(net,type,...points){
 }
 const B='advanced_logic_2:bus_purple_8',A='advanced_logic_2:bus_orange_4';
 const blue='wire_mod_2:wire_blue',green='wire_mod_2:wire_green',red='wire_mod_2:wire_red';
-// Тракт данных: обратная связь аккумулятора, непосредственный операнд и три результата ALU.
 wire('acc',B,[11,5],[12,5],[12,21],[8,21],[8,19]);
 wire('acc',B,[12,21],[28,21],[28,19]);wire('acc',B,[18,21],[18,19]);
 wire('acc',B,[12,5],[12,2],[10,2]);
@@ -73,24 +70,19 @@ wire('xor',B,[28,17],[28,16],[31,16],[31,13],[24,13],[24,10],[27,10]);
 wire('low',B,[18,9],[18,6]);wire('high',B,[28,9],[28,8],[16,8],[16,5],[17,5]);
 wire('result',B,[18,4],[18,2],[14,2],[14,7],[9,7],[9,5]);
 wire('result',B,[18,2],[18,0],[36,0],[36,6],[34,6]);wire('result',B,[18,2],[22,2]);
-// Адрес программы и код операции. MUX использует два младших бита кода операции.
 wire('pc',A,[16,33],[16,31],[4,31],[4,28]);
 wire('pc',A,[16,31],[40,31],[40,13],[32,13]);wire('pc',A,[25,31],[25,28]);
 wire('opcode',A,[25,26],[25,24],[35,24],[35,19]);
 wire('bit0',red,[35,17],[35,10],[29,10]);wire('bit0',red,[35,10],[35,7],[20,7],[20,10],[19,10]);
 wire('bit1',green,[36,17],[39,17],[39,14],[34,14],[34,8],[29,8],[29,4],[19,4],[19,5]);wire('opcode',A,[35,24],[37,24],[37,21]);
-// Выбор адреса RAM и чтение данных независимо от входа записи.
 wire('address',A,[32,11],[32,6]);wire('keypad',A,[30,14],[30,12],[31,12]);
 wire('inspect',red,[36,12],[33,12]);wire('ram',B,[32,4],[32,2]);
-// Одна физическая тактовая сеть для всех последовательных компонентов.
 wire('clock',blue,[3,33],[2,33],[2,3],[37,3],[37,5],[35,5]);
 wire('clock',blue,[10,3],[10,4]);wire('clock',blue,[2,33],[2,38],[20,38],[20,34],[18,34]);
 wire('enable',green,[41,37],[6,37],[6,6],[10,6]);wire('enable',green,[14,37],[14,35],[15,35]);
 wire('enable',green,[41,37],[41,9],[30,9],[30,5],[31,5]);
 wire('carry',green,[19,20],[17,20],[17,18]);
 wire('reset',red,[22,35],[18,35]);
-// Направления контактов заданы явно. У каждого контакта устройства должен быть настоящий провод
-// : пассивные мосты нельзя подключать непосредственно к портам компонентов.
 const terminals={
  acc:[[11,5,-1,0],[8,19,0,-1],[18,19,0,-1],[28,19,0,-1],[10,2,0,-1]],
  operand:[[4,26,0,1],[10,18,-1,0],[23,20,0,-1],[29,18,-1,0],[18,11,0,-1],[4,21,0,-1]],
@@ -110,8 +102,6 @@ for(const [k,owners]of grid){if(owners.size>1){
  const all=[...owners.values()];if(all.length!==2||!all.every(straight)||[...all[0].dirs][0].endsWith(',0')===[...all[1].dirs][0].endsWith(',0'))throw Error(`Non-crossing overlap ${k}: ${[...owners.keys()]}`);
  bridges.add(k);
 }}
-// На параллельных соседних дорожках прямой мост изолирует боковые контакты. Поворот
-// нельзя превращать в мост: это разорвёт нужную сеть.
 for(const [k,owners]of grid)for(const [net,c]of owners){for(const [dx,dz]of [[1,0],[-1,0],[0,1],[0,-1]]){
  const nk=key(c.x+dx,c.z+dz),other=grid.get(nk);if(!other)continue;
  for(const [on,oc]of other){if(net===on||c.type!==oc.type)continue;
@@ -127,7 +117,6 @@ for(const [k,owners]of grid){const c=[...owners.values()][0];blocks.push({name:b
 const result={format:1,name:'advanced-microcoded-machine',description:'8-битная программируемая машина: LOAD / ADD / SUB / XOR, аккумулятор и журнал RAM',author:'DaggerLab',dependencies:['wire_mod_2','advanced_logic_2'],size:[43,2,39],origin:[3,0,34],blocks};
 fs.writeFileSync(path.join(root,'schematics/advanced-microcoded-machine.wms'),encode(result)+'\n');
 console.log(`${blocks.length} blocks, ${Object.keys(devices).length} devices, ${bridges.size} bridges`);
-// Подписанный план для инструкции с теми же фиксированными координатами платы.
 const labels={carry:'SUB +1',pc:'PC',operand:'OPERAND',opcode:'OPCODE',add:'ADD',sub:'SUB ADD',invert:'NOT',xor:'XOR',alu_low:'LOAD/ADD',alu_high:'SUB/XOR',alu:'RESULT',decode:'DECODE',acc:'ACC',trace:'RAM',address:'ADDR MUX',keypad:'KEYPAD',inspect:'INSPECT',enable:'ENABLE',reset:'RESET PC',clock:'CLOCK',pc_display:'PC OUT',operand_display:'IMM OUT',opcode_display:'OP OUT',acc_display:'ACC OUT',alu_display:'NEXT OUT',ram_display:'RAM OUT'};
 let svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -3 48 44" width="960" height="880"><rect x="-2" y="-3" width="48" height="44" fill="#151b24"/><g stroke-linecap="round" fill="none">';
 for(const cells of nets.values())for(const c of cells.values())for(const dir of c.dirs){const [dx,dz]=dir.split(',').map(Number);const color=c.type===B?'#ad94da':c.type===A?'#e6b15c':c.type===blue?'#78bcec':c.type===green?'#8fd0ad':'#e98991';svg+=`<path d="M${c.x+.5} ${c.z+.5}l${dx/2} ${dz/2}" stroke="${color}" stroke-width=".13"/>`;}

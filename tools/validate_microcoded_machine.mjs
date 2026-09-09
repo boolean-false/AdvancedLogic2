@@ -1,4 +1,3 @@
-// Движок, а не эмулятор ALU, выполняет встроенную WMS и повторно загружает мир.
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';

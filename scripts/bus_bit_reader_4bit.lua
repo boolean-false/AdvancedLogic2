@@ -15,13 +15,11 @@ local device_id = api.register({"advanced_logic_2:bus_bit_reader_4bit"}, {
 api.register_signal_handler(device_id, function(read, write, inputs, outputs, origin, block_id)
     local bus_value = read("input") or 0
     
-    -- Получаем выбранный бит из поля блока
     local x, y, z = origin[1], origin[2], origin[3]
     local width = api.get_port_state('input',x,y,z).bits or 16
     local selected_bit = math.floor(block.get_field(x, y, z, "selected_bit") or 0) % 16
     
     -- Извлекаем выбранный бит из шины
-    -- Используем bit.band для получения нужного бита
     local bit_value = bit.band(bit.rshift(bus_value, selected_bit), 1)
     
     write("output", bit_value)
@@ -30,7 +28,6 @@ end)
 function on_placed(x, y, z, playerid)
     require('wire_mod_2:gate_mounts').prepare(x,y,z,playerid)
     bus.init_width(x, y, z)
-    -- Инициализируем selected_bit если его нет
     if block.get_field(x, y, z, "selected_bit") == nil then
         block.set_field(x, y, z, "selected_bit", 0)
     end

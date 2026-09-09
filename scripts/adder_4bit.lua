@@ -27,7 +27,6 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
     local sum    = result % modulus
     local cout   = math.floor(result / modulus)
 
-    -- Сохраняем COUT для Logic Viewer
     block.set_field(x, y, z, "cout", cout)
 
     write("sum", sum)

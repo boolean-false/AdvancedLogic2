@@ -31,7 +31,6 @@ function cycle_clock()
 end
 
 function on_open(...)
-    -- Получаем позицию блока из аргументов (переданных в hud.show_overlay).
     local args = {...}
     
     -- Сначала проверяем session (заполняется в on_interact).
@@ -41,7 +40,6 @@ function on_open(...)
         block_y = pos[2]
         block_z = pos[3]
     elseif args and #args >= 3 then
-        -- Используем аргументы, если они есть.
         block_x = args[1]
         block_y = args[2]
         block_z = args[3]
@@ -67,7 +65,6 @@ function on_open(...)
         delay_time = 0.5
     end
     
-    -- Обновляем поля отформатированными значениями (два знака после запятой).
     document.pulse_time.text = string.format("%.2f", pulse_time)
     document.delay_time.text = string.format("%.2f", delay_time)
     
@@ -75,7 +72,6 @@ end
 
 function apply_settings()
     if not valid_target() then return end
-    -- Проверяем и разбираем ввод.
     local pulse_text = document.pulse_time.text
     local delay_text = document.delay_time.text
     
@@ -92,11 +88,9 @@ function apply_settings()
         return
     end
     
-    -- Сохраняем в полях блока.
     block.set_field(block_x, block_y, block_z, "pulse_time", pulse_time)
     block.set_field(block_x, block_y, block_z, "delay_time", delay_time)
     
-    -- Обновляем время следующего переключения с учётом текущего состояния выхода.
     local success, uptime = pcall(time.uptime)
     if success and uptime then
         local current_output = block.get_field(block_x, block_y, block_z, "output") or 0

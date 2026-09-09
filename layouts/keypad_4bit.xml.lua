@@ -37,7 +37,6 @@ function press_key(value)
     block.set_field(bx, by, bz, "value",        value % 16)
     block.set_field(bx, by, bz, "strobe_until", uptime_safe() + STROBE_DURATION)
 
-    -- Обновляем индикатор последней нажатой
     local lbl = document["last_pressed"]
     if lbl then lbl.text = string.format("Выход: 0x%X / %d", value % 16, value % 16) end
 

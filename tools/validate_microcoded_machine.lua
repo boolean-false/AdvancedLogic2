@@ -1,4 +1,3 @@
--- Полный поведенческий тест в движке; запускается через validate_microcoded_machine.mjs.
 local enable={}
 for _,id in ipairs({'wire_mod_2','advanced_logic_2'}) do
  if not table.has(pack.get_installed(),id) then enable[#enable+1]=id end
@@ -31,7 +30,6 @@ for _,entry in ipairs(schematic.library())do
  if entry.path=='advanced_logic_2:schematics/advanced-microcoded-machine.wms' then value=entry.schematic end
 end
 assert(value,'machine missing from configurator library')
--- Опорный блок является началом схемы. Сохранённые позиции не зависят от игрока.
 local anchor
 if CREATE then
  local x,y,z=player.get_pos(pid);anchor={x=math.floor(x),y=math.floor(y)+4,z=math.floor(z)}
@@ -83,7 +81,6 @@ if not CREATE then
  assert(get(16,34,'count')==saved.pc and get(10,5,'q')==saved.acc,'register state changed during reload')
  for i=0,15 do assert(cell(i)==saved.cells[i+1],'RAM changed on reload at '..i)end
 end
--- Остановиться в середине, чтобы после повторного открытия выполнение продолжилось с ненулевыми PC и аккумулятором.
 local cycles=CREATE and 6 or 26
 for step=1,cycles do
  local pc=get(16,34,'count');local want=expected[pc+1]
@@ -101,7 +98,6 @@ for step=1,cycles do
  assert(read(10,1,'input')==want,'accumulator display disconnected')
  await_value(function()return read(10,5,'d')==expected[get(16,34,'count')+1] and read(22,1,'input')==read(10,5,'d') end,'next instruction did not settle')
 end
--- Проверить журнал через настоящую клавиатуру и адресный MUX при остановленном тактовом генераторе.
 lever(37,12,true)
 await_value(function()return read(32,12,'sel')==1 end,'INSPECT did not enable')
 for i=0,(CREATE and 5 or 15)do
@@ -110,7 +106,6 @@ for i=0,(CREATE and 5 or 15)do
 end
 lever(37,12,false)
 await_value(function()return read(32,12,'sel')==0 and read(32,5,'addr')==get(16,34,'count') end,'INSPECT did not disable')
--- ENABLE удерживает PC, ACC и всю RAM, пока тактовые импульсы продолжаются.
 lever(42,37,false)
 await_value(function()return read(16,34,'en')==0 and read(10,5,'load')==0 and read(32,5,'we')==0 end,'ENABLE did not disable')
 local oldpc,oldacc=get(16,34,'count'),get(10,5,'q')
@@ -128,7 +123,6 @@ for i=0,15 do assert(cell(i)==before[i+1],'ENABLE did not protect RAM')end
 lever(42,37,true)
 await_value(function()return read(16,34,'en')==1 and read(10,5,'load')==1 and read(32,5,'we')==1 end,'ENABLE did not re-enable')
 if not CREATE then
- -- Рычаг сброса очищает PC; нулевая команда инициализирует ACC на следующем фронте.
  lever(22,34,true)
  await_value(function()return get(16,34,'count')==0 and read(16,34,'clr')==1 end,'PC reset failed')
  lever(22,34,false)
@@ -140,7 +134,6 @@ if not CREATE then
  assert(get(16,34,'count')==5 and get(10,5,'q')==7,'autonomous execution failed')
  for i=0,4 do assert(cell(i)==expected[i+1],'autonomous RAM trace mismatch')end
 end
--- Выполнить отложенные задачи вариантов проводников и их наличия перед закрытием мира.
 local settle=time.uptime()+0.3;while time.uptime()<settle do frame()end
 local cells={};for i=0,15 do cells[i+1]=cell(i)end
 file.write(pack.data_file('advanced_logic_2','machine_state.json'),json.tostring({pc=get(16,34,'count'),acc=get(10,5,'q'),cells=cells}))
