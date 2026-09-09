@@ -76,7 +76,7 @@ function on_broken(x, y, z, _)
 end
 
 function on_block_present(x, y, z)
-    -- Незавершённый короткий импульс безопасно завершается при загрузке мира.
+    -- Короткий импульс, прерванный загрузкой, просто завершается.
     block.set_field(x, y, z, "pulse_active", 0)
     block.set_field(x, y, z, "pulse_until", 0)
     api.on_placed(x, y, z, device_id)

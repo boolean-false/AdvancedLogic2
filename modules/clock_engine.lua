@@ -1,5 +1,5 @@
---- Движок тактового генератора: обработка одного clock_generator блока.
---- Раньше находилось в scripts/clock_generator.lua:on_block_tick, теперь вызывается
+--- Логика одного блока clock_generator.
+--- Раньше это было в scripts/clock_generator.lua:on_block_tick, теперь функцию вызывает
 --- глобально из world.lua через clock_registry.
 
 local api = require('wire_mod_2:api')

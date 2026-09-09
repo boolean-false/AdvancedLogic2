@@ -1,6 +1,6 @@
 -- Тактовый генератор. Логика тактов вынесена в modules/clock_engine.lua,
 -- вызывается централизованно из scripts/world.lua через clock_registry.
--- Здесь только регистрация в registry + UI + initial fields.
+-- Здесь только регистрация, интерфейс и начальные поля.
 
 local api            = require("wire_mod_2:api")
 local logic_viewer   = require("wire_mod_2:logic_viewer")

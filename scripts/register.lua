@@ -1,4 +1,4 @@
--- Универсальный регистр с явной разрядностью 4/8/16 бит.
+-- Регистр с разрядностью 4, 8 или 16 бит.
 --
 -- Порты:
 --   D    (RIGHT, dir=1, flexible): вход данных
@@ -37,7 +37,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
         q = d
     end
 
-    -- Mask q к текущей ширине (на случай уменьшения ширины output цепи).
+    -- Ограничиваем q текущей разрядностью выхода.
     q = q % (mask + 1)
 
     block.set_field(x, y, z, "q", q)

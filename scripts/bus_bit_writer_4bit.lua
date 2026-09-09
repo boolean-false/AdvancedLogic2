@@ -62,7 +62,7 @@ logic_viewer.set_view(device_id, function(x, y, z)
     local bus_width = bus.get_width(x, y, z)
     selected_bit = math.floor(selected_bit) % 16
 
-    -- Показать бит, который будет записан (MSB -> LSB, left to right)
+    -- Показать записываемый бит (MSB -> LSB, слева направо)
     local bit_vis = ""
     for i = bus_width - 1, 0, -1 do
         if i == selected_bit then
@@ -72,8 +72,8 @@ logic_viewer.set_view(device_id, function(x, y, z)
         end
     end
 
-    -- inputs = nil  -> заполняются автоматически (показывают input_bit and input_bus values)
-    -- outputs = nil -> заполняются автоматически (показывают output bus value)
+    -- inputs = nil -> заполняются автоматически и показывают input_bit и input_bus
+    -- outputs = nil -> заполняются автоматически и показывают выходную шину
     return {
         display_name = "Записыватель бита шины",
         settings = {

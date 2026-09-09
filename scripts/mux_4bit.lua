@@ -52,6 +52,6 @@ logic_viewer.set_view(device_id, function(x, y, z)
         display_name = string.format("MUX 2:1 (%d-bit)", width),
         type = "gate",
         settings = {bus.viewer_width(width)},
-        -- inputs/outputs auto-filled (покажет A, B, SEL и Y с реальными значениями)
+        -- inputs/outputs заполняются автоматически и показывают реальные A, B, SEL и Y
     }
 end)

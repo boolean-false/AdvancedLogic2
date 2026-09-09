@@ -63,7 +63,7 @@ function M.init_width(x, y, z)
     end
 end
 
----Переключает ширину только конфигуратором в Viewer-режиме.
+--- Ширину меняет только конфигуратор в режиме Viewer.
 ---@return boolean handled
 function M.try_cycle_width(x, y, z, playerid)
     return require('advanced_logic_2:component_settings').open(x,y,z,playerid)

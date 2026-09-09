@@ -51,7 +51,7 @@ function on_interact(x, y, z, playerid)
     if hud.is_open(LAYOUT_ID) then return true end
 
     if not session.entries then session.entries = {} end
-    -- Legacy keys (без pkey) для совместимости с layout - он читает их.
+    -- Старые ключи без pkey нужны для совместимости с layout.
     session.entries["mem_editor_pos"]        = {x, y, z}
     session.entries["mem_editor_is_rom"]     = true
     session.entries["mem_editor_type"]       = "ROM"
