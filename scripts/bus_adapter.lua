@@ -1,5 +1,5 @@
 local unpack = table.unpack or unpack
--- Explicit unsigned width conversion. Narrowing keeps the low bits, including bit 0.
+-- Явное преобразование беззнаковой разрядности. При сужении сохраняются младшие биты, включая бит 0.
 local api = require('wire_mod_2:api')
 local viewer = require('wire_mod_2:logic_viewer')
 local settings = require('advanced_logic_2:adapter_settings')

@@ -52,7 +52,7 @@ logic_viewer.set_view(device_id, function(x, y, z)
     local bus_width = api.get_port_state('input',x,y,z).bits or 16
     selected_bit = math.floor(selected_bit) % 16
 
-    -- Visualize which bit is selected (MSB -> LSB, left to right)
+    -- Показать выбранный бит (MSB -> LSB, left to right)
     local bit_vis = ""
     for i = bus_width - 1, 0, -1 do
         if i == selected_bit then
@@ -62,8 +62,8 @@ logic_viewer.set_view(device_id, function(x, y, z)
         end
     end
 
-    -- inputs = nil  -> auto-fill from device_system (shows actual bus value)
-    -- outputs = nil -> auto-fill from device_system (shows bit output)
+    -- inputs = nil  -> заполняются автоматически из device_system (shows actual bus value)
+    -- outputs = nil -> заполняются автоматически из device_system (shows bit output)
     return {
         display_name = "Читатель бита шины",
         settings = {

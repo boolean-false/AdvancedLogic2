@@ -1,4 +1,4 @@
--- Clock Generator. Логика тика вынесена в modules/clock_engine.lua,
+-- Тактовый генератор. Логика тактов вынесена в modules/clock_engine.lua,
 -- вызывается централизованно из scripts/world.lua через clock_registry.
 -- Здесь только регистрация в registry + UI + initial fields.
 

@@ -1,4 +1,4 @@
--- Pulse Generator: на фронте входа (0->1) выдаёт фиксированный импульс на выход.
+-- Генератор импульсов: на переднем фронте входа (0->1) выдаёт фиксированный импульс на выход.
 -- Длительность настраивается; новый фронт продлевает импульс.
 --
 -- Порты:
@@ -37,7 +37,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 
     block.set_field(x, y, z, "prev_in", input_v)
 
-    -- Rising edge -> старт импульса
+    -- Передний фронт -> запуск импульса
     if input_v == 1 and prev == 0 then
         active = true
         until_t = now + duration(x,y,z)

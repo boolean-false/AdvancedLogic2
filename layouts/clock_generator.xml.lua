@@ -31,22 +31,22 @@ function cycle_clock()
 end
 
 function on_open(...)
-    -- Get block position from args (passed to hud.show_overlay)
+    -- Получаем позицию блока из аргументов (переданных в hud.show_overlay).
     local args = {...}
     
-    -- Try session first (set in on_interact)
+    -- Сначала проверяем session (заполняется в on_interact).
     if session.entries and session.entries["clock_generator_pos"] then
         local pos = session.entries["clock_generator_pos"]
         block_x = pos[1]
         block_y = pos[2]
         block_z = pos[3]
     elseif args and #args >= 3 then
-        -- Use args if available
+        -- Используем аргументы, если они есть.
         block_x = args[1]
         block_y = args[2]
         block_z = args[3]
     else
-        -- If no position found, close GUI
+        -- Если позиция не найдена, закрываем интерфейс.
         gui.alert("Error: Block position not found")
         close_gui()
         return
@@ -55,11 +55,11 @@ function on_open(...)
     if not valid_target() then return end
     document.feedback.text=''
     refresh_status()
-    -- Load current settings from block
+    -- Загружаем текущие настройки блока.
     local pulse_time = block.get_field(block_x, block_y, block_z, "pulse_time")
     local delay_time = block.get_field(block_x, block_y, block_z, "delay_time")
     
-    -- Set default values if not set
+    -- Задаём значения по умолчанию, если они не установлены.
     if not pulse_time or pulse_time == 0 then
         pulse_time = 0.5
     end
@@ -67,7 +67,7 @@ function on_open(...)
         delay_time = 0.5
     end
     
-    -- Update textboxes with formatted values (2 decimal places)
+    -- Обновляем поля отформатированными значениями (два знака после запятой).
     document.pulse_time.text = string.format("%.2f", pulse_time)
     document.delay_time.text = string.format("%.2f", delay_time)
     
@@ -75,7 +75,7 @@ end
 
 function apply_settings()
     if not valid_target() then return end
-    -- Validate and parse input
+    -- Проверяем и разбираем ввод.
     local pulse_text = document.pulse_time.text
     local delay_text = document.delay_time.text
     
@@ -92,11 +92,11 @@ function apply_settings()
         return
     end
     
-    -- Save to block fields
+    -- Сохраняем в полях блока.
     block.set_field(block_x, block_y, block_z, "pulse_time", pulse_time)
     block.set_field(block_x, block_y, block_z, "delay_time", delay_time)
     
-    -- Update next toggle time based on current output state
+    -- Обновляем время следующего переключения с учётом текущего состояния выхода.
     local success, uptime = pcall(time.uptime)
     if success and uptime then
         local current_output = block.get_field(block_x, block_y, block_z, "output") or 0

@@ -1,5 +1,5 @@
---- Keypad UI: 4x4 hex кнопок. На клик - пишет value+strobe в block fields,
---- mark_device_for_update тычет симуляцию.
+--- Интерфейс клавиатуры: 4x4 hex кнопок. На клик - пишет value+strobe в полях блока,
+--- mark_device_for_update запускает пересчёт симуляции.
 
 local api          = require("wire_mod_2:api")
 local simulation   = require("wire_mod_2:simulation")

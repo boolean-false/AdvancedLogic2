@@ -101,7 +101,7 @@ function on_mem_clear()
 end
 function refresh_all()
  if not valid() then return end
- -- Explicit reload discards the ROM draft only after a second click.
+ -- Явная перезагрузка отменяет черновик ROM только после второго нажатия.
  if is_rom then
   local values=read_draft();local dirty=not values
   if values then for i=0,cells-1 do if values[i+1]~=mem.clamp_value(mem.read_cell(bx,by,bz,i),bits) then dirty=true end end end

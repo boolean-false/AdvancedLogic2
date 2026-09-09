@@ -1,4 +1,4 @@
--- Minimal settings surface; presentation can be redesigned independently.
+-- Минимальная панель настроек; оформление можно менять независимо.
 local M={}
 local api=require('wire_mod_2:api')
 local function base_name(name)return name:gsub('_mounted$',''):gsub('_ceiling$','') end

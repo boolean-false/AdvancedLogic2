@@ -7,7 +7,7 @@ local M = {}
 --- Дефолт для совместимости со старыми скриптами.
 M.DEFAULT_PHYS_CELLS = 16
 
---- Допустимые битности данных (cycle через UI).
+--- Допустимые разрядности данных (переключаются через UI).
 M.BIT_CYCLE = {4, 8, 16}
 
 local INT16_MODULUS = 65536
@@ -29,7 +29,7 @@ function M.get_addr_bits(x, y, z)
     return M.safe_bits(block.get_field(x, y, z, "addr_bits", 0))
 end
 
--- Capacity changes hide cells instead of destroying their contents.
+-- Изменение ёмкости скрывает ячейки, не уничтожая их содержимое.
 function M.get_cells(x,y,z)
     return M.get_addr_bits(x,y,z)==6 and 64 or 16
 end
@@ -116,7 +116,7 @@ function M.normalize_cells_for_bits(x, y, z, new_bits, phys_cells)
 end
 
 ---Дамп памяти для logic_viewer.
----Кол-во строк автоматически: phys_cells / 8 (rounding up).
+---Количество строк: phys_cells / 8, с округлением вверх.
 ---Для phys_cells=16: 2 строки по 8. Для phys_cells=64: 8 строк по 8.
 ---@param x integer
 ---@param y integer

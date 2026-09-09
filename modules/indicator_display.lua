@@ -1,4 +1,4 @@
--- A client-only panel per loaded instrument. Texture slots are reused after removal.
+-- Клиентская панель для каждого загруженного индикатора. Слоты текстур повторно используются после удаления.
 local M={}
 local api=require('wire_mod_2:api')
 local font=require('advanced_logic_2:indicator_font')
@@ -8,7 +8,7 @@ local unpack=table.unpack or unpack
 local C={bg={16,24,30},text={232,244,238},accent={134,207,221},muted={121,139,151},line={44,60,70}}
 local function key(x,y,z) return x..':'..y..':'..z end
 local function rect(canvas,x,y,w,h,color)
-    -- Entity UV V runs opposite Canvas row order.
+    -- Координата V у Entity UV направлена противоположно порядку строк Canvas.
     canvas:rect(x,192-y-h,w,h,unpack(color))
 end
 local function text(canvas,value,y,scale,color,scale_y)
@@ -48,7 +48,7 @@ function M.draw(canvas,state)
         rect(canvas,10,103,108,1,C.line)
         text(canvas,'HEX',115,2,C.muted)
         text(canvas,string.format('%0'..math.ceil(bits/4)..'X',value),135,4,C.accent)
-        -- Bit cells show the physical width without requiring tiny binary text.
+        -- Ячейки битов показывают физическую разрядность, поэтому мелкий двоичный текст не нужен.
         local pitch=math.floor(108/bits)
         local left=math.floor((128-bits*pitch)/2)
         for bit=0,bits-1 do

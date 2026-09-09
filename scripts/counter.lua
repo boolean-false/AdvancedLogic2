@@ -1,6 +1,6 @@
--- Counter 2x2: all eight contacts lie on the panel perimeter.
--- CLR is asynchronous. Rising CLK: LOAD > EN; DIR=0 up, DIR=1 down.
--- CARRY reports wraparound until the next rising edge or clear.
+-- Счётчик 2x2: все восемь контактов находятся по периметру панели.
+-- CLR асинхронный. На переднем фронте CLK приоритет у LOAD, затем у EN; DIR=0 увеличивает, DIR=1 уменьшает.
+-- CARRY сообщает о переполнении до следующего переднего фронта или сброса.
 
 local api          = require('wire_mod_2:api')
 local logic_viewer = require('wire_mod_2:logic_viewer')

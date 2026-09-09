@@ -1,4 +1,4 @@
--- Universal unsigned indicator. Block ID retained for existing inventories/worlds.
+-- Универсальный беззнаковый индикатор. Идентификатор блока сохранён для существующих миров и инвентарей.
 local api=require('wire_mod_2:api')
 local display=require('advanced_logic_2:indicator_display')
 local configurator=require('advanced_logic_2:configurator_check')

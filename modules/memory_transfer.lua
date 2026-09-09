@@ -1,4 +1,4 @@
--- Text interchange uses words, not bytes. No implicit truncation or endianness.
+-- Для обмена используются слова, а не байты. Неявное усечение и порядок байтов не применяются.
 local M={}
 function M.parse(text,bits,radix,limit)
  local result={}

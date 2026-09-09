@@ -1,4 +1,4 @@
--- One scheduler, independent persistent pause state for each generator.
+-- Один планировщик с отдельным сохраняемым состоянием паузы для каждого генератора.
 local M={}
 local devices=require('wire_mod_2:device_system')
 local api=require('wire_mod_2:api')
@@ -21,7 +21,7 @@ function M.set_paused(x,y,z,paused)
     end
     return true
 end
--- A complete 0 -> 1 -> 0 pulse, across two world ticks. Keep this clock paused.
+-- Полный импульс 0 -> 1 -> 0 за два такта мира. Этот генератор должен оставаться на паузе.
 function M.request_cycle(x,y,z)
     local r=clocks[key(x,y,z)]
     if not r or not M.is_paused(x,y,z) or r.pending>0 then return false end

@@ -1,5 +1,5 @@
---- Clock Engine: обработка одного clock_generator блока.
---- Раньше жило в scripts/clock_generator.lua:on_block_tick - теперь вызывается
+--- Движок тактового генератора: обработка одного clock_generator блока.
+--- Раньше находилось в scripts/clock_generator.lua:on_block_tick, теперь вызывается
 --- глобально из world.lua через clock_registry.
 
 local api = require('wire_mod_2:api')
@@ -10,7 +10,7 @@ local M = {}
 local DEFAULT_PULSE_TIME = 0.5
 local DEFAULT_DELAY_TIME = 0.5
 
----Обработка одного clock-блока. Вызывается раз в tick из world.lua.
+---Обработка одного блока clock. Вызывается раз за такт из world.lua.
 ---@param x integer
 ---@param y integer
 ---@param z integer
