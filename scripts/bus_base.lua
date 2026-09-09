@@ -10,6 +10,7 @@ local function ensure_bus(color, bits)
         bits = bits,
         crossing = {
             lower_model='al2_crossing/ribbon/lower',upper_model='al2_crossing/ribbon/upper',
+            upper_models={'al2_crossing/ribbon/upper_1','al2_crossing/ribbon/upper_2','al2_crossing/ribbon/upper_3'},
             top='blocks:al2_ribbon_'..bits..'_5',side='blocks:al2_ribbon_'..bits..'_side'
         }
     })

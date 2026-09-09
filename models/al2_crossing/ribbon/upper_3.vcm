@@ -1,0 +1,6 @@
+@rect from (0.3,-0.08,0.5) right (-0.6,0,0) up (0,0,-1) texture "$upper_top" region (0.2,0,0.8,1)
+@rect from (0.3,-0.24,0.5) right (0,0,-1) up (-0.6,0,0) texture "$upper_side" region (0,0,1,1)
+@rect from (-0.3,-0.24,0.5) right (0,0,-1) up (0,0.16,0) texture "$upper_side" region (0,0,1,1)
+@rect from (0.3,-0.24,-0.5) right (0,0,1) up (0,0.16,0) texture "$upper_side" region (0,0,1,1)
+@rect from (-0.3,-0.24,-0.5) right (0.6,0,0) up (0,0.16,0) texture "$upper_side" region (0,0,1,1)
+@rect from (0.3,-0.24,0.5) right (-0.6,0,0) up (0,0.16,0) texture "$upper_side" region (0,0,1,1)
