@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_bus_join",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_bus_join",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "hitbox": [

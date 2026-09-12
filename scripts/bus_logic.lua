@@ -1,9 +1,9 @@
 -- Побитовая логика AND/OR/XOR/NOT для шин 4/8/16 бит.
 
-local api          = require("wire_mod_2:api")
-local bit          = require("wire_mod_2:bit")
-local logic_viewer = require("wire_mod_2:logic_viewer")
-local bus          = require("advanced_logic_2:bus_common")
+local api          = require("wire_mod:api")
+local bit          = require("wire_mod:bit")
+local logic_viewer = require("wire_mod:logic_viewer")
+local bus          = require("advanced_logic:bus_common")
 
 local OPERATIONS = {"AND", "OR", "XOR", "NOT"}
 
@@ -12,7 +12,7 @@ local function operation_at(value)
     return index, OPERATIONS[index]
 end
 
-local device_id = api.register({"advanced_logic_2:bus_logic"}, {
+local device_id = api.register({"advanced_logic:bus_logic"}, {
     inputs = {
         a = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
         b = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits", disabled_field="operation", disabled_value=3},
@@ -39,7 +39,7 @@ api.register_signal_handler(device_id, function(read, write, _, _, origin)
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     bus.init_width(x, y, z)
     if block.get_field(x, y, z, "operation") == nil then
         block.set_field(x, y, z, "operation", 0)
@@ -52,7 +52,7 @@ function on_broken(x, y, z, _)
 end
 
 function on_interact(x, y, z, playerid)
-    return require('advanced_logic_2:component_settings').open(x,y,z,playerid)
+    return require('advanced_logic:component_settings').open(x,y,z,playerid)
 end
 
 logic_viewer.set_view(device_id, function(x, y, z)

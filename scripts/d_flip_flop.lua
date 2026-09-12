@@ -6,11 +6,11 @@
 --   RST (BACK,  dir=0) - асинхронный сброс (active high)
 --   Q   (FRONT, dir=2) - выход
 
-local api          = require('wire_mod_2:api')
-local logic_viewer = require('wire_mod_2:logic_viewer')
-local edge         = require('advanced_logic_2:edge')
+local api          = require('wire_mod:api')
+local logic_viewer = require('wire_mod:logic_viewer')
+local edge         = require('advanced_logic:edge')
 
-local device_id = api.register({"advanced_logic_2:d_flip_flop"}, {
+local device_id = api.register({"advanced_logic:d_flip_flop"}, {
     inputs = {
         d   = {dir = 1, offset = 0, bits = 1},
         clk = {dir = 3, offset = 0, bits = 1},
@@ -42,7 +42,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     block.set_field(x, y, z, "q", 0)
     block.set_field(x, y, z, "prev_clk", 0)
     api.on_placed(x, y, z, device_id)

@@ -1,33 +1,33 @@
-@box from (0,0,0) to (1,0.14,1) texture "blocks:al2_instrument_body" {
+@box from (0,0,0) to (1,0.14,1) texture "blocks:al_instrument_body" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.06,0.14,0.28) to (0.94,0.22,0.72) texture "blocks:al2_instrument_edge" {
+@box from (0.06,0.14,0.28) to (0.94,0.22,0.72) texture "blocks:al_instrument_edge" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.32,0.22,0.43) to (0.68,0.35,0.57) texture "blocks:al2_instrument_metal" {
+@box from (0.32,0.22,0.43) to (0.68,0.35,0.57) texture "blocks:al_instrument_metal" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.07,0.41,0.34) to (0.93,1.9,0.66) texture "blocks:al2_instrument_body" {
+@box from (0.07,0.41,0.34) to (0.93,1.9,0.66) texture "blocks:al_instrument_body" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.02,0.35,0.33) to (0.98,0.41,0.67) texture "blocks:al2_instrument_edge" {
+@box from (0.02,0.35,0.33) to (0.98,0.41,0.67) texture "blocks:al_instrument_edge" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.02,1.9,0.33) to (0.98,1.96,0.67) texture "blocks:al2_instrument_edge" {
+@box from (0.02,1.9,0.33) to (0.98,1.96,0.67) texture "blocks:al_instrument_edge" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.02,0.41,0.33) to (0.07,1.9,0.67) texture "blocks:al2_instrument_edge" {
+@box from (0.02,0.41,0.33) to (0.07,1.9,0.67) texture "blocks:al_instrument_edge" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.93,0.41,0.33) to (0.98,1.9,0.67) texture "blocks:al2_instrument_edge" {
+@box from (0.93,0.41,0.33) to (0.98,1.9,0.67) texture "blocks:al_instrument_edge" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.07,0.41,0.329) to (0.93,1.9,0.671) texture "blocks:al2_instrument_glass" {
+@box from (0.07,0.41,0.329) to (0.93,1.9,0.671) texture "blocks:al_instrument_glass" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.2,0.14,0.72) to (0.8,0.2,1) texture "blocks:al2_instrument_metal" {
+@box from (0.2,0.14,0.72) to (0.8,0.2,1) texture "blocks:al_instrument_metal" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }
-@box from (0.26,0.2,0.76) to (0.74,0.21,1) texture "blocks:al2_instrument_contact" {
+@box from (0.26,0.2,0.76) to (0.74,0.21,1) texture "blocks:al_instrument_contact" {
     @part tags (west,east,bottom,top,north,south) region (0,0,1,1)
 }

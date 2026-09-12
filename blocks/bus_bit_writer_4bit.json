@@ -21,11 +21,11 @@
     }
   },
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_bus_bit_writer_4bit",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_bus_bit_writer_4bit",
+    "al_gate_side",
+    "al_gate_side"
   ]
 }

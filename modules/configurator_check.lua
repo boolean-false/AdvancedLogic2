@@ -1,12 +1,12 @@
 --- Проверка наличия logic_configurator у игрока в руке.
 --- Используется для гейтинга UI-открытий по специальному инструменту.
 
-local modes = require('wire_mod_2:configurator_modes')
+local modes = require('wire_mod:configurator_modes')
 
 ---@class ALConfiguratorCheck
 local M = {}
 
-local CONFIGURATOR_ITEM = "wire_mod_2:logic_configurator"
+local CONFIGURATOR_ITEM = "wire_mod:logic_configurator"
 
 ---@param playerid integer
 ---@return boolean

@@ -2,7 +2,7 @@
 --- Раньше это было в scripts/clock_generator.lua:on_block_tick, теперь функцию вызывает
 --- глобально из world.lua через clock_registry.
 
-local api = require('wire_mod_2:api')
+local api = require('wire_mod:api')
 
 ---@class ALClockEngine
 local M = {}

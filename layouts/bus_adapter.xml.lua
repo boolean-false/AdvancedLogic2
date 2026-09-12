@@ -1,8 +1,8 @@
 local unpack = table.unpack or unpack
-local settings=require('advanced_logic_2:adapter_settings')
+local settings=require('advanced_logic:adapter_settings')
 local pos
 function close()
-    hud.close('advanced_logic_2:bus_adapter')
+    hud.close('advanced_logic:bus_adapter')
 end
 function on_open()
     pos=session.entries and session.entries.adapter_pos

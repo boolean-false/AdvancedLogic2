@@ -2,12 +2,12 @@
 -- CLR асинхронный. На переднем фронте CLK приоритет у LOAD, затем у EN; DIR=0 увеличивает, DIR=1 уменьшает.
 -- CARRY сообщает о переполнении до следующего переднего фронта или сброса.
 
-local api          = require('wire_mod_2:api')
-local logic_viewer = require('wire_mod_2:logic_viewer')
-local edge         = require('advanced_logic_2:edge')
-local bus          = require('advanced_logic_2:bus_common')
+local api          = require('wire_mod:api')
+local logic_viewer = require('wire_mod:logic_viewer')
+local edge         = require('advanced_logic:edge')
+local bus          = require('advanced_logic:bus_common')
 
-local device_id = api.register({"advanced_logic_2:counter"}, {
+local device_id = api.register({"advanced_logic:counter"}, {
     inputs = {
         clk  = {dir = 3, offset = 0, bits = 1},
         en   = {dir = 1, offset = 0, bits = 1},
@@ -64,7 +64,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     bus.init_width(x, y, z)
     block.set_field(x, y, z, "count",    0)
     block.set_field(x, y, z, "carry",    0)

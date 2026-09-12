@@ -1,8 +1,8 @@
 -- Универсальный беззнаковый индикатор. Идентификатор блока сохранён для существующих миров и инвентарей.
-local api=require('wire_mod_2:api')
-local display=require('advanced_logic_2:indicator_display')
-local configurator=require('advanced_logic_2:configurator_check')
-local device_id=api.register({'advanced_logic_2:indicator_4bit'},{
+local api=require('wire_mod:api')
+local display=require('advanced_logic:indicator_display')
+local configurator=require('advanced_logic:configurator_check')
+local device_id=api.register({'advanced_logic:indicator_4bit'},{
     inputs={input={dir=0,offset=0,accept_bits={1,4,8,16}}}
 })
 api.register_signal_handler(device_id,function(_,_,_,_,origin)

@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
-  "icon": "items:al2_bus_logic",
-  "placing-block": "advanced_logic_2:bus_logic_mounted"
+  "icon": "items:al_bus_logic",
+  "placing-block": "advanced_logic:bus_logic_mounted"
 }

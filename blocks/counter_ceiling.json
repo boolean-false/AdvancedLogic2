@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_counter",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_counter",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "hitbox": [
@@ -41,5 +41,5 @@
     2
   ],
   "hidden": true,
-  "picking-item": "advanced_logic_2:counter.item"
+  "picking-item": "advanced_logic:counter.item"
 }

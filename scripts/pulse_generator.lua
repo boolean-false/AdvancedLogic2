@@ -5,9 +5,9 @@
 --   BACK  (dir=0, bits=1): in    - триггер
 --   FRONT (dir=2, bits=1): out   - импульс
 
-local api = require('wire_mod_2:api')
-local logic_viewer = require('wire_mod_2:logic_viewer')
-local timer_registry = require('wire_mod_2:timer_registry')
+local api = require('wire_mod:api')
+local logic_viewer = require('wire_mod:logic_viewer')
+local timer_registry = require('wire_mod:timer_registry')
 
 local function duration(x,y,z)
     local value=block.get_field(x,y,z,'pulse_duration') or 0
@@ -15,7 +15,7 @@ local function duration(x,y,z)
 end
 local process_timer
 
-local device_id = api.register({"advanced_logic_2:pulse_generator"}, {
+local device_id = api.register({"advanced_logic:pulse_generator"}, {
     inputs  = { ["in"] = {dir = 0, offset = 0, bits = 1} },
     outputs = { out    = {dir = 2, offset = 0, bits = 1} }
 })
@@ -62,7 +62,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     block.set_field(x, y, z, "prev_in",      0)
     block.set_field(x, y, z, "pulse_active", 0)
     block.set_field(x, y, z, "pulse_until",  0)
@@ -109,5 +109,5 @@ logic_viewer.set_view(device_id, function(x, y, z)
 end)
 
 function on_interact(x,y,z,playerid)
-    return require('advanced_logic_2:component_settings').open(x,y,z,playerid)
+    return require('advanced_logic:component_settings').open(x,y,z,playerid)
 end

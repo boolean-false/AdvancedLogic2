@@ -1,8 +1,8 @@
-local ui=require('wire_mod_2:ui')
-local api = require("wire_mod_2:api")
-local bus = require("advanced_logic_2:bus_common")
+local ui=require('wire_mod:ui')
+local api = require("wire_mod:api")
+local bus = require("advanced_logic:bus_common")
 
-local LAYOUT_ID = "advanced_logic_2:bus_constant"
+local LAYOUT_ID = "advanced_logic:bus_constant"
 local bx, by, bz
 local selected_width = bus.DEFAULT_WIDTH
 
@@ -24,7 +24,7 @@ function set_width(width)
 end
 
 function apply_constant()
-    if not ui.valid(bx,by,bz,'advanced_logic_2:bus_constant') then close_constant();return end
+    if not ui.valid(bx,by,bz,'advanced_logic:bus_constant') then close_constant();return end
     local input = document["value_input"]
     local value,err=ui.number(input and input.text,0,bus.mask(selected_width),true)
     if not value then document.feedback.text=err;return end

@@ -4,11 +4,11 @@ import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const game=path.resolve(root,'../..'),wire=path.resolve(root,'../wire_mod2');
-const project=fs.mkdtempSync(path.join(os.tmpdir(),'al2-machine-'));
+const game=path.resolve(root,'../..'),wire=path.resolve(root,'../wire_mod');
+const project=fs.mkdtempSync(path.join(os.tmpdir(),'al-machine-'));
 try{
  fs.mkdirSync(path.join(project,'content'));
- for(const [name,source]of Object.entries({base:path.join(game,'res/content/base'),wire_mod_2:wire,advanced_logic_2:root}))fs.symlinkSync(source,path.join(project,'content',name));
+ for(const [name,source]of Object.entries({base:path.join(game,'res/content/base'),wire_mod:wire,advanced_logic:root}))fs.symlinkSync(source,path.join(project,'content',name));
  fs.copyFileSync(path.join(game,'res/project.toml'),path.join(project,'project.toml'));
  for(const rot of [0,1,2,3])for(const create of [true,false]){
   if(create)fs.rmSync(path.join(project,'worlds'),{recursive:true,force:true});

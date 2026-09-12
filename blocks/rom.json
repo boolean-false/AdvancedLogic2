@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_rom",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_rom",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "rotation": "pane",

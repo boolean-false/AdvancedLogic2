@@ -2,12 +2,12 @@
 -- вызывается централизованно из scripts/world.lua через clock_registry.
 -- Здесь только регистрация, интерфейс и начальные поля.
 
-local api            = require("wire_mod_2:api")
-local logic_viewer   = require("wire_mod_2:logic_viewer")
-local cfg_check      = require("advanced_logic_2:configurator_check")
-local clock_registry = require("advanced_logic_2:clock_registry")
+local api            = require("wire_mod:api")
+local logic_viewer   = require("wire_mod:logic_viewer")
+local cfg_check      = require("advanced_logic:configurator_check")
+local clock_registry = require("advanced_logic:clock_registry")
 
-local device_id = api.register({"advanced_logic_2:clock_generator"}, {
+local device_id = api.register({"advanced_logic:clock_generator"}, {
     outputs = {
         output = { dir = 2, offset = 0, bits = 1}
     }
@@ -17,7 +17,7 @@ local DEFAULT_PULSE_TIME = 0.5
 local DEFAULT_DELAY_TIME = 0.5
 
 function on_placed(x, y, z, playerid)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,playerid)
+    require('wire_mod:gate_mounts').prepare(x,y,z,playerid)
     block.set_field(x, y, z, "pulse_time", DEFAULT_PULSE_TIME)
     block.set_field(x, y, z, "delay_time", DEFAULT_DELAY_TIME)
     local ok, uptime = pcall(time.uptime)
@@ -64,7 +64,7 @@ function on_interact(x, y, z, playerId)
     session.entries["clock_generator_pos_" .. tostring(playerId)] = {x, y, z}
     session.entries["clock_generator_pos"] = {x, y, z}
 
-    hud.show_overlay("advanced_logic_2:clock_generator", false, {x, y, z})
+    hud.show_overlay("advanced_logic:clock_generator", false, {x, y, z})
     return true
 end
 

@@ -6,12 +6,12 @@
 --   LOAD (BACK,  dir=0, bits=1):   разрешение записи
 --   Q    (RIGHT, dir=3, flexible): выход
 
-local api          = require('wire_mod_2:api')
-local logic_viewer = require('wire_mod_2:logic_viewer')
-local edge         = require('advanced_logic_2:edge')
-local bus          = require('advanced_logic_2:bus_common')
+local api          = require('wire_mod:api')
+local logic_viewer = require('wire_mod:logic_viewer')
+local edge         = require('advanced_logic:edge')
+local bus          = require('advanced_logic:bus_common')
 
-local device_id = api.register({"advanced_logic_2:register"}, {
+local device_id = api.register({"advanced_logic:register"}, {
     inputs = {
         d    = {dir = 1, offset = 0, bits = 4, bits_field = "data_bits"},
         clk  = {dir = 2, offset = 0, bits = 1},
@@ -45,7 +45,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     bus.init_width(x, y, z)
     block.set_field(x, y, z, "q", 0)
     block.set_field(x, y, z, "prev_clk", 0)

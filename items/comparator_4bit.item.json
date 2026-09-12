@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
-  "icon": "items:al2_comparator_4bit",
-  "placing-block": "advanced_logic_2:comparator_4bit_mounted"
+  "icon": "items:al_comparator_4bit",
+  "placing-block": "advanced_logic:comparator_4bit_mounted"
 }

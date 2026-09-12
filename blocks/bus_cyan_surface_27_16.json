@@ -1,5 +1,5 @@
 {
-  "texture": "al2_ribbon_16_side",
+  "texture": "al_ribbon_16_side",
   "model": "custom",
   "model-name": "surface_buses/16/216",
   "light-passing": true,
@@ -20,9 +20,9 @@
     }
   },
   "tags": [
-    "wire_mod_2:wire"
+    "wire_mod:wire"
   ],
-  "picking-item": "advanced_logic_2:bus_cyan_16.item",
+  "picking-item": "advanced_logic:bus_cyan_16.item",
   "obstacle": false,
   "state-based": {
     "offset": 0,
@@ -31,77 +31,77 @@
       {
         "model": "custom",
         "model-name": "surface_buses/16/216",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/217",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/217",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/218",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/218",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/219",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/219",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/220",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/220",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/221",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/221",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/222",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/222",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/223",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       },
       {
         "model": "custom",
         "model-name": "surface_buses/16/223",
-        "texture": "al2_ribbon_16_side"
+        "texture": "al_ribbon_16_side"
       }
     ]
   },

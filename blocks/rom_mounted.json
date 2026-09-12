@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_rom",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_rom",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "rotation": "pipe",
@@ -37,5 +37,5 @@
     1
   ],
   "hidden": true,
-  "picking-item": "advanced_logic_2:rom.item"
+  "picking-item": "advanced_logic:rom.item"
 }

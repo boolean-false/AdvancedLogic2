@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_ram",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_ram",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "hitbox": [
@@ -43,5 +43,5 @@
   },
   "script-name": "ram",
   "hidden": true,
-  "picking-item": "advanced_logic_2:ram.item"
+  "picking-item": "advanced_logic:ram.item"
 }

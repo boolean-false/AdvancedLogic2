@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
-  "icon": "items:al2_clock_generator",
-  "placing-block": "advanced_logic_2:clock_generator_mounted"
+  "icon": "items:al_clock_generator",
+  "placing-block": "advanced_logic:clock_generator_mounted"
 }

@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_bus_logic_mode_0",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_bus_logic_mode_0",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "hitbox": [
@@ -35,32 +35,32 @@
     "variants": [
       {
         "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_bus_logic_mode_1",
-          "al2_gate_side",
-          "al2_gate_side"
+          "al_gate_side",
+          "al_gate_side",
+          "al_gate_side",
+          "al_bus_logic_mode_1",
+          "al_gate_side",
+          "al_gate_side"
         ]
       },
       {
         "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_bus_logic_mode_2",
-          "al2_gate_side",
-          "al2_gate_side"
+          "al_gate_side",
+          "al_gate_side",
+          "al_gate_side",
+          "al_bus_logic_mode_2",
+          "al_gate_side",
+          "al_gate_side"
         ]
       },
       {
         "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_bus_logic_mode_3",
-          "al2_gate_side",
-          "al2_gate_side"
+          "al_gate_side",
+          "al_gate_side",
+          "al_gate_side",
+          "al_bus_logic_mode_3",
+          "al_gate_side",
+          "al_gate_side"
         ]
       }
     ]

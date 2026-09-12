@@ -1,5 +1,5 @@
 local enable={}
-for _,id in ipairs({'wire_mod_2','advanced_logic_2'}) do
+for _,id in ipairs({'wire_mod','advanced_logic'}) do
  if not table.has(pack.get_installed(),id) then enable[#enable+1]=id end
 end
 if #enable>0 then app.reconfig_packs(enable,{}) end
@@ -19,22 +19,22 @@ local function await_value(predicate,message)
 end
 wait(40)
 local pid=hud.get_player()
-local schematic=require('wire_mod_2:schematic')
-local api=require('wire_mod_2:api')
-local sim=require('wire_mod_2:simulation')
-local cm=require('wire_mod_2:chain_manager')
-local clocks=require('advanced_logic_2:clock_registry')
-local mem=require('advanced_logic_2:memory_common')
+local schematic=require('wire_mod:schematic')
+local api=require('wire_mod:api')
+local sim=require('wire_mod:simulation')
+local cm=require('wire_mod:chain_manager')
+local clocks=require('advanced_logic:clock_registry')
+local mem=require('advanced_logic:memory_common')
 local value
 for _,entry in ipairs(schematic.library())do
- if entry.path=='advanced_logic_2:schematics/advanced-microcoded-machine.wms' then value=entry.schematic end
+ if entry.path=='advanced_logic:schematics/advanced-microcoded-machine.wms' then value=entry.schematic end
 end
 assert(value,'machine missing from configurator library')
 local anchor
 if CREATE then
  local x,y,z=player.get_pos(pid);anchor={x=math.floor(x),y=math.floor(y)+4,z=math.floor(z)}
- file.write(pack.data_file('advanced_logic_2','machine_anchor.json'),json.tostring(anchor))
-else anchor=json.parse(file.read(pack.data_file('advanced_logic_2','machine_anchor.json'))) end
+ file.write(pack.data_file('advanced_logic','machine_anchor.json'),json.tostring(anchor))
+else anchor=json.parse(file.read(pack.data_file('advanced_logic','machine_anchor.json'))) end
 player.set_flight(pid,true)
 local cx,cz=18,-16;for _=1,ROT do cx,cz=-cz,cx end
 player.set_pos(pid,anchor.x+cx,anchor.y+32,anchor.z+cz)
@@ -62,9 +62,9 @@ local function chain(x,z,name)local a,b,c=p(x,z);return cm.get_chain_for_port(na
 local function cell(i)local a,b,c=p(32,5);return mem.read_cell(a,b,c,i)end
 local function lever(x,z,on)
  local a,b,c=p(x,z);local name=block.name(block.get(a,b,c))
- assert(name=='wire_mod_2:lever_'..(on and 'off' or 'on'),'unexpected lever state')
+ assert(name=='wire_mod:lever_'..(on and 'off' or 'on'),'unexpected lever state')
  events.emit(name..'.interact',a,b,c,pid)
- assert(block.name(block.get(a,b,c))=='wire_mod_2:lever_'..(on and 'on' or 'off'),'lever interaction failed')
+ assert(block.name(block.get(a,b,c))=='wire_mod:lever_'..(on and 'on' or 'off'),'lever interaction failed')
 end
 assert(get(3,34,'paused')==1,'machine must start paused')
 local cc=chain(3,34,'output')
@@ -77,7 +77,7 @@ local operands={10,5,3,255,20,40,170,200,100,50,15,1,0,1,255,42}
 local operations={0,1,2,3,1,2,3,0,1,2,3,1,0,2,3,1}
 local expected={10,15,12,243,7,223,117,200,44,250,245,246,0,255,0,42}
 if not CREATE then
- local saved=json.parse(file.read(pack.data_file('advanced_logic_2','machine_state.json')))
+ local saved=json.parse(file.read(pack.data_file('advanced_logic','machine_state.json')))
  assert(get(16,34,'count')==saved.pc and get(10,5,'q')==saved.acc,'register state changed during reload')
  for i=0,15 do assert(cell(i)==saved.cells[i+1],'RAM changed on reload at '..i)end
 end
@@ -136,7 +136,7 @@ if not CREATE then
 end
 local settle=time.uptime()+0.3;while time.uptime()<settle do frame()end
 local cells={};for i=0,15 do cells[i+1]=cell(i)end
-file.write(pack.data_file('advanced_logic_2','machine_state.json'),json.tostring({pc=get(16,34,'count'),acc=get(10,5,'q'),cells=cells}))
+file.write(pack.data_file('advanced_logic','machine_state.json'),json.tostring({pc=get(16,34,'count'),acc=get(10,5,'q'),cells=cells}))
 app.close_world(true)
 print('MACHINE validation passed: rotation '..ROT..', '..(CREATE and 'create / 6 instructions' or 'reload / 26 instructions / autonomous clock')..', RAM, ENABLE, displays')
 app.quit()

@@ -11,10 +11,10 @@ function M.set_width(x,y,z,width)
     local id=block.get(x,y,z)
     if id<=0 then return false end
     local name=block.name(id)
-    if name~='advanced_logic_2:bus_adapter' and name~='advanced_logic_2:bus_adapter_mounted'
-        and name~='advanced_logic_2:bus_adapter_ceiling' then return false end
+    if name~='advanced_logic:bus_adapter' and name~='advanced_logic:bus_adapter_mounted'
+        and name~='advanced_logic:bus_adapter_ceiling' then return false end
     block.set_field(x,y,z,'data_bits',width)
-    require('wire_mod_2:api').refresh_device(x,y,z)
+    require('wire_mod:api').refresh_device(x,y,z)
     return true
 end
 return M

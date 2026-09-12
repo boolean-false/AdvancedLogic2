@@ -1,5 +1,5 @@
-local ui=require('wire_mod_2:ui')
-local clocks = require('advanced_logic_2:clock_registry')
+local ui=require('wire_mod:ui')
+local clocks = require('advanced_logic:clock_registry')
 
 local block_x, block_y, block_z = 0, 0, 0
 
@@ -7,8 +7,8 @@ local function valid_target()
     local id=block.get(block_x,block_y,block_z)
     if id<=0 then close_gui();return false end
     local name=block.name(id)
-    if name~='advanced_logic_2:clock_generator' and name~='advanced_logic_2:clock_generator_mounted'
-        and name~='advanced_logic_2:clock_generator_ceiling' then close_gui();return false end
+    if name~='advanced_logic:clock_generator' and name~='advanced_logic:clock_generator_mounted'
+        and name~='advanced_logic:clock_generator_ceiling' then close_gui();return false end
     return true
 end
 local function refresh_status()
@@ -113,5 +113,5 @@ function preset(hz)
 end
 
 function close_gui()
-    hud.close("advanced_logic_2:clock_generator")
+    hud.close("advanced_logic:clock_generator")
 end

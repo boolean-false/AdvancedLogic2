@@ -1,14 +1,14 @@
-local ui=require('wire_mod_2:ui')
-local mem=require('advanced_logic_2:memory_common')
-local transfer=require('advanced_logic_2:memory_transfer')
-local api=require('wire_mod_2:api')
-local LAYOUT_ID='advanced_logic_2:memory_editor'
+local ui=require('wire_mod:ui')
+local mem=require('advanced_logic:memory_common')
+local transfer=require('advanced_logic:memory_transfer')
+local api=require('wire_mod:api')
+local LAYOUT_ID='advanced_logic:memory_editor'
 local bx,by,bz,is_rom,bits,cells,radix
 local clear_until,reload_until=0,0
 local clear_range
 local function feedback(text)document.feedback.text=text end
 local function valid()
- if not ui.valid(bx,by,bz,is_rom and 'advanced_logic_2:rom' or 'advanced_logic_2:ram') then
+ if not ui.valid(bx,by,bz,is_rom and 'advanced_logic:rom' or 'advanced_logic:ram') then
   hud.close(LAYOUT_ID);return false
  end
  return true

@@ -1,9 +1,9 @@
-local api = require('wire_mod_2:api')
-local bit = require('wire_mod_2:bit')
-local logic_viewer = require('wire_mod_2:logic_viewer')
-local bus = require('advanced_logic_2:bus_common')
+local api = require('wire_mod:api')
+local bit = require('wire_mod:bit')
+local logic_viewer = require('wire_mod:logic_viewer')
+local bus = require('advanced_logic:bus_common')
 
-local device_id = api.register({"advanced_logic_2:bus_bit_reader_4bit"}, {
+local device_id = api.register({"advanced_logic:bus_bit_reader_4bit"}, {
     inputs = {
         input = {dir = 2, offset = 0, accept_bits = {1,4,8,16}},
     },
@@ -26,7 +26,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, playerid)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,playerid)
+    require('wire_mod:gate_mounts').prepare(x,y,z,playerid)
     bus.init_width(x, y, z)
     if block.get_field(x, y, z, "selected_bit") == nil then
         block.set_field(x, y, z, "selected_bit", 0)
@@ -39,7 +39,7 @@ function on_broken(x, y, z, playerid)
 end
 
 function on_interact(x, y, z, playerid)
-    return require('advanced_logic_2:component_settings').open(x,y,z,playerid)
+    return require('advanced_logic:component_settings').open(x,y,z,playerid)
 end
 
 logic_viewer.set_view(device_id, function(x, y, z)

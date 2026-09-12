@@ -1,17 +1,17 @@
-local lifecycle = require('wire_mod_2:conductor_lifecycle')
-local api = require('wire_mod_2:api')
+local lifecycle = require('wire_mod:conductor_lifecycle')
+local api = require('wire_mod:api')
 
 local function ensure_bus(color, bits)
-    local base_name = string.format("advanced_logic_2:bus_%s_%d", color, bits)
+    local base_name = string.format("advanced_logic:bus_%s_%d", color, bits)
     if api.get_wire_by_name(base_name) then return end
-    api.register_wire_variants("advanced_logic_2", {
+    api.register_wire_variants("advanced_logic", {
         wire_type = "bus",
         color = color,
         bits = bits,
         crossing = {
-            lower_model='al2_crossing/ribbon/lower',upper_model='al2_crossing/ribbon/upper',
-            upper_models={'al2_crossing/ribbon/upper_1','al2_crossing/ribbon/upper_2','al2_crossing/ribbon/upper_3'},
-            top='blocks:al2_ribbon_'..bits..'_5',side='blocks:al2_ribbon_'..bits..'_side'
+            lower_model='al_crossing/ribbon/lower',upper_model='al_crossing/ribbon/upper',
+            upper_models={'al_crossing/ribbon/upper_1','al_crossing/ribbon/upper_2','al_crossing/ribbon/upper_3'},
+            top='blocks:al_ribbon_'..bits..'_5',side='blocks:al_ribbon_'..bits..'_side'
         }
     })
 end

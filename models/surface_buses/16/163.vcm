@@ -1,24 +1,24 @@
-@box from (0.04,0.2,0.04) to (0.2,0.8,0.2) texture "blocks:al2_ribbon_16_side" {
- @part tags (west) texture "blocks:al2_ribbon_16_11" region (0.2,0.8,0.8,0.2)
- @part tags (east) texture "blocks:al2_ribbon_16_11" region (0.8,0.8,0.2,0.2)
- @part tags (north) texture "blocks:al2_ribbon_16_3" region (0.8,0.8,0.2,0.2)
- @part tags (south) texture "blocks:al2_ribbon_16_3" region (0.2,0.8,0.8,0.2)
+@box from (0.04,0.2,0.04) to (0.2,0.8,0.2) texture "blocks:al_ribbon_16_side" {
+ @part tags (west) texture "blocks:al_ribbon_16_11" region (0.2,0.8,0.8,0.2)
+ @part tags (east) texture "blocks:al_ribbon_16_11" region (0.8,0.8,0.2,0.2)
+ @part tags (north) texture "blocks:al_ribbon_16_3" region (0.8,0.8,0.2,0.2)
+ @part tags (south) texture "blocks:al_ribbon_16_3" region (0.2,0.8,0.8,0.2)
 }
-@box from (0.04,0.2,0.2) to (0.2,0.8,1) texture "blocks:al2_ribbon_16_side" {
- @part tags (west) texture "blocks:al2_ribbon_16_11" region (0.8,0.8,1,0.2)
- @part tags (east) texture "blocks:al2_ribbon_16_11" region (1,0.8,0.8,0.2)
+@box from (0.04,0.2,0.2) to (0.2,0.8,1) texture "blocks:al_ribbon_16_side" {
+ @part tags (west) texture "blocks:al_ribbon_16_11" region (0.8,0.8,1,0.2)
+ @part tags (east) texture "blocks:al_ribbon_16_11" region (1,0.8,0.8,0.2)
 }
-@box from (0.2,0.2,0.04) to (1,0.8,0.2) texture "blocks:al2_ribbon_16_side" {
- @part tags (north) texture "blocks:al2_ribbon_16_3" region (1,0.8,0.8,0.2)
- @part tags (south) texture "blocks:al2_ribbon_16_3" region (0.8,0.8,1,0.2)
+@box from (0.2,0.2,0.04) to (1,0.8,0.2) texture "blocks:al_ribbon_16_side" {
+ @part tags (north) texture "blocks:al_ribbon_16_3" region (1,0.8,0.8,0.2)
+ @part tags (south) texture "blocks:al_ribbon_16_3" region (0.8,0.8,1,0.2)
 }
-@box from (0.04,0.2,0) to (0.2,0.8,0.04) texture "blocks:al2_ribbon_16_side" {
- @part tags (west) texture "blocks:al2_ribbon_16_11" region (0,0.8,0.2,0.2)
- @part tags (east) texture "blocks:al2_ribbon_16_11" region (0.2,0.8,0,0.2)
+@box from (0.04,0.2,0) to (0.2,0.8,0.04) texture "blocks:al_ribbon_16_side" {
+ @part tags (west) texture "blocks:al_ribbon_16_11" region (0,0.8,0.2,0.2)
+ @part tags (east) texture "blocks:al_ribbon_16_11" region (0.2,0.8,0,0.2)
 }
-@box from (0.04,0.8,0.04) to (0.2,1,0.2) texture "blocks:al2_ribbon_16_side" {
- @part tags (west) texture "blocks:al2_ribbon_16_11" region (0.2,0.2,0.8,0)
- @part tags (east) texture "blocks:al2_ribbon_16_11" region (0.8,0.2,0.2,0)
- @part tags (north) texture "blocks:al2_ribbon_16_3" region (0.8,0.2,0.2,0)
- @part tags (south) texture "blocks:al2_ribbon_16_3" region (0.2,0.2,0.8,0)
+@box from (0.04,0.8,0.04) to (0.2,1,0.2) texture "blocks:al_ribbon_16_side" {
+ @part tags (west) texture "blocks:al_ribbon_16_11" region (0.2,0.2,0.8,0)
+ @part tags (east) texture "blocks:al_ribbon_16_11" region (0.8,0.2,0.2,0)
+ @part tags (north) texture "blocks:al_ribbon_16_3" region (0.8,0.2,0.2,0)
+ @part tags (south) texture "blocks:al_ribbon_16_3" region (0.2,0.2,0.8,0)
 }

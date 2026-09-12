@@ -1,13 +1,13 @@
 -- Настраиваемый постоянный источник для шин 4/8/16 бит.
 
-local api          = require("wire_mod_2:api")
-local logic_viewer = require("wire_mod_2:logic_viewer")
-local bus          = require("advanced_logic_2:bus_common")
-local cfg_check    = require("advanced_logic_2:configurator_check")
+local api          = require("wire_mod:api")
+local logic_viewer = require("wire_mod:logic_viewer")
+local bus          = require("advanced_logic:bus_common")
+local cfg_check    = require("advanced_logic:configurator_check")
 
-local LAYOUT_ID = "advanced_logic_2:bus_constant"
+local LAYOUT_ID = "advanced_logic:bus_constant"
 
-local device_id = api.register({"advanced_logic_2:bus_constant"}, {
+local device_id = api.register({"advanced_logic:bus_constant"}, {
     outputs = {
         value = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
     },
@@ -19,7 +19,7 @@ api.register_signal_handler(device_id, function(_, write, _, _, origin)
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     bus.init_width(x, y, z)
     if block.get_field(x, y, z, "value") == nil then
         block.set_field(x, y, z, "value", 0)

@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_bus_adapter",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_bus_adapter",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "hitbox": [
@@ -27,5 +27,5 @@
   },
   "script-name": "bus_adapter",
   "hidden": true,
-  "picking-item": "advanced_logic_2:bus_adapter.item"
+  "picking-item": "advanced_logic:bus_adapter.item"
 }

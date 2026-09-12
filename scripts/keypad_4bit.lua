@@ -4,16 +4,16 @@
 --   - strobe (RIGHT, 1-bit) <- 1 в течение STROBE_DURATION секунд
 -- ПКМ+конфигуратор -> открыть UI.
 
-local api          = require('wire_mod_2:api')
-local logic_viewer = require('wire_mod_2:logic_viewer')
-local cfg_check    = require('advanced_logic_2:configurator_check')
-local timer_registry = require('wire_mod_2:timer_registry')
+local api          = require('wire_mod:api')
+local logic_viewer = require('wire_mod:logic_viewer')
+local cfg_check    = require('advanced_logic:configurator_check')
+local timer_registry = require('wire_mod:timer_registry')
 
-local LAYOUT_ID       = "advanced_logic_2:keypad_4bit"
+local LAYOUT_ID       = "advanced_logic:keypad_4bit"
 local STROBE_DURATION = 0.15  -- секунды
 local process_timer
 
-local device_id = api.register({"advanced_logic_2:keypad_4bit"}, {
+local device_id = api.register({"advanced_logic:keypad_4bit"}, {
     outputs = {
         value  = {dir = 2, offset = 0, bits = 4},
         strobe = {dir = 1, offset = 0, bits = 1},
@@ -37,7 +37,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     block.set_field(x, y, z, "value",        0)
     block.set_field(x, y, z, "strobe_until", 0)
     api.on_placed(x, y, z, device_id)

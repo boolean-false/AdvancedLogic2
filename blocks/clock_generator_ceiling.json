@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_clock_generator",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_clock_generator",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "hitbox": [
@@ -43,37 +43,37 @@
     "variants": [
       {
         "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_clock_generator",
-          "al2_gate_side",
-          "al2_gate_side"
+          "al_gate_side",
+          "al_gate_side",
+          "al_gate_side",
+          "al_clock_generator",
+          "al_gate_side",
+          "al_gate_side"
         ]
       },
       {
         "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_clock_generator",
-          "al2_gate_side",
-          "al2_gate_side"
+          "al_gate_side",
+          "al_gate_side",
+          "al_gate_side",
+          "al_clock_generator",
+          "al_gate_side",
+          "al_gate_side"
         ]
       },
       {
         "texture-faces": [
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_gate_side",
-          "al2_clock_generator",
-          "al2_gate_side",
-          "al2_gate_side"
+          "al_gate_side",
+          "al_gate_side",
+          "al_gate_side",
+          "al_clock_generator",
+          "al_gate_side",
+          "al_gate_side"
         ]
       }
     ]
   },
   "script-name": "clock_generator",
   "hidden": true,
-  "picking-item": "advanced_logic_2:clock_generator.item"
+  "picking-item": "advanced_logic:clock_generator.item"
 }

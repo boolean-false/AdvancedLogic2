@@ -1,5 +1,5 @@
 {
   "icon-type": "sprite",
-  "icon": "items:al2_demux_1to4_4bit",
-  "placing-block": "advanced_logic_2:demux_1to4_4bit_mounted"
+  "icon": "items:al_demux_1to4_4bit",
+  "placing-block": "advanced_logic:demux_1to4_4bit_mounted"
 }

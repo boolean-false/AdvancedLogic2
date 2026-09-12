@@ -9,11 +9,11 @@
 -- При oe=1 пишем data на выход. Это позволяет нескольким bus_driver'ам разделять
 -- одну цепь - активен только тот, у кого oe=1 (классический tri-state bus).
 
-local api = require('wire_mod_2:api')
-local logic_viewer = require('wire_mod_2:logic_viewer')
-local bus = require('advanced_logic_2:bus_common')
+local api = require('wire_mod:api')
+local logic_viewer = require('wire_mod:logic_viewer')
+local bus = require('advanced_logic:bus_common')
 
-local device_id = api.register({"advanced_logic_2:bus_driver_4bit"}, {
+local device_id = api.register({"advanced_logic:bus_driver_4bit"}, {
     inputs  = {
         data = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
         oe   = {dir = 3, offset = 0, bits = 1},
@@ -32,7 +32,7 @@ api.register_signal_handler(device_id, function(read, write, _, _, origin)
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     bus.init_width(x, y, z)
     api.on_placed(x, y, z, device_id)
 end

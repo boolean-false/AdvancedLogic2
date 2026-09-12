@@ -1,7 +1,7 @@
 --- Общие правила для настраиваемых шинных компонентов.
 
-local api       = require("wire_mod_2:api")
-local cfg_check = require("advanced_logic_2:configurator_check")
+local api       = require("wire_mod:api")
+local cfg_check = require("advanced_logic:configurator_check")
 
 ---@class ALBusCommon
 local M = {}
@@ -66,7 +66,7 @@ end
 --- Ширину меняет только конфигуратор в режиме Viewer.
 ---@return boolean handled
 function M.try_cycle_width(x, y, z, playerid)
-    return require('advanced_logic_2:component_settings').open(x,y,z,playerid)
+    return require('advanced_logic:component_settings').open(x,y,z,playerid)
 end
 
 ---@param width integer

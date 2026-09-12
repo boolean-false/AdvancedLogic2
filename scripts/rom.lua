@@ -1,12 +1,12 @@
-local api          = require("wire_mod_2:api")
-local logic_viewer = require("wire_mod_2:logic_viewer")
-local mem          = require("advanced_logic_2:memory_common")
-local cfg_check    = require("advanced_logic_2:configurator_check")
+local api          = require("wire_mod:api")
+local logic_viewer = require("wire_mod:logic_viewer")
+local mem          = require("advanced_logic:memory_common")
+local cfg_check    = require("advanced_logic:configurator_check")
 
-local LAYOUT_ID = "advanced_logic_2:memory_editor"
+local LAYOUT_ID = "advanced_logic:memory_editor"
 local PHYS_CELLS = 64
 
-local device_id = api.register({"advanced_logic_2:rom"}, {
+local device_id = api.register({"advanced_logic:rom"}, {
     inputs  = { addr = {dir = 0, accept_bits = {1,4,8,16}} },
     outputs = { data = {dir = 2, bits = 4, bits_field = "data_bits"} }
 })
@@ -34,7 +34,7 @@ api.register_signal_handler(device_id, function(read, write, inputs, outputs, or
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     mem.init_fields(x, y, z, PHYS_CELLS)
     block.set_field(x,y,z,"addr_bits",4)
     api.on_placed(x, y, z, device_id)

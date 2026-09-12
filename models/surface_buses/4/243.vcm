@@ -1,12 +1,12 @@
-@box from (0.04,0.04,0.04) to (0.2,0.2,0.2) texture "blocks:al2_ribbon_4_side" {
+@box from (0.04,0.04,0.04) to (0.2,0.2,0.2) texture "blocks:al_ribbon_4_side" {
 }
-@box from (0.04,0.04,0.2) to (0.2,0.2,1) texture "blocks:al2_ribbon_4_side" {
+@box from (0.04,0.04,0.2) to (0.2,0.2,1) texture "blocks:al_ribbon_4_side" {
 }
-@box from (0.04,0.04,0) to (0.2,0.2,0.04) texture "blocks:al2_ribbon_4_side" {
+@box from (0.04,0.04,0) to (0.2,0.2,0.04) texture "blocks:al_ribbon_4_side" {
 }
-@box from (0,0.04,0.04) to (0.04,0.2,0.2) texture "blocks:al2_ribbon_4_side" {
+@box from (0,0.04,0.04) to (0.04,0.2,0.2) texture "blocks:al_ribbon_4_side" {
 }
-@box from (0.04,0.2,0.04) to (0.2,1,0.2) texture "blocks:al2_ribbon_4_side" {
+@box from (0.04,0.2,0.04) to (0.2,1,0.2) texture "blocks:al_ribbon_4_side" {
 }
-@box from (0.04,0,0.04) to (0.2,0.04,0.2) texture "blocks:al2_ribbon_4_side" {
+@box from (0.04,0,0.04) to (0.2,0.04,0.2) texture "blocks:al_ribbon_4_side" {
 }

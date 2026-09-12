@@ -1,11 +1,11 @@
 {
-  "id": "advanced_logic_2",
+  "id": "advanced_logic",
   "title": "AdvancedLogic2",
   "version": "2.0.0",
   "creator": "Dagger",
   "description": "Расширение WireMod2: шины 4/8/16 бит, арифметика, маршрутизация данных, регистры, счётчики и память. Редактор HEX/DEC с обменом данными и универсальный индикатор сигналов.",
   "dependencies": [
-    "wire_mod_2"
+    "wire_mod"
   ],
   "license": "MIT"
 }

@@ -2,21 +2,21 @@
   {
     "name": "Счётчик и индикатор",
     "category": "Advanced Logic / Автоматика",
-    "path": "advanced_logic_2:schematics/advanced-counter-display.wms"
+    "path": "advanced_logic:schematics/advanced-counter-display.wms"
   },
   {
     "name": "Стенд RAM",
     "category": "Advanced Logic / Память",
-    "path": "advanced_logic_2:schematics/advanced-ram-workbench.wms"
+    "path": "advanced_logic:schematics/advanced-ram-workbench.wms"
   },
   {
     "name": "4-битный процессор",
     "category": "Advanced Logic / Вычисления",
-    "path": "advanced_logic_2:schematics/advanced-accumulator-cpu.wms"
+    "path": "advanced_logic:schematics/advanced-accumulator-cpu.wms"
   },
   {
     "name": "8-битная программируемая машина",
     "category": "Advanced Logic / Вычисления",
-    "path": "advanced_logic_2:schematics/advanced-microcoded-machine.wms"
+    "path": "advanced_logic:schematics/advanced-microcoded-machine.wms"
   }
 ]

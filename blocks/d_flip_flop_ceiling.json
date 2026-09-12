@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_d_flip_flop",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_d_flip_flop",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "hitbox": [
@@ -30,5 +30,5 @@
   },
   "script-name": "d_flip_flop",
   "hidden": true,
-  "picking-item": "advanced_logic_2:d_flip_flop.item"
+  "picking-item": "advanced_logic:d_flip_flop.item"
 }

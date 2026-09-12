@@ -1,7 +1,7 @@
-local settings=require('advanced_logic_2:component_settings')
-local ui=require('wire_mod_2:ui')
+local settings=require('advanced_logic:component_settings')
+local ui=require('wire_mod:ui')
 local target
-function close()hud.close('advanced_logic_2:component_settings')end
+function close()hud.close('advanced_logic:component_settings')end
 function choose(field,value)
  if not target or not settings.apply(target,field,value) then close();return end
  on_open();document.feedback.text='Настройка применена'
@@ -9,7 +9,7 @@ end
 function on_open()
  target=session.entries and session.entries.component_settings
  if not target then close();return end
- local info=require('wire_mod_2:logic_viewer').inspect(target[1],target[2],target[3])
+ local info=require('wire_mod:logic_viewer').inspect(target[1],target[2],target[3])
  document.ui_title.text=info and info.display_name or 'Настройки компонента'
  local panel=document.options;panel:clear()
  for _,spec in ipairs(settings.specs(target[4])) do

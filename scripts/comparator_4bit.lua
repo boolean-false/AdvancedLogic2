@@ -1,8 +1,8 @@
-local api = require('wire_mod_2:api')
-local logic_viewer = require('wire_mod_2:logic_viewer')
-local bus = require('advanced_logic_2:bus_common')
+local api = require('wire_mod:api')
+local logic_viewer = require('wire_mod:logic_viewer')
+local bus = require('advanced_logic:bus_common')
 
-local device_id = api.register({"advanced_logic_2:comparator_4bit"}, {
+local device_id = api.register({"advanced_logic:comparator_4bit"}, {
     inputs = {
         a = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
         b = {dir = 0, offset = 1, bits = 4, bits_field = "data_bits"},
@@ -24,7 +24,7 @@ api.register_signal_handler(device_id, function(read, write, _, _, origin)
 end)
 
 function on_placed(x, y, z, _)
-    require('wire_mod_2:gate_mounts').prepare(x,y,z,_)
+    require('wire_mod:gate_mounts').prepare(x,y,z,_)
     bus.init_width(x, y, z)
     api.on_placed(x, y, z, device_id)
 end

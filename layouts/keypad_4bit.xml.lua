@@ -1,10 +1,10 @@
 --- Интерфейс клавиатуры: 4x4 hex кнопок. На клик - пишет value+strobe в полях блока,
 --- mark_device_for_update запускает пересчёт симуляции.
 
-local api          = require("wire_mod_2:api")
-local simulation   = require("wire_mod_2:simulation")
+local api          = require("wire_mod:api")
+local simulation   = require("wire_mod:simulation")
 
-local LAYOUT_ID       = "advanced_logic_2:keypad_4bit"
+local LAYOUT_ID       = "advanced_logic:keypad_4bit"
 local STROBE_DURATION = 0.15
 
 local bx, by, bz
@@ -33,7 +33,7 @@ function on_close(invid)
 end
 
 function press_key(value)
-    if not require('wire_mod_2:ui').valid(bx,by,bz,'advanced_logic_2:keypad_4bit') then close_keypad();return end
+    if not require('wire_mod:ui').valid(bx,by,bz,'advanced_logic:keypad_4bit') then close_keypad();return end
     block.set_field(bx, by, bz, "value",        value % 16)
     block.set_field(bx, by, bz, "strobe_until", uptime_safe() + STROBE_DURATION)
 

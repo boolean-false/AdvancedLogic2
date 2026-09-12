@@ -1,11 +1,11 @@
 {
   "texture-faces": [
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_gate_side",
-    "al2_pulse_generator",
-    "al2_gate_side",
-    "al2_gate_side"
+    "al_gate_side",
+    "al_gate_side",
+    "al_gate_side",
+    "al_pulse_generator",
+    "al_gate_side",
+    "al_gate_side"
   ],
   "model": "aabb",
   "hitbox": [
@@ -37,5 +37,5 @@
   "tick-interval": 1,
   "script-name": "pulse_generator",
   "hidden": true,
-  "picking-item": "advanced_logic_2:pulse_generator.item"
+  "picking-item": "advanced_logic:pulse_generator.item"
 }

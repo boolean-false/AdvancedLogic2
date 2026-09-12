@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import {encode} from '../../wire_mod2/tools/wms_codec.mjs';
+import {encode} from '../../wire_mod/tools/wms_codec.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -7,10 +7,10 @@ const axes=[[1,0,0],[0,1,0],[0,0,1]], blocks=[], occupied=new Map(), grid=new Ma
 const key=(x,z)=>`${x},${z}`;
 const devices={},sizes={};
 function device(label,name,x,z,fields={},data){
- const full=name.includes(':')?name:`advanced_logic_2:${name}`;
+ const full=name.includes(':')?name:`advanced_logic:${name}`;
  const b={name:full,pos:[x,0,z],axes,fields};if(data)b.data=data;
  blocks.push(b);devices[label]=b;
- const pack=full.startsWith('wire_mod_2:')?path.resolve(root,'../wire_mod2'):root;
+ const pack=full.startsWith('wire_mod:')?path.resolve(root,'../wire_mod'):root;
  const def=JSON.parse(fs.readFileSync(path.join(pack,'blocks',full.split(':')[1]+'.json')));
  const [sx,,sz]=def.size||[1,1,1];sizes[label]=[sx,sz];
  for(let dx=0;dx<sx;dx++)for(let dz=0;dz<sz;dz++){
@@ -26,7 +26,7 @@ device('opcode','rom',25,27,{data_bits:4,addr_bits:4},memory(operations));
 device('add','adder_4bit',8,18,{data_bits:8});
 device('sub','adder_4bit',18,18,{data_bits:8});
 device('invert','bus_logic',23,19,{data_bits:8,operation:3});
-device('carry','wire_mod_2:lever_on',20,20);
+device('carry','wire_mod:lever_on',20,20);
 device('xor','bus_logic',28,18,{data_bits:8,operation:2});
 device('alu_low','mux_4bit',18,10,{data_bits:8});
 device('alu_high','mux_4bit',28,10,{data_bits:8});
@@ -36,9 +36,9 @@ device('acc','register',10,5,{data_bits:8});
 device('trace','ram',32,5,{data_bits:8,addr_bits:4},memory([]));
 device('address','mux_4bit',32,12,{data_bits:4});
 device('keypad','keypad_4bit',30,15,{value:0});
-device('inspect','wire_mod_2:lever_off',37,12);
-device('enable','wire_mod_2:lever_on',42,37);
-device('reset','wire_mod_2:lever_off',22,34);
+device('inspect','wire_mod:lever_off',37,12);
+device('enable','wire_mod:lever_on',42,37);
+device('reset','wire_mod:lever_off',22,34);
 device('clock','clock_generator',3,34,{pulse_time:0.5,delay_time:0.5,paused:1});
 for(const [label,x,z] of [['pc_display',16,30],['operand_display',4,20],['opcode_display',37,20],['acc_display',10,1],['alu_display',22,1],['ram_display',32,1]])device(label,'indicator_4bit',x,z);
 const nets=new Map();
@@ -55,8 +55,8 @@ function wire(net,type,...points){
   while(x!==tx||z!==tz){const dx=Math.sign(tx-x),dz=Math.sign(tz-z);add(x,z).dirs.add(`${dx},${dz}`);add(x+dx,z+dz).dirs.add(`${-dx},${-dz}`);x+=dx;z+=dz;}
  }
 }
-const B='advanced_logic_2:bus_purple_8',A='advanced_logic_2:bus_orange_4';
-const blue='wire_mod_2:wire_blue',green='wire_mod_2:wire_green',red='wire_mod_2:wire_red';
+const B='advanced_logic:bus_purple_8',A='advanced_logic:bus_orange_4';
+const blue='wire_mod:wire_blue',green='wire_mod:wire_green',red='wire_mod:wire_red';
 wire('acc',B,[11,5],[12,5],[12,21],[8,21],[8,19]);
 wire('acc',B,[12,21],[28,21],[28,19]);wire('acc',B,[18,21],[18,19]);
 wire('acc',B,[12,5],[12,2],[10,2]);
@@ -113,8 +113,8 @@ for(const [k,owners]of grid)for(const [net,c]of owners){for(const [dx,dz]of [[1,
  }
 }}
 for(const [net,ends]of Object.entries(terminals))for(const [x,z]of ends)if(bridges.has(key(x,z)))throw Error(`Bridge touches port ${net}: ${x},${z}`);
-for(const [k,owners]of grid){const c=[...owners.values()][0];blocks.push({name:bridges.has(k)?'wire_mod_2:wire_bridge':c.type,pos:[c.x,0,c.z],axes});}
-const result={format:1,name:'advanced-microcoded-machine',description:'8-битная программируемая машина: LOAD / ADD / SUB / XOR, аккумулятор и журнал RAM',author:'DaggerLab',dependencies:['wire_mod_2','advanced_logic_2'],size:[43,2,39],origin:[3,0,34],blocks};
+for(const [k,owners]of grid){const c=[...owners.values()][0];blocks.push({name:bridges.has(k)?'wire_mod:wire_bridge':c.type,pos:[c.x,0,c.z],axes});}
+const result={format:1,name:'advanced-microcoded-machine',description:'8-битная программируемая машина: LOAD / ADD / SUB / XOR, аккумулятор и журнал RAM',author:'DaggerLab',dependencies:['wire_mod','advanced_logic'],size:[43,2,39],origin:[3,0,34],blocks};
 fs.writeFileSync(path.join(root,'schematics/advanced-microcoded-machine.wms'),encode(result)+'\n');
 console.log(`${blocks.length} blocks, ${Object.keys(devices).length} devices, ${bridges.size} bridges`);
 const labels={carry:'SUB +1',pc:'PC',operand:'OPERAND',opcode:'OPCODE',add:'ADD',sub:'SUB ADD',invert:'NOT',xor:'XOR',alu_low:'LOAD/ADD',alu_high:'SUB/XOR',alu:'RESULT',decode:'DECODE',acc:'ACC',trace:'RAM',address:'ADDR MUX',keypad:'KEYPAD',inspect:'INSPECT',enable:'ENABLE',reset:'RESET PC',clock:'CLOCK',pc_display:'PC OUT',operand_display:'IMM OUT',opcode_display:'OP OUT',acc_display:'ACC OUT',alu_display:'NEXT OUT',ram_display:'RAM OUT'};

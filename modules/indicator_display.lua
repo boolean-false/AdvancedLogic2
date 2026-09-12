@@ -1,7 +1,7 @@
 -- Клиентская панель для каждого загруженного индикатора. Слоты текстур повторно используются после удаления.
 local M={}
-local api=require('wire_mod_2:api')
-local font=require('advanced_logic_2:indicator_font')
+local api=require('wire_mod:api')
+local font=require('advanced_logic:indicator_font')
 local records,slots={},{}
 local uploads=0
 local unpack=table.unpack or unpack
@@ -67,8 +67,8 @@ local function acquire()
     for _,slot in ipairs(slots) do
         if not slot.used then slot.used=true;return slot end
     end
-    local name='al2_indicator_slot_'..(#slots+1)
-    assets.load_texture(file.read_bytes('advanced_logic_2:assets/indicator_canvas.png'),name,'png')
+    local name='al_indicator_slot_'..(#slots+1)
+    assets.load_texture(file.read_bytes('advanced_logic:assets/indicator_canvas.png'),name,'png')
     local slot={name=name,canvas=assert(assets.to_canvas(name)),used=true}
     slots[#slots+1]=slot
     return slot
@@ -93,7 +93,7 @@ function M.remove(x,y,z)
 end
 local function create(r)
     r.slot=acquire()
-    local panel=entities.spawn('advanced_logic_2:indicator_screen',{r.x+.5,r.y+1.155,r.z+.5},{})
+    local panel=entities.spawn('advanced_logic:indicator_screen',{r.x+.5,r.y+1.155,r.z+.5},{})
     r.uid=panel:get_uid()
     local a,b,c={block.get_X(r.x,r.y,r.z)},{block.get_Y(r.x,r.y,r.z)},{block.get_Z(r.x,r.y,r.z)}
     panel.transform:set_rot({a[1],a[2],a[3],0,b[1],b[2],b[3],0,c[1],c[2],c[3],0,0,0,0,1})
@@ -104,7 +104,7 @@ function M.tick()
     if not vc.is_client() then return end
     for _,r in pairs(records) do
         local id=block.get(r.x,r.y,r.z)
-        if id<=0 or block.name(id)~='advanced_logic_2:indicator_4bit' then
+        if id<=0 or block.name(id)~='advanced_logic:indicator_4bit' then
             M.remove(r.x,r.y,r.z)
         else
             if r.uid and (not entities.exists(r.uid) or r.rotation~=block.get_rotation(r.x,r.y,r.z)) then

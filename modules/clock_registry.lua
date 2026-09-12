@@ -1,7 +1,7 @@
 -- Один планировщик с отдельным сохраняемым состоянием паузы для каждого генератора.
 local M={}
-local devices=require('wire_mod_2:device_system')
-local api=require('wire_mod_2:api')
+local devices=require('wire_mod:device_system')
+local api=require('wire_mod:api')
 local clocks={}
 local function key(x,y,z)return x..':'..y..':'..z end
 function M.register(x,y,z,device_id)
