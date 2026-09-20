@@ -8,15 +8,5 @@
     "name": "Стенд RAM",
     "category": "Advanced Logic / Память",
     "path": "advanced_logic:schematics/advanced-ram-workbench.wms"
-  },
-  {
-    "name": "4-битный процессор",
-    "category": "Advanced Logic / Вычисления",
-    "path": "advanced_logic:schematics/advanced-accumulator-cpu.wms"
-  },
-  {
-    "name": "8-битная программируемая машина",
-    "category": "Advanced Logic / Вычисления",
-    "path": "advanced_logic:schematics/advanced-microcoded-machine.wms"
   }
 ]
