@@ -15,7 +15,7 @@ local function duration(x,y,z)
 end
 local process_timer
 
-local device_id = api.register({"advanced_logic:pulse_generator"}, {
+local device_id = api.register_device({"advanced_logic:pulse_generator"}, {
     inputs  = { ["in"] = {dir = 0, offset = 0, bits = 1} },
     outputs = { out    = {dir = 2, offset = 0, bits = 1} }
 })

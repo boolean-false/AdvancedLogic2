@@ -13,7 +13,7 @@ local LAYOUT_ID       = "advanced_logic:keypad_4bit"
 local STROBE_DURATION = 0.15  -- секунды
 local process_timer
 
-local device_id = api.register({"advanced_logic:keypad_4bit"}, {
+local device_id = api.register_device({"advanced_logic:keypad_4bit"}, {
     outputs = {
         value  = {dir = 2, offset = 0, bits = 4},
         strobe = {dir = 1, offset = 0, bits = 1},

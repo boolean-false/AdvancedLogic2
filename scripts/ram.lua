@@ -7,7 +7,7 @@ local cfg_check    = require("advanced_logic:configurator_check")
 local LAYOUT_ID = "advanced_logic:memory_editor"
 local PHYS_CELLS = 64
 
-local device_id = api.register({"advanced_logic:ram"}, {
+local device_id = api.register_device({"advanced_logic:ram"}, {
     inputs  = {
         addr     = {dir = 0, accept_bits = {1,4,8,16}},
         we       = {dir = 1, bits = 1},

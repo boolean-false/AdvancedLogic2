@@ -3,7 +3,7 @@ local bit = require('wire_mod:bit')
 local logic_viewer = require('wire_mod:logic_viewer')
 local bus = require('advanced_logic:bus_common')
 
-local device_id = api.register({"advanced_logic:bus_bit_reader_4bit"}, {
+local device_id = api.register_device({"advanced_logic:bus_bit_reader_4bit"}, {
     inputs = {
         input = {dir = 2, offset = 0, accept_bits = {1,4,8,16}},
     },

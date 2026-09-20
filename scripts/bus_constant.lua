@@ -7,7 +7,7 @@ local cfg_check    = require("advanced_logic:configurator_check")
 
 local LAYOUT_ID = "advanced_logic:bus_constant"
 
-local device_id = api.register({"advanced_logic:bus_constant"}, {
+local device_id = api.register_device({"advanced_logic:bus_constant"}, {
     outputs = {
         value = {dir = 2, offset = 0, bits = 4, bits_field = "data_bits"},
     },

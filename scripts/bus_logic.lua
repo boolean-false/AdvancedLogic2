@@ -12,7 +12,7 @@ local function operation_at(value)
     return index, OPERATIONS[index]
 end
 
-local device_id = api.register({"advanced_logic:bus_logic"}, {
+local device_id = api.register_device({"advanced_logic:bus_logic"}, {
     inputs = {
         a = {dir = 0, offset = 0, bits = 4, bits_field = "data_bits"},
         b = {dir = 3, offset = 0, bits = 4, bits_field = "data_bits", disabled_field="operation", disabled_value=3},

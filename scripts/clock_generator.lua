@@ -7,7 +7,7 @@ local logic_viewer   = require("wire_mod:logic_viewer")
 local cfg_check      = require("advanced_logic:configurator_check")
 local clock_registry = require("advanced_logic:clock_registry")
 
-local device_id = api.register({"advanced_logic:clock_generator"}, {
+local device_id = api.register_device({"advanced_logic:clock_generator"}, {
     outputs = {
         output = { dir = 2, offset = 0, bits = 1}
     }

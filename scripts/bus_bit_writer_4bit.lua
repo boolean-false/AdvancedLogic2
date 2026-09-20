@@ -3,7 +3,7 @@ local bit = require('wire_mod:bit')
 local logic_viewer = require('wire_mod:logic_viewer')
 local bus = require('advanced_logic:bus_common')
 
-local device_id = api.register({"advanced_logic:bus_bit_writer_4bit"}, {
+local device_id = api.register_device({"advanced_logic:bus_bit_writer_4bit"}, {
     inputs = {
         input_bit = {dir = 0, offset = 0, bits = 1},  -- 1-битный вход для записи
         input_bus = {dir = 1, offset = 0, bits = 4, bits_field = "data_bits"},

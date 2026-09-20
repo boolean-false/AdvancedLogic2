@@ -7,7 +7,7 @@ local logic_viewer = require('wire_mod:logic_viewer')
 local edge         = require('advanced_logic:edge')
 local bus          = require('advanced_logic:bus_common')
 
-local device_id = api.register({"advanced_logic:counter"}, {
+local device_id = api.register_device({"advanced_logic:counter"}, {
     inputs = {
         clk  = {dir = 3, offset = 0, bits = 1},
         en   = {dir = 1, offset = 0, bits = 1},

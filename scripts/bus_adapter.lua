@@ -4,7 +4,7 @@ local api = require('wire_mod:api')
 local viewer = require('wire_mod:logic_viewer')
 local settings = require('advanced_logic:adapter_settings')
 
-local device_id = api.register({'advanced_logic:bus_adapter'}, {
+local device_id = api.register_device({'advanced_logic:bus_adapter'}, {
     inputs = {input = {dir=0, offset=0, accept_bits={1,4,8,16}}},
     outputs = {output = {dir=2, offset=0, bits=4, bits_field='data_bits'}},
 })

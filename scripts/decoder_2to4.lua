@@ -1,7 +1,7 @@
 local api = require('wire_mod:api')
 local logic_viewer = require('wire_mod:logic_viewer')
 
-local device_id = api.register({"advanced_logic:decoder_2to4"}, {
+local device_id = api.register_device({"advanced_logic:decoder_2to4"}, {
     inputs  = { sel = {dir = 0, offset = 0, accept_bits = {1,4,8,16}} },
     outputs = {
         out0 = {dir = 2, offset = 0, bits = 1},

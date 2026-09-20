@@ -10,7 +10,7 @@ local api          = require('wire_mod:api')
 local logic_viewer = require('wire_mod:logic_viewer')
 local edge         = require('advanced_logic:edge')
 
-local device_id = api.register({"advanced_logic:d_flip_flop"}, {
+local device_id = api.register_device({"advanced_logic:d_flip_flop"}, {
     inputs = {
         d   = {dir = 1, offset = 0, bits = 1},
         clk = {dir = 3, offset = 0, bits = 1},
