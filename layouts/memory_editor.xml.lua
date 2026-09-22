@@ -112,7 +112,7 @@ function refresh_all()
  clear_until=0;reload_until=0;build();feedback('Перечитано из памяти')
 end
 function set_radix(value)
- local n=tonumber(value);if (n~=10 and n~=16) or n==radix then return end
+ local n=tonumber(value);if (n~=2 and n~=10 and n~=16) or n==radix then return end
  local values=read_draft();if not values then headers();return end
  radix=n;headers();build(values);document.exchange.text=''
  feedback('Изменен только формат отображения')
@@ -140,5 +140,5 @@ function on_open()
  document.range_start.text='0x00';document.range_count.text=tostring(cells)
  document.exchange.text=''
  document.mem_apply.enabled=is_rom;document.mem_clear.enabled=is_rom;document.import_btn.enabled=is_rom
- feedback(is_rom and 'HEX: одно поле = одно слово. Правки записываются кнопкой "Записать".' or 'RAM: снимок для чтения и копирования. Запись выполняет схема.')
+ feedback(is_rom and 'Одно поле = одно слово. Правки записываются кнопкой "Записать".' or 'RAM: снимок для чтения и копирования. Запись выполняет схема.')
 end

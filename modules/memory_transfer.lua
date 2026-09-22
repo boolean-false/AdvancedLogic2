@@ -5,10 +5,12 @@ function M.parse(text,bits,radix,limit)
  for token in tostring(text or ''):gmatch('[^%s,;]+') do
   local value
   if token:match('^0[xX]%x+$') then value=tonumber(token:sub(3),16)
-  elseif token:match('^0b') then
-   if token:match('^0b[01]+$') then
+  elseif token:match('^0[bB]') then
+   if token:match('^0[bB][01]+$') then
     value=0;for digit in token:sub(3):gmatch('.') do value=value*2+tonumber(digit) end
    end
+  elseif radix==2 and token:match('^[01]+$') then
+   value=0;for digit in token:gmatch('.') do value=value*2+tonumber(digit) end
   elseif radix==16 and token:match('^%x+$') then value=tonumber(token,16)
   elseif radix==10 and token:match('^%d+$') then value=tonumber(token) end
   if not value or value~=value or value<0 or value>=2^bits or value~=math.floor(value) then
@@ -21,7 +23,13 @@ function M.parse(text,bits,radix,limit)
  return result
 end
 function M.format(value,bits,radix)
- return radix==16 and string.format('%0'..math.ceil(bits/4)..'X',value) or string.format("%.0f",value)
+ if radix==16 then return string.format('%0'..math.ceil(bits/4)..'X',value) end
+ if radix==2 then
+  local digits={}
+  for shift=bits-1,0,-1 do digits[#digits+1]=math.floor(value/2^shift)%2 end
+  return table.concat(digits)
+ end
+ return string.format("%.0f",value)
 end
 function M.export(values,bits,radix)
  local lines={}

@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<container position-func="math.max(8,(gui.get_viewport()[1]-348)/2),math.max(8,(gui.get_viewport()[2]-370)/2)" size="348,370" color="#1B2027FC">
-<container pos="0,0" size="4,66" color="#8AC6D3FF" interactive="false"/>
-<label pos="20,12" size="308,28" color="#E8E6DFFF" id="ui_title">Клавиатура HEX</label><label pos="20,42" size="308,20" color="#ADB5C1FF">Клик отправляет цифру и импульс STROBE</label>
-<label pos="20,78" size="308,28" color="#8AC6D3FF" id="last_pressed"></label><button pos="20,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(0)" id="digit_0">0</button><button pos="98,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(1)" id="digit_1">1</button><button pos="176,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(2)" id="digit_2">2</button><button pos="254,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(3)" id="digit_3">3</button><button pos="20,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(4)" id="digit_4">4</button><button pos="98,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(5)" id="digit_5">5</button><button pos="176,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(6)" id="digit_6">6</button><button pos="254,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(7)" id="digit_7">7</button><button pos="20,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(8)" id="digit_8">8</button><button pos="98,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(9)" id="digit_9">9</button><button pos="176,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(10)" id="digit_10">A</button><button pos="254,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(11)" id="digit_11">B</button><button pos="20,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(12)" id="digit_12">C</button><button pos="98,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(13)" id="digit_13">D</button><button pos="176,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(14)" id="digit_14">E</button><button pos="254,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="press_key(15)" id="digit_15">F</button><button pos="188,320" size="140,34" color="#2B333EFF" hover-color="#465365FF" text-align="center" onclick="close_keypad()">Закрыть</button>
+<container
+    position-func="math.max(8,(gui.get_viewport()[1]-348)/2),math.max(8,(gui.get_viewport()[2]-370)/2)"
+    size="348,346" color="#1B2027FC">
+    <label pos="20,12" size="308,28" color="#E8E6DFFF" id="ui_title">Клавиатура HEX</label>
+    <label pos="20,42" size="308,20" color="#ADB5C1FF">Клик отправляет цифру и импульс STROBE</label>
+    <label pos="20,78" size="308,28" color="#8AC6D3FF" id="last_pressed"></label>
+    <button pos="20,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(0)" id="digit_0">0</button>
+    <button pos="98,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(1)" id="digit_1">1</button>
+    <button pos="176,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(2)" id="digit_2">2</button>
+    <button pos="254,116" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(3)" id="digit_3">3</button>
+    <button pos="20,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(4)" id="digit_4">4</button>
+    <button pos="98,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(5)" id="digit_5">5</button>
+    <button pos="176,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(6)" id="digit_6">6</button>
+    <button pos="254,162" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(7)" id="digit_7">7</button>
+    <button pos="20,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(8)" id="digit_8">8</button>
+    <button pos="98,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(9)" id="digit_9">9</button>
+    <button pos="176,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(10)" id="digit_10">A</button>
+    <button pos="254,208" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(11)" id="digit_11">B</button>
+    <button pos="20,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(12)" id="digit_12">C</button>
+    <button pos="98,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(13)" id="digit_13">D</button>
+    <button pos="176,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(14)" id="digit_14">E</button>
+    <button pos="254,254" size="72,34" color="#2B333EFF" hover-color="#465365FF" text-align="center"
+        onclick="press_key(15)" id="digit_15">F</button>
+    <button pos="186,300" size="140,34" color="#2B333EFF" hover-color="#465365FF"
+        text-align="center" onclick="close_keypad()">Закрыть</button>
 </container>
