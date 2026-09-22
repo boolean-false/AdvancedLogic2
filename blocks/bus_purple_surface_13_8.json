@@ -8,14 +8,17 @@
   "sky-light-passing": true,
   "hitbox": [
     0,
-    0.039999999999999994,
+    0,
     0,
     1,
-    0.96,
+    1,
     1
   ],
   "fields": {
     "chain_id": {
+      "type": "int32"
+    },
+    "wire_blocked": {
       "type": "int32"
     }
   },

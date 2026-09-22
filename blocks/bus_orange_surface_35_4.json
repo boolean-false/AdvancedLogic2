@@ -17,6 +17,9 @@
   "fields": {
     "chain_id": {
       "type": "int32"
+    },
+    "wire_blocked": {
+      "type": "int32"
     }
   },
   "tags": [
